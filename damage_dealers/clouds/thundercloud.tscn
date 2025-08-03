@@ -54,7 +54,7 @@ polygon = PackedVector2Array(5, -11, 13, -11, 13, -10, 16, -10, 16, -8, 19, -8, 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o2urc")
 autoplay = "default"
-frame_progress = 0.304442
+frame_progress = 0.890908
 
 [node name="ThundercloudLightning" type="Sprite2D" parent="."]
 visible = false

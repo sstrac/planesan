@@ -107,7 +107,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 		elif area.collision_layer == 2: #healer
 			health_bar.show()
 			hide_health_bar_timer.stop()
-			health_comp.increase(1)
+			health_comp.increase(area.health)
 		
 
 func _on_area_2d_exited(area: Area2D) -> void:

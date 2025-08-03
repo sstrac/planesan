@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c47yeqvumvykv"]
+
+[ext_resource type="Script" path="res://health_dealers/health_dealer.gd" id="1_mg5t0"]
+
+[node name="HealthDealer" type="Area2D"]
+rotation = -1.5708
+collision_layer = 2
+script = ExtResource("1_mg5t0")

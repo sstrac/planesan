@@ -56,7 +56,7 @@ mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
 [node name="Balloon" parent="." instance=ExtResource("1_g122v")]
-position = Vector2(123, 156)
+position = Vector2(165, 144)
 
 [node name="Clouds" type="Node2D" parent="."]
 position = Vector2(43, 137)
@@ -74,7 +74,7 @@ position = Vector2(114, 41)
 position = Vector2(26, -5)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary_collision_shape") instance=ExtResource("5_m4pxb")]
-position = Vector2(20, 160)
+position = Vector2(21, 160)
 collision_mask = 3
 plane_boundary_collision_shape = NodePath("../PlaneBoundary/CollisionPolygon2D")
 
@@ -106,7 +106,7 @@ script = ExtResource("10_0167p")
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 34, 34, 34, 34, -34, -34, -34, -34, 34, -32, 34)
 
 [node name="BalloonRing" parent="." instance=ExtResource("11_t8w75")]
-position = Vector2(83, 158)
+position = Vector2(59, 158)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="PlaneBoundary/Finish/Retry/RetryButton" to="PlaneBoundary/Finish/Retry/RetryButton" method="_on_button_down"]

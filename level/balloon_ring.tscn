@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4i3f8y532v2b"]
+[gd_scene load_steps=5 format=3 uid="uid://d4i3f8y532v2b"]
 
 [ext_resource type="PackedScene" uid="uid://c6xq5rp2g005l" path="res://level/small_balloon.tscn" id="1_0ism3"]
 [ext_resource type="Script" path="res://level/balloon_ring.gd" id="1_hp25r"]
 [ext_resource type="AudioStream" uid="uid://cdq2gnur1yo2g" path="res://audio/balloon_pop.wav" id="3_7w8o0"]
+[ext_resource type="PackedScene" uid="uid://c47yeqvumvykv" path="res://health_dealers/HealthDealer.tscn" id="3_k60qv"]
 
 [node name="BalloonRing" type="Node2D"]
 script = ExtResource("1_hp25r")
@@ -37,16 +38,16 @@ position = Vector2(9, -10.5)
 [node name="SmallBalloon8" parent="Balloons" instance=ExtResource("1_0ism3")]
 position = Vector2(0, -15.5)
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
+[node name="HealthDealer" parent="." instance=ExtResource("3_k60qv")]
+health = 10.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-position = Vector2(-48, -27)
-polygon = PackedVector2Array(48, 12, 49, 12, 52, 18, 53, 24, 53, 32, 51, 38, 48, 43, 47, 43, 50, 38, 52, 32, 52, 24, 51, 18)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HealthDealer"]
+position = Vector2(-47.9999, -27.0002)
+polygon = PackedVector2Array(64, 26, 64, 27, 59, 29, 54, 30, 40, 30, 34, 27, 34, 26, 40, 29, 54, 29, 59, 28)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_7w8o0")
 volume_db = -7.849
 max_distance = 64.0
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="HealthDealer" to="." method="_on_health_dealer_area_entered"]
