@@ -11,5 +11,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_animation_finished() -> void:
+func _on_audio_stream_player_2d_finished() -> void:
 	queue_free()
+
+
+func _on_animation_finished() -> void:
+	hide()

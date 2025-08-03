@@ -5,6 +5,8 @@ const EXPLOSION_SCENE = preload("res://plane/explosion.tscn")
 const Y_SPEED = 2
 const MAX_X_ACCELERATION = 50
 const ACCELERATION_FACTOR = 200
+const SILENT = -40
+const NORMAL_VOLUME = 0
 
 var current_damage = 0
 
@@ -12,6 +14,7 @@ var current_damage = 0
 @onready var damage_timer: Timer = get_node("DamageTimer")
 
 @onready var anim: AnimationPlayer = get_node("AnimationPlayer")
+@onready var audio_anim: AnimationPlayer = get_node("AudioAnimation")
 
 @onready var health_bar: TextureProgressBar = get_node("HealthBar")
 @onready var hide_health_bar_timer: Timer = get_node("HideHealthbarTimer")
@@ -31,6 +34,7 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	
@@ -63,9 +67,10 @@ func _physics_process(delta: float) -> void:
 
 func _take_damage():
 	health_comp.decrease(current_damage)
-	
-	if not scream_audio.playing:
-		scream_audio.play()
+
+
+func calculate_scream_audio_position():
+	return scream_audio.stream.get_length() * (1.0 - health_comp.health / health_comp.max_health)
 	
 
 func _on_death():
@@ -75,6 +80,7 @@ func _on_death():
 	hide_health_bar_timer.stop()
 	health_bar.hide()
 	cabin_audio.stop()
+	scream_audio.stop()
 
 
 func _on_damage_area_area_entered(area: Area2D) -> void:
@@ -83,18 +89,26 @@ func _on_damage_area_area_entered(area: Area2D) -> void:
 	
 	current_damage += area.damage
 	_take_damage()
-	scream_audio.play()
 	damage_timer.start()
 	
 	anim.play(TURBULENCE)
+	scream_audio.play(calculate_scream_audio_position())
+	audio_anim.play('louden_screams')
+	
+	if not scream_audio.playing:
+		scream_audio.play(calculate_scream_audio_position())
+		
 
 
 func _on_damage_area_area_exited(area: Area2D) -> void:
 	current_damage -= area.damage
 	damage_timer.stop()
 	
-	anim.stop()
-	
 	if current_damage <= 0:
 		hide_health_bar_timer.start()
 	
+	anim.stop()
+	audio_anim.play_backwards('louden_screams')
+	await audio_anim.animation_finished
+	if audio_anim.speed_scale == -1:
+		scream_audio.stop()

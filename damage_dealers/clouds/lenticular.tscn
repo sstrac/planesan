@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://blofs3c8q8emy"]
+
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="1_w1dki"]
+[ext_resource type="Texture2D" uid="uid://cpa0sijm3dxgh" path="res://damage_dealers/clouds/lenticular.png" id="2_k1j38"]
+
+[node name="Lenticular" type="Node2D"]
+
+[node name="DamageDealer" parent="." instance=ExtResource("1_w1dki")]
+damage = 1
+
+[node name="Lenticular" type="Sprite2D" parent="."]
+texture = ExtResource("2_k1j38")
