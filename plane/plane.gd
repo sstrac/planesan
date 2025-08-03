@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const TURBULENCE = 'turbulence'
 const EXPLOSION_SCENE = preload("res://plane/explosion.tscn")
-const Y_SPEED = 2
+const Y_SPEED = 100
 const MAX_X_ACCELERATION = 50
 const ACCELERATION_FACTOR = 200
 const SILENT = -40
@@ -49,10 +49,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = x_acceleration
 		
 		if Input.is_action_just_pressed("scroll_up"):
-			position.y -= Y_SPEED
+			velocity.y = -Y_SPEED
 			
-		if Input.is_action_just_pressed("scroll_down"):
-			position.y += Y_SPEED
+		elif Input.is_action_just_pressed("scroll_down"):
+			velocity.y = Y_SPEED
+		
+		else:
+			velocity.y = 0
 		
 		move_and_slide()
 	
