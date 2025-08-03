@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfxarephuoc6m"
-path="res://.godot/imported/plane_broken.png-aab8e61bdc7aa0b1c54ee23e65f18406.ctex"
+uid="uid://6da2o1wm4jwn"
+path="res://.godot/imported/retry.png-e6b738a754c34d45c3e7fdbc79af957b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://damage_dealers/plane_broken.png"
-dest_files=["res://.godot/imported/plane_broken.png-aab8e61bdc7aa0b1c54ee23e65f18406.ctex"]
+source_file="res://img/retry.png"
+dest_files=["res://.godot/imported/retry.png-e6b738a754c34d45c3e7fdbc79af957b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://83m6ncor5xm7"
-path="res://.godot/imported/angry.png-0bcb4cf21447de53ede2dd50326b66ae.ctex"
+uid="uid://d2f4cs3cc0npm"
+path="res://.godot/imported/thundercloud_lightning.png-5bcd32c749884855fb3eb6e3be3560a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://angry.png"
-dest_files=["res://.godot/imported/angry.png-0bcb4cf21447de53ede2dd50326b66ae.ctex"]
+source_file="res://damage_dealers/clouds/thundercloud_lightning.png"
+dest_files=["res://.godot/imported/thundercloud_lightning.png-5bcd32c749884855fb3eb6e3be3560a4.ctex"]
 
 [params]
 

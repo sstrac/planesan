@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://cyjcdnusb1fy3"]
 
-[ext_resource type="Texture2D" uid="uid://cvfvrnjmr1rwm" path="res://retry_icon.svg" id="1_0ro3p"]
-[ext_resource type="Shader" path="res://invert.gdshader" id="1_i7w2v"]
-[ext_resource type="Script" path="res://retry_button.gd" id="3_u736y"]
+[ext_resource type="Shader" path="res://invert.gdshader" id="1_ilqpx"]
+[ext_resource type="Texture2D" uid="uid://cvfvrnjmr1rwm" path="res://img/retry_icon.svg" id="2_6xv54"]
+[ext_resource type="Script" path="res://level/retry_button.gd" id="3_5n86k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_anre6"]
-shader = ExtResource("1_i7w2v")
+shader = ExtResource("1_ilqpx")
 
 [node name="GameOver" type="Node2D"]
 
@@ -34,7 +34,7 @@ color = Color(0.0588235, 0.0588235, 0.0588235, 0.129412)
 material = SubResource("ShaderMaterial_anre6")
 position = Vector2(58, 6)
 scale = Vector2(0.333333, 0.333333)
-texture = ExtResource("1_0ro3p")
+texture = ExtResource("2_6xv54")
 
 [node name="RetryButton" type="Button" parent="RetryIcon"]
 self_modulate = Color(1, 1, 1, 0)
@@ -42,6 +42,6 @@ offset_left = -12.0
 offset_top = -12.0
 offset_right = 12.0
 offset_bottom = 12.0
-script = ExtResource("3_u736y")
+script = ExtResource("3_5n86k")
 
 [connection signal="button_down" from="RetryIcon/RetryButton" to="RetryIcon/RetryButton" method="_on_button_down"]

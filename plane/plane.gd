@@ -10,6 +10,8 @@ const NORMAL_VOLUME = 0
 
 var current_damage = 0
 
+@export var plane_boundary_collision_shape: CollisionPolygon2D
+
 @onready var health_comp: Node = get_node("HealthComponent")
 @onready var damage_timer: Timer = get_node("DamageTimer")
 
@@ -23,6 +25,7 @@ var current_damage = 0
 @onready var scream_audio: AudioStreamPlayer2D = get_node("ScreamAudio")
 
 var dead: bool = false
+var won: bool = false
 var grounded_after_death: bool = false
 var x_acceleration: float = 0
 
@@ -34,11 +37,7 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	
-	if not dead:
+	if not dead and not won:
 		var x_direction := Input.get_axis("left", "right")
 		if x_direction:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:
@@ -56,10 +55,8 @@ func _physics_process(delta: float) -> void:
 		
 		else:
 			velocity.y = 0
-		
-		move_and_slide()
 	
-	else:
+	elif dead:
 		if global_position.y < 375:
 			position.y += 1
 		elif not grounded_after_death:
@@ -67,6 +64,10 @@ func _physics_process(delta: float) -> void:
 			await get_tree().create_timer(5).timeout
 			add_child(EXPLOSION_SCENE.instantiate())
 
+	elif won:
+		velocity.x = x_acceleration
+		
+	move_and_slide()
 
 func _take_damage():
 	health_comp.decrease(current_damage)
@@ -86,33 +87,52 @@ func _on_death():
 	scream_audio.stop()
 
 
-func _on_damage_area_area_entered(area: Area2D) -> void:
-	health_bar.show()
-	hide_health_bar_timer.stop()
-	
-	current_damage += area.damage
-	_take_damage()
-	damage_timer.start()
-	
-	anim.play(TURBULENCE)
-	scream_audio.play(calculate_scream_audio_position())
-	audio_anim.play('louden_screams')
-	
-	if not scream_audio.playing:
-		scream_audio.play(calculate_scream_audio_position())
+func _on_area_2d_entered(area: Area2D) -> void:
+	if not won:
+		if area.collision_layer == 1: #damage dealer
+			health_bar.show()
+			hide_health_bar_timer.stop()
+			
+			current_damage += area.damage
+			_take_damage()
+			damage_timer.start()
+			
+			anim.play(TURBULENCE)
+			scream_audio.play(calculate_scream_audio_position())
+			audio_anim.play('louden_screams')
+			
+			if not scream_audio.playing:
+				scream_audio.play(calculate_scream_audio_position())
+		
+		elif area.collision_layer == 2: #healer
+			health_bar.show()
+			hide_health_bar_timer.stop()
+			health_comp.increase(1)
 		
 
-
-func _on_damage_area_area_exited(area: Area2D) -> void:
-	current_damage -= area.damage
-	damage_timer.stop()
-	
-	if current_damage <= 0:
-		hide_health_bar_timer.start()
-	
+func _on_area_2d_exited(area: Area2D) -> void:
+	if not won:
+		if area.collision_layer == 1: #damage dealer
+			current_damage -= area.damage
+			damage_timer.stop()
+			
+			if current_damage <= 0:
+				hide_health_bar_timer.start()
+			
+			anim.stop()
+			audio_anim.play_backwards('louden_screams')
+			
+			await audio_anim.animation_finished
+			if audio_anim.current_animation_position == 0:
+				scream_audio.stop()
+				
+		elif area.collision_layer == 2: #healer
+			hide_health_bar_timer.start()
+			
+			
+func win_actions():
+	plane_boundary_collision_shape.set_deferred('disabled', true)
+	won = true
 	anim.stop()
-	audio_anim.play_backwards('louden_screams')
-	
-	await audio_anim.animation_finished
-	if audio_anim.current_animation_position == 0:
-		scream_audio.stop()
+	scream_audio.stop()
+	health_bar.hide()

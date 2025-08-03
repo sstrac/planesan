@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6xq5rp2g005l"]
+
+[ext_resource type="Texture2D" uid="uid://bdjs4qk50dhmv" path="res://img/small_balloon.png" id="1_h1yn7"]
+[ext_resource type="Script" path="res://level/small_balloon.gd" id="2_e8c8m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulmgo"]
+atlas = ExtResource("1_h1yn7")
+region = Rect2(0, 0, 4, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5755y"]
+atlas = ExtResource("1_h1yn7")
+region = Rect2(4, 0, 4, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwhwj"]
+atlas = ExtResource("1_h1yn7")
+region = Rect2(8, 0, 4, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_487yv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulmgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5755y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwhwj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_e8c8m")
+
+[node name="PopParticles" type="CPUParticles2D" parent="."]
+position = Vector2(1, 0)
+emitting = false
+amount = 20
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+color = Color(1, 0.984314, 1, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_487yv")
+autoplay = "default"
+frame_progress = 0.204374
