@@ -1,0 +1,129 @@
+[gd_scene load_steps=20 format=3 uid="uid://dtwrv4qlgeneo"]
+
+[ext_resource type="Script" path="res://plane/plane.gd" id="1_50gcs"]
+[ext_resource type="Texture2D" uid="uid://cl0qouhya6ce7" path="res://plane/planesan.png" id="2_fkjgi"]
+[ext_resource type="Script" path="res://health_bar.gd" id="3_0xslr"]
+[ext_resource type="Script" path="res://plane/planesan.gd" id="3_26gxl"]
+[ext_resource type="Script" path="res://health_component.gd" id="4_g1x0u"]
+[ext_resource type="AudioStream" uid="uid://dj7jsu7vf3ks4" path="res://audio/cabin_calm.wav" id="6_ocw5u"]
+[ext_resource type="AudioStream" uid="uid://cf6d4kryst3wh" path="res://audio/screams_1.wav" id="7_s5djf"]
+[ext_resource type="AudioStream" uid="uid://cc84spacjes5u" path="res://audio/small_scream.wav" id="8_6gj6g"]
+[ext_resource type="AudioStream" uid="uid://b258d3colk31r" path="res://audio/small_scream_2.wav" id="9_e4odd"]
+[ext_resource type="AudioStream" uid="uid://dy8xtfwm7vs2y" path="res://audio/tiny_scream.wav" id="10_38uc8"]
+
+[sub_resource type="Gradient" id="Gradient_omunm"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.721569, 0.721569, 0.721569, 0.360784)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pr7jw"]
+gradient = SubResource("Gradient_omunm")
+
+[sub_resource type="Gradient" id="Gradient_s72i8"]
+offsets = PackedFloat32Array(0.0352113)
+colors = PackedColorArray(1, 0.268772, 0.654902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tgsnk"]
+gradient = SubResource("Gradient_s72i8")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcmt0"]
+size = Vector2(12, 4)
+
+[sub_resource type="Animation" id="Animation_g4t8e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Planesan:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_32w28"]
+resource_name = "turbulence"
+length = 0.3
+loop_mode = 1
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Planesan:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yojsp"]
+_data = {
+"RESET": SubResource("Animation_g4t8e"),
+"turbulence": SubResource("Animation_32w28")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2ggoi"]
+streams_count = 4
+stream_0/stream = ExtResource("7_s5djf")
+stream_1/stream = ExtResource("8_6gj6g")
+stream_2/stream = ExtResource("9_e4odd")
+stream_3/stream = ExtResource("10_38uc8")
+
+[node name="Plane" type="CharacterBody2D"]
+script = ExtResource("1_50gcs")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("health_comp")]
+visible = false
+offset_left = -6.0
+offset_top = -4.0
+offset_right = 7.0
+offset_bottom = -3.0
+value = 50.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_pr7jw")
+texture_progress = SubResource("GradientTexture2D_tgsnk")
+script = ExtResource("3_0xslr")
+health_comp = NodePath("../HealthComponent")
+
+[node name="Planesan" type="Sprite2D" parent="."]
+texture = ExtResource("2_fkjgi")
+script = ExtResource("3_26gxl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lcmt0")
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yojsp")
+}
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_g1x0u")
+max_health = 20
+
+[node name="HideHealthbarTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageArea"]
+polygon = PackedVector2Array(-8, -3, -7, -3, -7, -2, -6, -2, -6, -1, -1, -1, -1, -3, 1, -3, 1, -2, 2, -2, 2, -1, 8, -1, 8, 0, 10, 0, 10, 2, 1, 2, 1, 3, 0, 3, 0, 4, -3, 4, -3, 3, -2, 3, -2, 2, -8, 2, -8, 3, -10, 3, -10, 2, -9, 2, -9, 1, -8, 1, -8, 0, -9, 0, -9, -2, -8, -2)
+
+[node name="CabinAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ocw5u")
+autoplay = true
+max_polyphony = 2
+
+[node name="ScreamAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_2ggoi")
+
+[connection signal="area_entered" from="DamageArea" to="." method="_on_damage_area_area_entered"]
+[connection signal="area_exited" from="DamageArea" to="." method="_on_damage_area_area_exited"]

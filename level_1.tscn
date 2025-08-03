@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb1fcmrhenqhh"]
+
+[ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="1_oarmb"]
+[ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="2_v6ytv"]
+[ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="3_m55ed"]
+[ext_resource type="Script" path="res://boundary.gd" id="4_cgplk"]
+
+[sub_resource type="Gradient" id="Gradient_h1uxu"]
+offsets = PackedFloat32Array(0, 0.0714286)
+colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.0509804, 0.478431, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jfnjs"]
+gradient = SubResource("Gradient_h1uxu")
+width = 2000
+height = 2000
+fill_from = Vector2(1, 1)
+
+[node name="Level1" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_top = -1586.0
+offset_right = 2000.0
+offset_bottom = 414.0
+texture = SubResource("GradientTexture2D_jfnjs")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = 375.0
+offset_right = 2000.0
+offset_bottom = 415.0
+color = Color(0, 0.431373, 0.0941176, 1)
+
+[node name="Cumulus" parent="." instance=ExtResource("1_oarmb")]
+position = Vector2(31, 46)
+
+[node name="Plane" parent="." instance=ExtResource("2_v6ytv")]
+position = Vector2(19, 31)
+
+[node name="Balloon" parent="." instance=ExtResource("3_m55ed")]
+position = Vector2(75, 18)
+
+[node name="Boundary" type="StaticBody2D" parent="."]
+position = Vector2(36, 33)
+script = ExtResource("4_cgplk")
+
+[node name="Camera2D" type="Camera2D" parent="Boundary"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 34, 34, 34, 34, -34, -34, -34, -34, 34, -32, 34)
