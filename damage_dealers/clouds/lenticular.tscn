@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://blofs3c8q8emy"]
+[gd_scene load_steps=4 format=3 uid="uid://blofs3c8q8emy"]
 
+[ext_resource type="Script" path="res://damage_dealers/clouds/cloud.gd" id="1_1yy88"]
 [ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="1_w1dki"]
 [ext_resource type="Texture2D" uid="uid://cpa0sijm3dxgh" path="res://damage_dealers/clouds/lenticular.png" id="2_k1j38"]
 
 [node name="Lenticular" type="Node2D"]
+script = ExtResource("1_1yy88")
+
+[node name="Lenticular" type="Sprite2D" parent="."]
+texture = ExtResource("2_k1j38")
 
 [node name="DamageDealer" parent="." instance=ExtResource("1_w1dki")]
 damage = 1
 
-[node name="Lenticular" type="Sprite2D" parent="."]
-texture = ExtResource("2_k1j38")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageDealer"]
+polygon = PackedVector2Array(-13, -12, 7, -12, 7, -11, 12, -11, 12, -10, 15, -10, 15, -9, 18, -9, 18, -8, 20, -8, 20, -7, 21, -7, 21, -6, 23, -6, 23, -5, 24, -5, 24, -4, 25, -4, 25, -2, 21, -2, 21, -1, 17, -1, 17, 0, 7, 0, 7, 2, 12, 2, 12, 3, 15, 3, 15, 4, 17, 4, 17, 5, 19, 5, 19, 6, 20, 6, 20, 7, 22, 7, 22, 8, 23, 8, 23, 9, 24, 9, 24, 11, 20, 11, 20, 12, 16, 12, 16, 13, -11, 13, -11, 12, -17, 12, -17, 11, -20, 11, -20, 10, -22, 10, -22, 7, -21, 7, -21, 6, -19, 6, -19, 5, -18, 5, -18, 4, -17, 4, -17, 3, -15, 3, -15, 2, -12, 2, -12, 1, -12, 0, -17, 0, -17, -1, -19, -1, -19, -2, -22, -2, -22, -3, -24, -3, -24, -6, -23, -6, -23, -7, -21, -7, -21, -8, -20, -8, -20, -9, -19, -9, -19, -10, -17, -10, -17, -11, -13, -11)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=8 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="1_oarmb"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="2_v6ytv"]
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="3_m55ed"]
 [ext_resource type="Script" path="res://boundary.gd" id="4_cgplk"]
+[ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="5_2xn2i"]
 
 [sub_resource type="Gradient" id="Gradient_h1uxu"]
 offsets = PackedFloat32Array(0, 0.0714286)
@@ -32,6 +33,12 @@ color = Color(0, 0.431373, 0.0941176, 1)
 [node name="Cumulus" parent="." instance=ExtResource("1_oarmb")]
 position = Vector2(31, 46)
 
+[node name="Cumulus2" parent="." instance=ExtResource("1_oarmb")]
+position = Vector2(101, 1)
+
+[node name="Lenticular" parent="." instance=ExtResource("5_2xn2i")]
+position = Vector2(114, 41)
+
 [node name="Plane" parent="." instance=ExtResource("2_v6ytv")]
 position = Vector2(19, 31)
 
@@ -46,3 +53,5 @@ script = ExtResource("4_cgplk")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundary"]
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 34, 34, 34, 34, -34, -34, -34, -34, 34, -32, 34)
+
+[node name="Clouds" type="Node2D" parent="."]

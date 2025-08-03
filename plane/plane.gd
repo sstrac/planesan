@@ -109,6 +109,7 @@ func _on_damage_area_area_exited(area: Area2D) -> void:
 	
 	anim.stop()
 	audio_anim.play_backwards('louden_screams')
+	
 	await audio_anim.animation_finished
-	if audio_anim.speed_scale == -1:
+	if audio_anim.current_animation_position == 0:
 		scream_audio.stop()
