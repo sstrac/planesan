@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtwrv4qlgeneo"]
+[gd_scene load_steps=21 format=3 uid="uid://dtwrv4qlgeneo"]
 
 [ext_resource type="Script" path="res://plane/plane.gd" id="1_50gcs"]
 [ext_resource type="Texture2D" uid="uid://cl0qouhya6ce7" path="res://plane/planesan.png" id="2_fkjgi"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dj7jsu7vf3ks4" path="res://audio/cabin_calm.wav" id="6_ocw5u"]
 [ext_resource type="AudioStream" uid="uid://duk4p8knkj8gw" path="res://audio/distant seagull.wav" id="7_aqqc4"]
 [ext_resource type="AudioStream" uid="uid://k25hi2cdoq6y" path="res://audio/full_screams.wav" id="8_olre1"]
+[ext_resource type="Texture2D" uid="uid://boasjee116ulv" path="res://plane/heart.png" id="9_xkcjm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcmt0"]
 size = Vector2(12, 4)
@@ -114,9 +115,11 @@ libraries = {
 "": SubResource("AnimationLibrary_yojsp")
 }
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("heart", "sfx")]
 script = ExtResource("4_g1x0u")
 max_health = 20.0
+heart = NodePath("../Heart")
+sfx = NodePath("../SFXAudio")
 
 [node name="HideHealthbarTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -143,6 +146,9 @@ max_polyphony = 2
 stream = ExtResource("8_olre1")
 volume_db = -20.0
 
+[node name="SFXAudio" type="AudioStreamPlayer2D" parent="."]
+volume_db = 4.0
+
 [node name="AudioAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_dmgut")
@@ -164,6 +170,19 @@ texture_under = SubResource("GradientTexture2D_pr7jw")
 texture_progress = SubResource("GradientTexture2D_tgsnk")
 script = ExtResource("3_0xslr")
 health_comp = NodePath("../HealthComponent")
+
+[node name="Heart" type="CPUParticles2D" parent="."]
+position = Vector2(4, -5)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+texture = ExtResource("9_xkcjm")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 13.07
+initial_velocity_max = 13.07
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_exited"]

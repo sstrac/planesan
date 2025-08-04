@@ -1,37 +1,26 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnub8ykfqllq3"]
 
-[ext_resource type="Texture2D" uid="uid://cujorl1p6x1wx" path="res://damage_dealers/clouds/cirrocumulus.png" id="1_4878y"]
+[ext_resource type="PackedScene" uid="uid://n83pmdc3g4jd" path="res://damage_dealers/clouds/cirrocumulus.tscn" id="1_i81fa"]
 
 [node name="CirrocumulusCluster" type="Node2D"]
 
-[node name="Cirrocumulus" type="Sprite2D" parent="."]
+[node name="Cirrocumulus" parent="." instance=ExtResource("1_i81fa")]
 position = Vector2(2, 2)
-texture = ExtResource("1_4878y")
 
-[node name="Cirrocumulus2" type="Sprite2D" parent="."]
-position = Vector2(9, 4)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus2" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(9, 9)
 
-[node name="Cirrocumulus3" type="Sprite2D" parent="."]
-position = Vector2(17, 7)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus3" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(21, 4)
 
-[node name="Cirrocumulus4" type="Sprite2D" parent="."]
-position = Vector2(10, 12)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus4" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(22, 14)
 
-[node name="Cirrocumulus5" type="Sprite2D" parent="."]
-position = Vector2(18, 15)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus5" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(10, 20)
 
-[node name="Cirrocumulus6" type="Sprite2D" parent="."]
-position = Vector2(26, 10)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus6" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(34, 8)
 
-[node name="Cirrocumulus7" type="Sprite2D" parent="."]
-position = Vector2(28, 2)
-texture = ExtResource("1_4878y")
-
-[node name="Cirrocumulus8" type="Sprite2D" parent="."]
-position = Vector2(1, 15)
-texture = ExtResource("1_4878y")
+[node name="Cirrocumulus7" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(32, 23)

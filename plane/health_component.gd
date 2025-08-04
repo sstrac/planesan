@@ -1,7 +1,10 @@
 extends Node
 
-
+const UPTONE = preload("res://audio/uptone.wav")
 @export var max_health: float
+@export var heart: CPUParticles2D
+@export var sfx: AudioStreamPlayer2D
+
 var health: float
 
 signal died
@@ -16,6 +19,9 @@ func decrease(amt):
 		died.emit()
 		
 func increase(amt):
+	sfx.stream = UPTONE
+	sfx.play()
+	heart.emitting = true
 	health += amt
 	
 	if health > max_health:

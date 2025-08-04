@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbnviwfhlgk0t"]
+
+[ext_resource type="Script" path="res://damage_dealers/clouds/nimbocirrocumulus.gd" id="1_fy0a8"]
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_s3o0r"]
+[ext_resource type="Texture2D" uid="uid://cujorl1p6x1wx" path="res://damage_dealers/clouds/cirrocumulus.png" id="3_bxryr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_flyiv"]
+radius = 10.198
+
+[node name="Nimbocirrocumulus" type="Node2D"]
+script = ExtResource("1_fy0a8")
+
+[node name="Cirrocumulus" type="Sprite2D" parent="."]
+self_modulate = Color(0.552956, 0.552956, 0.552955, 1)
+texture = ExtResource("3_bxryr")
+
+[node name="DamageDealer" parent="." instance=ExtResource("2_s3o0r")]
+damage = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageDealer"]
+polygon = PackedVector2Array(-1, -2, 2, -2, 2, -1, 3, -1, 3, 2, 2, 2, 2, 3, -1, 3, -1, 2, -2, 2, -2, -1, -1, -1)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_flyiv")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

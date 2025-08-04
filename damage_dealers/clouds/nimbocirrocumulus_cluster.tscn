@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://by7jp6eqcrmlb"]
+
+[ext_resource type="PackedScene" uid="uid://cbnviwfhlgk0t" path="res://damage_dealers/clouds/nimbocirrocumulus.tscn" id="1_s7vtj"]
+
+[node name="NimbocirrocumulusCluster" type="Node2D"]
+
+[node name="Nimbocirrocumulus" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(2, 2)
+
+[node name="Nimbocirrocumulus2" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(13, 8)
+
+[node name="Nimbocirrocumulus3" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(7, 18)
+
+[node name="Nimbocirrocumulus4" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(24, 2)
+
+[node name="Nimbocirrocumulus5" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(20, 24)
+
+[node name="Nimbocirrocumulus6" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(36, 17)
+
+[node name="Nimbocirrocumulus7" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(39, 4)
