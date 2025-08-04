@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://r3auskec56w2"]
+
+[ext_resource type="Texture2D" uid="uid://c80k7ps1rksw6" path="res://damage_dealers/clouds/cirrus.png" id="1_1ql2o"]
+[ext_resource type="Script" path="res://damage_dealers/clouds/cloud.gd" id="1_pfmf7"]
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_slkp0"]
+
+[node name="Cirrus" type="Node2D"]
+script = ExtResource("1_pfmf7")
+
+[node name="DamageDealer" parent="." instance=ExtResource("2_slkp0")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageDealer"]
+polygon = PackedVector2Array(-6, -5, 0, -5, 0, -4, 2, -4, 2, -3, 4, -3, 4, -2, 6, -2, 6, -1, 10, -1, 10, 2, 8, 2, 8, 3, 6, 3, 6, 4, 3, 4, 3, 5, -4, 5, -4, 4, -7, 4, -7, 3, -8, 3, -8, 2, -9, 2, -9, 1, -10, 1, -10, -2, -9, -2, -9, -3, -8, -3, -8, -4, -6, -4)
+
+[node name="Cirrus" type="Sprite2D" parent="."]
+texture = ExtResource("1_1ql2o")

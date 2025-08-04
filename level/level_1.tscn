@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=24 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
@@ -6,17 +6,24 @@
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
+[ext_resource type="PackedScene" uid="uid://qy6lcspp5s4f" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="5_m4pxb"]
 [ext_resource type="PackedScene" uid="uid://cnub8ykfqllq3" path="res://damage_dealers/clouds/cirrocumulus_cluster.tscn" id="6_h3gqr"]
 [ext_resource type="PackedScene" uid="uid://by7jp6eqcrmlb" path="res://damage_dealers/clouds/nimbocirrocumulus_cluster.tscn" id="7_lgkxy"]
+[ext_resource type="Shader" path="res://level/space.gdshader" id="8_3dmqn"]
 [ext_resource type="Texture2D" uid="uid://de2117o72lftm" path="res://img/finish.png" id="8_4unrb"]
 [ext_resource type="Texture2D" uid="uid://6da2o1wm4jwn" path="res://img/retry.png" id="9_56p3l"]
+[ext_resource type="Texture2D" uid="uid://d2i4d5x0h3cho" path="res://img/space.png" id="9_f30ae"]
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://level/balloon_ring.tscn" id="11_t8w75"]
+[ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
 b = Vector2(0, 2000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_go5lg"]
+shader = ExtResource("8_3dmqn")
 
 [sub_resource type="Gradient" id="Gradient_h1uxu"]
 offsets = PackedFloat32Array(0, 0.0912548, 0.125475, 0.39924, 0.574144, 0.749049)
@@ -36,22 +43,143 @@ b = Vector2(0, 2500)
 
 [node name="Level1" type="Node2D"]
 
-[node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("finish", "plane")]
-position = Vector2(367, 3)
+[node name="UpperClouds" type="Node2D" parent="."]
+
+[node name="CirrocumulusCluster" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(0, 100)
+
+[node name="CirrocumulusCluster2" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(78, 111)
+scale = Vector2(-1, 1)
+
+[node name="CirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(9, 98)
+scale = Vector2(1, -1)
+
+[node name="CirrocumulusCluster5" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(48, 104)
+scale = Vector2(1, -1)
+
+[node name="CirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(88, 106)
+
+[node name="CirrocumulusCluster6" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(93, 78)
+
+[node name="NimbocirrocumulusCluster" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(206, 80)
+
+[node name="NimbocirrocumulusCluster2" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(224, 136)
+scale = Vector2(1, -1)
+
+[node name="NimbocirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(177, 130)
+scale = Vector2(1, -1)
+
+[node name="NimbocirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(302, 86)
+scale = Vector2(-1, 1)
+
+[node name="CirrusCluster" parent="UpperClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(566, 101)
+
+[node name="CirrusCluster2" parent="UpperClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(676, 56)
+
+[node name="CirrusCluster3" parent="UpperClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(724, 144)
+
+[node name="CirrusCluster4" parent="UpperClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(823, 184)
+
+[node name="MiddleClouds" type="Node2D" parent="."]
+
+[node name="Cumulus10" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+position = Vector2(272, 280)
+scale = Vector2(-1, 2)
+
+[node name="Cumulus11" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+position = Vector2(220, 280)
+scale = Vector2(-1, -2)
+
+[node name="Thundercloud2" parent="MiddleClouds" instance=ExtResource("5_6w57y")]
+position = Vector2(236, 284)
+
+[node name="Thundercloud3" parent="MiddleClouds" instance=ExtResource("5_6w57y")]
+position = Vector2(263, 270)
+scale = Vector2(-1, 1)
+
+[node name="LowerClouds" type="Node2D" parent="."]
+position = Vector2(43, 137)
+
+[node name="Cumulus" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(-21, 184)
+scale = Vector2(1, -1)
+
+[node name="Cumulus2" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(7, 194)
+
+[node name="Cumulus3" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(44, 192)
+
+[node name="Cumulus4" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(91, 174)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus5" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(115, 182)
+scale = Vector2(-1, -1)
+
+[node name="Cumulus6" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(107, 196)
+scale = Vector2(1, -1)
+
+[node name="Cumulus7" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(169, 192)
+
+[node name="Lenticular" parent="LowerClouds" instance=ExtResource("4_gb0ih")]
+modulate = Color(0.800491, 0.800491, 0.800491, 1)
+position = Vector2(213, 189)
+
+[node name="Cumulus8" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+position = Vector2(247, 170)
+
+[node name="Thundercloud" parent="LowerClouds" instance=ExtResource("5_6w57y")]
+position = Vector2(256, 184)
+
+[node name="Cumulus9" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.783523, 0.783523, 0.783523, 1)
+position = Vector2(293, 187)
+scale = Vector2(-1, 1)
+
+[node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
+position = Vector2(587, -112)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
-finish = NodePath("../PlaneBoundary/Finish")
 plane = NodePath("../Plane")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
 shape = SubResource("SegmentShape2D_rap3p")
 
+[node name="Space" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_go5lg")
+position = Vector2(0, -602)
+texture = ExtResource("9_f30ae")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 600)
+
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -2
-offset_top = -600.0
+offset_top = -602.0
 offset_right = 2000.0
-offset_bottom = 400.0
+offset_bottom = 398.0
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_jfnjs")
 
@@ -63,53 +191,27 @@ offset_bottom = 415.0
 mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
-[node name="Balloon" parent="." instance=ExtResource("1_g122v")]
-position = Vector2(165, 144)
-
-[node name="Clouds" type="Node2D" parent="."]
-position = Vector2(43, 137)
-
-[node name="Cumulus" parent="Clouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(96, 141)
-
-[node name="Cumulus2" parent="Clouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(16, 157)
-
-[node name="Lenticular" parent="Clouds" instance=ExtResource("4_gb0ih")]
-position = Vector2(236, 108)
-
-[node name="Thundercloud" parent="Clouds" instance=ExtResource("5_6w57y")]
-position = Vector2(116, 153)
-
-[node name="CirrocumulusCluster" parent="Clouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(30, 15)
-
-[node name="NimbocirrocumulusCluster" parent="Clouds" instance=ExtResource("7_lgkxy")]
-position = Vector2(-7, 53)
-
-[node name="BalloonRing" parent="." instance=ExtResource("11_t8w75")]
-position = Vector2(190, 164)
-
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary_collision_shape") instance=ExtResource("5_m4pxb")]
-position = Vector2(21, 160)
+position = Vector2(27, 214)
 collision_mask = 3
 plane_boundary_collision_shape = NodePath("../PlaneBoundary/CollisionPolygon2D")
 
 [node name="PlaneBoundary" type="StaticBody2D" parent="." node_paths=PackedStringArray("plane")]
-position = Vector2(37, 162)
+position = Vector2(43, 216)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 
-[node name="Finish" type="Sprite2D" parent="PlaneBoundary"]
+[node name="FinishImage" type="Sprite2D" parent="PlaneBoundary"]
 visible = false
 position = Vector2(-4, -17)
 texture = ExtResource("8_4unrb")
+script = ExtResource("14_f1j5w")
 
-[node name="Retry" type="Sprite2D" parent="PlaneBoundary/Finish"]
+[node name="Retry" type="Sprite2D" parent="PlaneBoundary/FinishImage"]
 position = Vector2(21, 0)
 texture = ExtResource("9_56p3l")
 
-[node name="RetryButton" type="Button" parent="PlaneBoundary/Finish/Retry"]
+[node name="RetryButton" type="Button" parent="PlaneBoundary/FinishImage/Retry"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -5.0
 offset_top = -5.0
@@ -134,5 +236,11 @@ shape = SubResource("SegmentShape2D_jalv0")
 
 [node name="Obstacles" type="Node2D" parent="."]
 
+[node name="BalloonRing" parent="Obstacles" instance=ExtResource("11_t8w75")]
+position = Vector2(177, 215)
+
+[node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
+position = Vector2(202, 236)
+
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
-[connection signal="button_down" from="PlaneBoundary/Finish/Retry/RetryButton" to="PlaneBoundary/Finish/Retry/RetryButton" method="_on_button_down"]
+[connection signal="button_down" from="PlaneBoundary/FinishImage/Retry/RetryButton" to="PlaneBoundary/FinishImage/Retry/RetryButton" method="_on_button_down"]

@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/use_filter=false
 config/icon="res://plane/planesan.png"
 
+[autoload]
+
+Finish="*res://finish.gd"
+
 [display]
 
 window/size/viewport_width=64

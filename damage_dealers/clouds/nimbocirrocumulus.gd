@@ -1,6 +1,6 @@
 extends Node2D
 
-const MEANDER_LIMIT = 6
+const MEANDER_LIMIT = 8
 const ATTRACTION_SPEED = 3
 
 @onready var timer: Timer = get_node("Timer")

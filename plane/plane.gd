@@ -2,11 +2,13 @@ extends CharacterBody2D
 
 const TURBULENCE = 'turbulence'
 const EXPLOSION_SCENE = preload("res://plane/explosion.tscn")
-const Y_SPEED = 100
 const MAX_X_ACCELERATION = 50
 const ACCELERATION_FACTOR = 200
 const SILENT = -40
 const NORMAL_VOLUME = 0
+const REDUCE_GRAVITY_Y_POSITION = -300
+const NORMAL_Y_SPEED: float = 100
+const GROUND_Y_POS = 375
 
 var current_damage = 0
 
@@ -24,20 +26,30 @@ var current_damage = 0
 @onready var cabin_audio: AudioStreamPlayer2D = get_node("CabinAudio")
 @onready var scream_audio: AudioStreamPlayer2D = get_node("ScreamAudio")
 
-var dead: bool = false
+var game_over: bool = false
 var won: bool = false
-var grounded_after_death: bool = false
+
 var x_acceleration: float = 0
+var y_speed: float = 100
 
 
 func _ready():
+	Finish.finished.connect(_on_finish)
 	health_comp.died.connect(_on_death)
 	damage_timer.timeout.connect(_take_damage)
 	hide_health_bar_timer.timeout.connect(health_bar.hide)
 
 
 func _physics_process(delta: float) -> void:
-	if not dead and not won:
+	if game_over:
+		velocity.x = 0
+		if position.y < GROUND_Y_POS:
+			position.y += 1
+
+	elif won:
+		velocity.x = x_acceleration
+	
+	else:
 		var x_direction := Input.get_axis("left", "right")
 		if x_direction:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:
@@ -48,26 +60,23 @@ func _physics_process(delta: float) -> void:
 		velocity.x = x_acceleration
 		
 		if Input.is_action_just_pressed("scroll_up"):
-			velocity.y = -Y_SPEED
+			velocity.y = -y_speed
 			
 		elif Input.is_action_just_pressed("scroll_down"):
-			velocity.y = Y_SPEED
+			velocity.y = y_speed
 		
 		else:
 			velocity.y = 0
-	
-	elif dead:
-		velocity.x = 0
-		if global_position.y < 375:
-			position.y += 1
-		elif not grounded_after_death:
-			grounded_after_death = true
-			await get_tree().create_timer(5).timeout
-			add_child(EXPLOSION_SCENE.instantiate())
-
-	elif won:
-		velocity.x = x_acceleration
-		
+			
+		if global_position.y < REDUCE_GRAVITY_Y_POSITION:
+			y_speed = NORMAL_Y_SPEED - abs(global_position.y - REDUCE_GRAVITY_Y_POSITION)
+			
+		else:
+			y_speed = lerp(y_speed, NORMAL_Y_SPEED, delta )
+			
+		if y_speed < 1.0:
+			Finish.game_over()
+			
 	move_and_slide()
 
 func _take_damage():
@@ -79,17 +88,27 @@ func calculate_scream_audio_position():
 	
 
 func _on_death():
-	dead = true
+	health_comp.died.disconnect(_on_death)
 	planesan.switch_to_broken_texture()
-	add_child(EXPLOSION_SCENE.instantiate())
-	hide_health_bar_timer.stop()
-	health_bar.hide()
-	cabin_audio.stop()
-	scream_audio.stop()
-	for boundary in get_tree().get_nodes_in_group('boundary'):
-		boundary.set_deferred('disabled', true)
+	Finish.game_over()
+	
 
+func _on_finish(finish_type):
+	match finish_type:
+		Finish.FinishType.GAME_OVER:
+			game_over = true
+			
+			add_child(EXPLOSION_SCENE.instantiate())
+			hide_health_bar_timer.stop()
+			health_bar.hide()
+			cabin_audio.stop()
+			for boundary in get_tree().get_nodes_in_group('boundary'):
+				boundary.set_deferred('disabled', true)
+				
+		Finish.FinishType.WON:
+			pass
 
+	
 func _on_area_2d_entered(area: Area2D) -> void:
 	if not won:
 		if area.collision_layer == 1: #damage dealer
