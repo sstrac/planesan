@@ -153,6 +153,7 @@ texture = ExtResource("2_fkjgi")
 script = ExtResource("3_26gxl")
 
 [node name="HealthBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("health_comp")]
+visible = false
 offset_left = -6.0
 offset_top = -7.0
 offset_right = 7.0

@@ -20,4 +20,7 @@ func _on_health_dealer_area_entered(area: Area2D) -> void:
 		popped = true
 		for balloon in get_node("Balloons").get_children():
 			balloon.pop()
-			audio.play()
+		
+		audio.play()
+		await audio.finished
+		queue_free()

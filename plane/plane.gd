@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0
 	
 	elif dead:
+		velocity.x = 0
 		if global_position.y < 375:
 			position.y += 1
 		elif not grounded_after_death:
@@ -85,6 +86,8 @@ func _on_death():
 	health_bar.hide()
 	cabin_audio.stop()
 	scream_audio.stop()
+	for boundary in get_tree().get_nodes_in_group('boundary'):
+		boundary.set_deferred('disabled', true)
 
 
 func _on_area_2d_entered(area: Area2D) -> void:
