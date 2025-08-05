@@ -6,9 +6,10 @@ const MAX_X_ACCELERATION = 50
 const ACCELERATION_FACTOR = 200
 const SILENT = -40
 const NORMAL_VOLUME = 0
-const REDUCE_GRAVITY_Y_POSITION = -300
+const REDUCE_GRAVITY_Y_POSITION = 0
 const NORMAL_Y_SPEED: float = 100
 const GROUND_Y_POS = 375
+
 
 var current_damage = 0
 
@@ -55,8 +56,8 @@ func _physics_process(delta: float) -> void:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:
 				x_acceleration += delta * ACCELERATION_FACTOR * x_direction
 		else:
-			x_acceleration = lerp(x_acceleration, 0.0, delta)
-
+			x_acceleration = lerp(x_acceleration, 5.0, delta)
+			
 		velocity.x = x_acceleration
 		
 		if Input.is_action_just_pressed("scroll_up"):
@@ -69,7 +70,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0
 			
 		if global_position.y < REDUCE_GRAVITY_Y_POSITION:
-			y_speed = NORMAL_Y_SPEED - abs(global_position.y - REDUCE_GRAVITY_Y_POSITION)
+			y_speed = NORMAL_Y_SPEED - (abs(global_position.y - REDUCE_GRAVITY_Y_POSITION) * 2)
 			
 		else:
 			y_speed = lerp(y_speed, NORMAL_Y_SPEED, delta )

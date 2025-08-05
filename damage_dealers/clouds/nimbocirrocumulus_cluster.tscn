@@ -5,22 +5,73 @@
 [node name="NimbocirrocumulusCluster" type="Node2D"]
 
 [node name="Nimbocirrocumulus" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(2, 2)
-
-[node name="Nimbocirrocumulus2" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(13, 8)
-
-[node name="Nimbocirrocumulus3" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(7, 18)
-
-[node name="Nimbocirrocumulus4" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(24, 2)
+position = Vector2(123, 6)
 
 [node name="Nimbocirrocumulus5" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(20, 24)
+position = Vector2(32, 27)
 
 [node name="Nimbocirrocumulus6" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(36, 17)
+position = Vector2(48, 20)
 
 [node name="Nimbocirrocumulus7" parent="." instance=ExtResource("1_s7vtj")]
-position = Vector2(39, 4)
+position = Vector2(51, 7)
+
+[node name="Nimbocirrocumulus8" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(42, 69)
+
+[node name="Nimbocirrocumulus10" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(116, 38)
+
+[node name="Nimbocirrocumulus11" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(24, 44)
+
+[node name="Nimbocirrocumulus12" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(14, 68)
+
+[node name="Nimbocirrocumulus13" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(40, 50)
+
+[node name="Nimbocirrocumulus14" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(36, 8)
+
+[node name="Nimbocirrocumulus15" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(69, 4)
+
+[node name="Nimbocirrocumulus16" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(80, 10)
+
+[node name="Nimbocirrocumulus17" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(74, 20)
+
+[node name="Nimbocirrocumulus18" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(91, 4)
+
+[node name="Nimbocirrocumulus19" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(87, 26)
+
+[node name="Nimbocirrocumulus20" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(103, 19)
+
+[node name="Nimbocirrocumulus21" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(106, 6)
+
+[node name="Nimbocirrocumulus22" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(59, 38)
+
+[node name="Nimbocirrocumulus23" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(70, 46)
+
+[node name="Nimbocirrocumulus24" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(61, 58)
+
+[node name="Nimbocirrocumulus25" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(81, 40)
+
+[node name="Nimbocirrocumulus26" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(88, 59)
+
+[node name="Nimbocirrocumulus27" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(97, 71)
+
+[node name="Nimbocirrocumulus28" parent="." instance=ExtResource("1_s7vtj")]
+position = Vector2(96, 42)

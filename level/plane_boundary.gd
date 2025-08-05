@@ -3,8 +3,6 @@ extends StaticBody2D
 
 @export var plane: CharacterBody2D
 
-const SPEED = 5
-
 var speed = 5
 
 # Called when the node enters the scene tree for the first time.

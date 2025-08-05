@@ -5,22 +5,85 @@
 [node name="CirrocumulusCluster" type="Node2D"]
 
 [node name="Cirrocumulus" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(2, 2)
+position = Vector2(83, 43)
 
 [node name="Cirrocumulus2" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(9, 9)
+position = Vector2(99, 4)
 
 [node name="Cirrocumulus3" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(21, 4)
+position = Vector2(43, 6)
 
 [node name="Cirrocumulus4" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(22, 14)
+position = Vector2(30, 9)
 
 [node name="Cirrocumulus5" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(10, 20)
+position = Vector2(22, 18)
 
 [node name="Cirrocumulus6" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(34, 8)
+position = Vector2(54, 17)
 
 [node name="Cirrocumulus7" parent="." instance=ExtResource("1_i81fa")]
-position = Vector2(32, 23)
+position = Vector2(35, 20)
+
+[node name="Cirrocumulus8" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(9, 52)
+
+[node name="Cirrocumulus9" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(77, 30)
+
+[node name="Cirrocumulus10" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(21, 28)
+
+[node name="Cirrocumulus11" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(15, 37)
+
+[node name="Cirrocumulus12" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(22, 44)
+
+[node name="Cirrocumulus13" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(34, 32)
+
+[node name="Cirrocumulus14" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(33, 48)
+
+[node name="Cirrocumulus15" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(58, 4)
+
+[node name="Cirrocumulus16" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(65, 11)
+
+[node name="Cirrocumulus17" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(77, 6)
+
+[node name="Cirrocumulus18" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(78, 16)
+
+[node name="Cirrocumulus19" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(66, 22)
+
+[node name="Cirrocumulus20" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(90, 10)
+
+[node name="Cirrocumulus21" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(88, 25)
+
+[node name="Cirrocumulus22" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(45, 28)
+
+[node name="Cirrocumulus23" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(47, 38)
+
+[node name="Cirrocumulus24" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(59, 33)
+
+[node name="Cirrocumulus25" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(60, 43)
+
+[node name="Cirrocumulus26" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(48, 49)
+
+[node name="Cirrocumulus27" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(72, 37)
+
+[node name="Cirrocumulus28" parent="." instance=ExtResource("1_i81fa")]
+position = Vector2(70, 52)
