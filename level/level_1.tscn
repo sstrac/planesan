@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=24 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
+[ext_resource type="PackedScene" uid="uid://ddw3b0pes1coy" path="res://damage_dealers/clouds/cumulonimbus.tscn" id="3_fxevg"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
@@ -46,24 +47,39 @@ b = Vector2(0, 2500)
 position = Vector2(-4, -27)
 
 [node name="CirrocumulusCluster" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(5, 36)
+position = Vector2(-7, 34)
 
 [node name="CirrocumulusCluster2" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(88, 36)
+position = Vector2(76, 34)
 
-[node name="CirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(417, 38)
+[node name="CirrocumulusCluster5" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(159, 31)
 
-[node name="CirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(499, 37)
+[node name="CirrocumulusCluster6" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(242, 31)
+
+[node name="CirrocumulusCluster7" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(319, 32)
 
 [node name="NimbocirrocumulusCluster" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
-position = Vector2(166, 24)
+position = Vector2(396, 30)
 
 [node name="NimbocirrocumulusCluster2" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
-position = Vector2(308, 26)
+position = Vector2(549, 29)
+
+[node name="CirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(659, 33)
+
+[node name="CirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(741, 32)
 
 [node name="MiddleClouds" type="Node2D" parent="."]
+
+[node name="Cumulonimbus" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
+position = Vector2(401, 235)
+
+[node name="Cumulonimbus2" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
+position = Vector2(399, 8)
 
 [node name="Cumulus" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(97, 177)
@@ -136,7 +152,7 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 
 [node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
-position = Vector2(587, -112)
+position = Vector2(826, -96)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
@@ -172,12 +188,12 @@ mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary_collision_shape") instance=ExtResource("5_m4pxb")]
-position = Vector2(18, 174)
+position = Vector2(36, 40)
 collision_mask = 3
 plane_boundary_collision_shape = NodePath("../PlaneBoundary/CollisionPolygon2D")
 
 [node name="PlaneBoundary" type="StaticBody2D" parent="." node_paths=PackedStringArray("plane")]
-position = Vector2(34, 176)
+position = Vector2(49, 62)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 

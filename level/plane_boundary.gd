@@ -18,4 +18,4 @@ func _process(delta: float) -> void:
 			global_position.y = lerp(global_position.y, plane.global_position.y, delta)
 			
 		else:
-			global_position = lerp(global_position, plane.global_position, delta * 10)
+			global_position = round(plane.global_position)

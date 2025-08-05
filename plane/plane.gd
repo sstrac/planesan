@@ -7,7 +7,7 @@ const ACCELERATION_FACTOR = 200
 const SILENT = -40
 const NORMAL_VOLUME = 0
 const REDUCE_GRAVITY_Y_POSITION = 0
-const NORMAL_Y_SPEED: float = 100
+const NORMAL_Y_SPEED: int = 100
 const GROUND_Y_POS = 375
 
 
@@ -31,7 +31,7 @@ var game_over: bool = false
 var won: bool = false
 
 var x_acceleration: float = 0
-var y_speed: float = 100
+var y_speed: int = 100
 
 
 func _ready():
@@ -45,7 +45,9 @@ func _physics_process(delta: float) -> void:
 	if game_over:
 		velocity.x = 0
 		if position.y < GROUND_Y_POS:
-			position.y += 1
+			velocity.y = 50
+		else:
+			velocity.y = 0
 
 	elif won:
 		velocity.x = x_acceleration
