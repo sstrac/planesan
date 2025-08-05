@@ -6,6 +6,7 @@
 
 [node name="Lenticular" type="Node2D"]
 script = ExtResource("1_1yy88")
+x_speed = 5.0
 
 [node name="DamageDealer" parent="." instance=ExtResource("1_w1dki")]
 damage = 1

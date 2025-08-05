@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=26 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
+[ext_resource type="PackedScene" uid="uid://qy6lcspp5s4f" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="5_m4pxb"]
 [ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="6_d3cfc"]
 [ext_resource type="PackedScene" uid="uid://cnub8ykfqllq3" path="res://damage_dealers/clouds/cirrocumulus_cluster.tscn" id="6_h3gqr"]
@@ -80,7 +81,7 @@ position = Vector2(741, 32)
 position = Vector2(401, 235)
 
 [node name="Cumulonimbus3" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
-position = Vector2(625, 255)
+position = Vector2(626, 253)
 
 [node name="Cumulonimbus2" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
 position = Vector2(399, 8)
@@ -147,17 +148,32 @@ position = Vector2(239, 129)
 [node name="Cirrus8" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(29, 106)
 
+[node name="Cirrus13" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(546, 133)
+
+[node name="Cirrus14" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(559, 123)
+
+[node name="Cirrus15" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(585, 140)
+
 [node name="Cirrus9" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(42, 96)
 
 [node name="Cirrus10" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(68, 113)
 
+[node name="Lenticular4" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
+position = Vector2(55, 109)
+
+[node name="Lenticular5" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
+position = Vector2(213, 119)
+
 [node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
-position = Vector2(289, 237)
+position = Vector2(294, 215)
 
 [node name="Lenticular3" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
-position = Vector2(230, 228)
+position = Vector2(229, 254)
 
 [node name="Cumulus10" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(317, 80)
@@ -173,9 +189,23 @@ position = Vector2(256, 176)
 rotation = 3.14159
 scale = Vector2(-1, -1)
 
+[node name="Cumulus14" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(155, 232)
+
+[node name="Cumulus15" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(136, 241)
+rotation = -3.14159
+scale = Vector2(1, -1)
+
 [node name="Cumulus13" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(237, 185)
 scale = Vector2(-1, 1)
+
+[node name="CirrusCluster" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(1469, 278)
+
+[node name="CirrusCluster2" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(1786, 254)
 
 [node name="LowerClouds" type="Node2D" parent="."]
 position = Vector2(43, 137)
@@ -326,10 +356,10 @@ shape = SubResource("SegmentShape2D_jalv0")
 position = Vector2(623, 140)
 
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(576, 269)
+position = Vector2(644, 265)
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(481, 105)
+position = Vector2(537, 94)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="PlaneBoundary/FinishImage/Retry/RetryButton" to="PlaneBoundary/FinishImage/Retry/RetryButton" method="_on_button_down"]
