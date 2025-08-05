@@ -27,6 +27,8 @@ var current_damage = 0
 @onready var cabin_audio: AudioStreamPlayer2D = get_node("CabinAudio")
 @onready var scream_audio: AudioStreamPlayer2D = get_node("ScreamAudio")
 
+@onready var area2d: Area2D = get_node("Area2D")
+
 var game_over: bool = false
 var won: bool = false
 
@@ -58,7 +60,7 @@ func _physics_process(delta: float) -> void:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:
 				x_acceleration += delta * ACCELERATION_FACTOR * x_direction
 		else:
-			x_acceleration = lerp(x_acceleration, 5.0, delta)
+			x_acceleration = lerp(x_acceleration, Speed.X_PAN_SPEED, delta)
 			
 		velocity.x = x_acceleration
 		
@@ -91,8 +93,6 @@ func calculate_scream_audio_position():
 	
 
 func _on_death():
-	health_comp.died.disconnect(_on_death)
-	planesan.switch_to_broken_texture()
 	Finish.game_over()
 	
 
@@ -100,7 +100,9 @@ func _on_finish(finish_type):
 	match finish_type:
 		Finish.FinishType.GAME_OVER:
 			game_over = true
-			
+			health_comp.died.disconnect(_on_death)
+			area2d.queue_free()
+			planesan.switch_to_broken_texture()
 			add_child(EXPLOSION_SCENE.instantiate())
 			hide_health_bar_timer.stop()
 			health_bar.hide()

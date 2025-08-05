@@ -19,6 +19,7 @@ config/icon="res://plane/planesan.png"
 [autoload]
 
 Finish="*res://finish.gd"
+Speed="*res://speed.gd"
 
 [display]
 
