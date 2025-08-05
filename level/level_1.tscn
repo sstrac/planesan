@@ -32,7 +32,7 @@ colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.254189, 0.507308, 0.727273
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jfnjs"]
 gradient = SubResource("Gradient_h1uxu")
 width = 2000
-height = 1000
+height = 500
 fill_from = Vector2(1, 1)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_irxpe"]
@@ -169,15 +169,15 @@ shape = SubResource("SegmentShape2D_rap3p")
 [node name="Space" type="Sprite2D" parent="."]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_go5lg")
-position = Vector2(0, -602)
+position = Vector2(0, -104)
 texture = ExtResource("9_f30ae")
 centered = false
 region_enabled = true
-region_rect = Rect2(0, 0, 2000, 600)
+region_rect = Rect2(0, 0, 2000, 200)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -2
-offset_top = -602.0
+offset_top = -102.0
 offset_right = 2000.0
 offset_bottom = 398.0
 mouse_filter = 2
