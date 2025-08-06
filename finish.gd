@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node
 
 enum FinishType {GAME_OVER, WON}
 

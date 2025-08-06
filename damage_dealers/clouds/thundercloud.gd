@@ -1,17 +1,41 @@
 extends "res://damage_dealers/clouds/cloud.gd"
 
 const LIGHTNING_TIME = 8.11
+const ACTIVATION_X_DISTANCE_TO_PLANE = 50
+const PLANE_IN_RANGE_Y = 32
+const PLANE_IN_RANGE_X = 10
+const BOLT_CHANCE_WHEN_IN_RANGE = 8
 
 @onready var cloud = get_node("AnimatedSprite2D")
 @onready var lightning = get_node("ThundercloudLightning")
-@onready var timer = get_node("Timer")
-@onready var audio = get_node("AudioStreamPlayer2D")
+@onready var timer: Timer = get_node("Timer")
+@onready var audio: AudioStreamPlayer2D = get_node("AudioStreamPlayer2D")
 @onready var lightning_polygon = get_node("DamageDealer2/LightningPolygon")
+
+var plane_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.timeout.connect(_lightning_bolt)
+	pass
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	plane_position = PlaneTracker.plane.global_position
+	if abs(global_position.distance_to(plane_position)) < ACTIVATION_X_DISTANCE_TO_PLANE:
+		if not timer.timeout.is_connected(_lightning_bolt):
+			timer.timeout.connect(_lightning_bolt)
+	
+	position.x -= randf() * delta * x_speed
+
+	#TODO increase chance of lightning bolt when underneath it
+	#var y_diff = plane_position.y - global_position.y
+	#var x_diff = abs(plane_position.x - global_position.x)
+	#
+	#if not audio.is_playing:
+		#if plane_position.y - global_position.y < PLANE_IN_RANGE_Y and y_diff > 0 and x_diff < PLANE_IN_RANGE_X:
+			#if range(1,10).pick_random() <= BOLT_CHANCE_WHEN_IN_RANGE:
+				#_lightning_bolt()
+			
 
 func _lightning_bolt():
 	lightning.show()
@@ -20,8 +44,6 @@ func _lightning_bolt():
 	await get_tree().create_timer(0.1).timeout
 	lightning.hide()
 	cloud.show()
-	timer.wait_time = randf() * 10
+	timer.wait_time = randf() * 6
 	audio.play(LIGHTNING_TIME)
 	lightning_polygon.set_deferred('disabled', true)
-	
-	

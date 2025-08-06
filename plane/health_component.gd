@@ -1,11 +1,12 @@
 extends Node
 
 const UPTONE = preload("res://audio/uptone.wav")
-@export var max_health: float
+
 @export var heart: CPUParticles2D
 @export var sfx: AudioStreamPlayer2D
 
-var health: float
+var max_health: int = 20
+var health: int
 
 signal died
 

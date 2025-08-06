@@ -39,6 +39,7 @@ position = Vector2(9, -10.5)
 position = Vector2(0, -15.5)
 
 [node name="HealthDealer" parent="." instance=ExtResource("3_k60qv")]
+collision_mask = 32772
 health = 10.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HealthDealer"]

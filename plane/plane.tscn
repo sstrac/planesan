@@ -117,7 +117,6 @@ libraries = {
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("heart", "sfx")]
 script = ExtResource("4_g1x0u")
-max_health = 20.0
 heart = NodePath("../Heart")
 sfx = NodePath("../SFXAudio")
 

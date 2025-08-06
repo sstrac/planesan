@@ -11,8 +11,6 @@ const NORMAL_Y_SPEED: int = 100
 const GROUND_Y_POS = 375
 const BOUNDARY_DISTANCE_FROM_CENTER = 32
 
-var current_damage = 0
-
 @onready var health_comp: Node = get_node("HealthComponent")
 @onready var damage_timer: Timer = get_node("DamageTimer")
 
@@ -34,6 +32,7 @@ var crashed_on_ground = false
 var x_acceleration: float = 0
 var y_speed: int = 100
 
+var exposure_damage = 0
 
 func _ready():
 	Finish.finished.connect(_on_finish)
@@ -58,8 +57,7 @@ func _physics_process(delta: float) -> void:
 		var camera = get_viewport().get_camera_2d()
 		var breaches_right_boundary = global_position.x > camera.global_position.x + BOUNDARY_DISTANCE_FROM_CENTER
 		var breaches_left_boundary = global_position.x < camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER
-		
-		print(breaches_left_boundary)
+
 		var x_direction := Input.get_axis("left", "right")
 		
 		if breaches_left_boundary:
@@ -99,9 +97,6 @@ func _physics_process(delta: float) -> void:
 			
 		if y_speed < 1.0:
 			Finish.game_over()
-	
-	
-	
 		
 	move_and_slide()
 
@@ -115,11 +110,11 @@ func _hit_ground():
 	
 	
 func _take_damage():
-	health_comp.decrease(current_damage)
+	health_comp.decrease(exposure_damage)
 
 
 func calculate_scream_audio_position():
-	return scream_audio.stream.get_length() * (1.0 - health_comp.health / health_comp.max_health)
+	return scream_audio.stream.get_length() * (1.0 - float(health_comp.health) / health_comp.max_health)
 	
 
 func _on_death():
@@ -153,8 +148,9 @@ func _on_area_2d_entered(area: Area2D) -> void:
 				health_bar.show()
 				hide_health_bar_timer.stop()
 				
-				current_damage += area.damage
-				_take_damage()
+				health_comp.decrease(area.damage)
+				exposure_damage += area.damage
+				
 				damage_timer.start()
 				
 				anim.play(TURBULENCE)
@@ -176,10 +172,10 @@ func _on_area_2d_exited(area: Area2D) -> void:
 			if game_over:
 				anim.stop()
 			else:
-				current_damage -= area.damage
+				exposure_damage -= area.damage
 				damage_timer.stop()
 				
-				if current_damage <= 0:
+				if exposure_damage <= 0:
 					hide_health_bar_timer.start()
 				
 				anim.stop()
