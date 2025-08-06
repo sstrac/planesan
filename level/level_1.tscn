@@ -339,7 +339,7 @@ script = ExtResource("10_0167p")
 [node name="Camera2D" type="Camera2D" parent="PlaneBoundary"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlaneBoundary"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 34, 34, 34, 34, -34, -34, -34, -34, 34, -32, 34)
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 38, 34, 38, 34, -34, -34, -34, -34, 38, -32, 38)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
