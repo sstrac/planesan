@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Camera2D
 
 const BOUNDARY_LERP_SPEED = 12
 const MIN_DISTANCE_TO_PLANE_TO_FOLLOW = 6

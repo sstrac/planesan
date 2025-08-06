@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 
-@export var plane_boundary: StaticBody2D
+@export var plane_boundary: Camera2D
 
 var rolling_delta: float
 var x_deviation: float

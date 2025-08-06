@@ -59,14 +59,14 @@ func _physics_process(delta: float) -> void:
 		var breaches_right_boundary = global_position.x > camera.global_position.x + BOUNDARY_DISTANCE_FROM_CENTER
 		var breaches_left_boundary = global_position.x < camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER
 		
-		#print(global_position.x)
-		#print(camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER)
-		#print(x_acceleration)
 		print(breaches_left_boundary)
 		var x_direction := Input.get_axis("left", "right")
 		
 		if breaches_left_boundary:
 			x_acceleration = Speed.X_PAN_SPEED * 2
+		
+		elif breaches_right_boundary:
+			x_acceleration = -Speed.X_PAN_SPEED * 2
 
 		elif x_direction:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:

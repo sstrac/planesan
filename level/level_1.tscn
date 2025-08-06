@@ -312,7 +312,7 @@ color = Color(0, 0.431373, 0.0941176, 1)
 position = Vector2(27, 175)
 collision_mask = 3
 
-[node name="PlaneBoundary" type="StaticBody2D" parent="." node_paths=PackedStringArray("plane")]
+[node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane")]
 position = Vector2(36, 177)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
@@ -334,8 +334,6 @@ offset_top = -5.0
 offset_right = 6.0
 offset_bottom = 5.0
 script = ExtResource("10_0167p")
-
-[node name="Camera2D" type="Camera2D" parent="PlaneBoundary"]
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
