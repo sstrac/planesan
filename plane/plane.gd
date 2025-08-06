@@ -3,17 +3,15 @@ extends CharacterBody2D
 const TURBULENCE = 'turbulence'
 const EXPLOSION_SCENE = preload("res://plane/explosion.tscn")
 const MAX_X_ACCELERATION = 50
-const ACCELERATION_FACTOR = 200
+const ACCELERATION_FACTOR = 300
 const SILENT = -40
 const NORMAL_VOLUME = 0
 const REDUCE_GRAVITY_Y_POSITION = 0
 const NORMAL_Y_SPEED: int = 100
 const GROUND_Y_POS = 375
-
+const BOUNDARY_DISTANCE_FROM_CENTER = 32
 
 var current_damage = 0
-
-@export var plane_boundary_collision_shape: CollisionPolygon2D
 
 @onready var health_comp: Node = get_node("HealthComponent")
 @onready var damage_timer: Timer = get_node("DamageTimer")
@@ -57,14 +55,32 @@ func _physics_process(delta: float) -> void:
 		velocity.x = x_acceleration
 	
 	else:
+		var camera = get_viewport().get_camera_2d()
+		var breaches_right_boundary = global_position.x > camera.global_position.x + BOUNDARY_DISTANCE_FROM_CENTER
+		var breaches_left_boundary = global_position.x < camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER
+		
+		#print(global_position.x)
+		#print(camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER)
+		#print(x_acceleration)
+		print(breaches_left_boundary)
 		var x_direction := Input.get_axis("left", "right")
-		if x_direction:
+		
+		if breaches_left_boundary:
+			x_acceleration = Speed.X_PAN_SPEED * 2
+
+		elif x_direction:
 			if abs(x_acceleration) < MAX_X_ACCELERATION:
 				x_acceleration += delta * ACCELERATION_FACTOR * x_direction
 		else:
 			x_acceleration = lerp(x_acceleration, Speed.X_PAN_SPEED, delta)
 			
 		velocity.x = x_acceleration
+		
+		var breaches_bottom_boundary = global_position.y > camera.global_position.y + BOUNDARY_DISTANCE_FROM_CENTER
+		var breaches_top_boundary = global_position.y < camera.global_position.y - BOUNDARY_DISTANCE_FROM_CENTER
+#
+		if breaches_top_boundary or breaches_bottom_boundary:
+			velocity.y = 0
 		
 		if Input.is_action_just_pressed("scroll_up"):
 			velocity.y = -y_speed
@@ -83,7 +99,10 @@ func _physics_process(delta: float) -> void:
 			
 		if y_speed < 1.0:
 			Finish.game_over()
-			
+	
+	
+	
+		
 	move_and_slide()
 
 
@@ -175,7 +194,6 @@ func _on_area_2d_exited(area: Area2D) -> void:
 			
 			
 func win_actions():
-	plane_boundary_collision_shape.set_deferred('disabled', true)
 	won = true
 	anim.stop()
 	scream_audio.stop()

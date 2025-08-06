@@ -308,10 +308,9 @@ offset_bottom = 415.0
 mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
-[node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary_collision_shape") instance=ExtResource("5_m4pxb")]
+[node name="Plane" parent="." instance=ExtResource("5_m4pxb")]
 position = Vector2(27, 175)
 collision_mask = 3
-plane_boundary_collision_shape = NodePath("../PlaneBoundary/CollisionPolygon2D")
 
 [node name="PlaneBoundary" type="StaticBody2D" parent="." node_paths=PackedStringArray("plane")]
 position = Vector2(36, 177)
@@ -337,9 +336,6 @@ offset_bottom = 5.0
 script = ExtResource("10_0167p")
 
 [node name="Camera2D" type="Camera2D" parent="PlaneBoundary"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlaneBoundary"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32, -32, 38, 34, 38, 34, -34, -34, -34, -34, 38, -32, 38)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 

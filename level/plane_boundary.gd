@@ -18,7 +18,6 @@ func _process(delta: float) -> void:
 			global_position.y = lerp(global_position.y, plane.global_position.y, delta)
 			
 		else:
-			print(global_position.distance_to(plane.global_position))
 			if global_position.distance_to(plane.global_position) > MIN_DISTANCE_TO_PLANE_TO_FOLLOW:
 				global_position = lerp(global_position, plane.global_position, delta * BOUNDARY_LERP_SPEED)
 			else:
