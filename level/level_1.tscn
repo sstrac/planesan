@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=28 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
 [ext_resource type="PackedScene" uid="uid://ddw3b0pes1coy" path="res://damage_dealers/clouds/cumulonimbus.tscn" id="3_fxevg"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
+[ext_resource type="PackedScene" uid="uid://m5iasrjjtqhk" path="res://damage_dealers/clouds/cumulonimbus_half.tscn" id="3_x0lly"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
 [ext_resource type="PackedScene" uid="uid://qy6lcspp5s4f" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
@@ -78,14 +79,14 @@ position = Vector2(741, 32)
 
 [node name="MiddleClouds" type="Node2D" parent="."]
 
-[node name="Cumulonimbus" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
-position = Vector2(401, 235)
+[node name="CumulonimbusHalf" parent="MiddleClouds" instance=ExtResource("3_x0lly")]
+position = Vector2(396, 274)
 
 [node name="Cumulonimbus3" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
 position = Vector2(626, 253)
 
 [node name="Cumulonimbus2" parent="MiddleClouds" instance=ExtResource("3_fxevg")]
-position = Vector2(399, 8)
+position = Vector2(389, 102)
 
 [node name="Cumulus" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(97, 177)
@@ -173,6 +174,12 @@ position = Vector2(213, 119)
 [node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
 position = Vector2(294, 215)
 
+[node name="Lenticular6" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
+position = Vector2(590, 209)
+
+[node name="Lenticular7" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
+position = Vector2(529, 95)
+
 [node name="Lenticular3" parent="MiddleClouds" instance=ExtResource("4_gb0ih")]
 position = Vector2(229, 254)
 
@@ -183,6 +190,42 @@ scale = Vector2(-1, -1)
 
 [node name="Cumulus11" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(298, 89)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus16" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(458, 112)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+
+[node name="Cumulus17" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(522, 197)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus18" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(396, 143)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+
+[node name="Cumulus19" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(377, 152)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus20" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(697, 246)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+
+[node name="Cumulus21" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(678, 255)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus22" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(730, 131)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+
+[node name="Cumulus23" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
+position = Vector2(711, 140)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus12" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
@@ -207,6 +250,18 @@ position = Vector2(1469, 278)
 
 [node name="CirrusCluster2" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(1786, 254)
+
+[node name="CirrusCluster3" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(1931, 133)
+
+[node name="Cirrus16" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(745, 290)
+
+[node name="Cirrus17" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(758, 280)
+
+[node name="Cirrus18" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+position = Vector2(784, 297)
 
 [node name="LowerClouds" type="Node2D" parent="."]
 position = Vector2(43, 137)
@@ -244,9 +299,6 @@ position = Vector2(169, 192)
 modulate = Color(0.800491, 0.800491, 0.800491, 1)
 position = Vector2(135, 178)
 
-[node name="Thundercloud" parent="LowerClouds" instance=ExtResource("5_6w57y")]
-position = Vector2(256, 184)
-
 [node name="Cumulus8" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
 modulate = Color(0.621523, 0.621524, 0.621524, 1)
 position = Vector2(222, 189)
@@ -256,21 +308,42 @@ modulate = Color(0.621523, 0.621524, 0.621524, 1)
 position = Vector2(222, 170)
 scale = Vector2(-1, 1)
 
+[node name="Cumulus12" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.753984, 0.753984, 0.753984, 1)
+position = Vector2(292, 169)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus10" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.621523, 0.621524, 0.621524, 1)
+position = Vector2(452, 177)
+
+[node name="Cumulus11" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
+modulate = Color(0.621523, 0.621524, 0.621524, 1)
+position = Vector2(525, 191)
+scale = Vector2(-1, 1)
+
+[node name="Thundercloud" parent="LowerClouds" instance=ExtResource("5_6w57y")]
+position = Vector2(256, 184)
+
 [node name="Thundercloud2" parent="LowerClouds" instance=ExtResource("5_6w57y")]
 position = Vector2(188, 185)
 scale = Vector2(-1, 1)
 
+[node name="Thundercloud3" parent="LowerClouds" instance=ExtResource("5_6w57y")]
+position = Vector2(471, 192)
+scale = Vector2(1, -1)
+
 [node name="Cirrus" parent="LowerClouds" instance=ExtResource("6_d3cfc")]
-modulate = Color(0.473976, 0.473976, 0.473976, 1)
-position = Vector2(288, 179)
+modulate = Color(0.728822, 0.728822, 0.728822, 1)
+position = Vector2(331, 180)
 
 [node name="Cirrus3" parent="LowerClouds" instance=ExtResource("6_d3cfc")]
-modulate = Color(0.473976, 0.473976, 0.473976, 1)
-position = Vector2(283, 185)
+modulate = Color(0.728822, 0.728822, 0.728822, 1)
+position = Vector2(326, 186)
 
 [node name="Cirrus2" parent="LowerClouds" instance=ExtResource("6_d3cfc")]
-modulate = Color(0.473976, 0.473976, 0.473976, 1)
-position = Vector2(295, 185)
+modulate = Color(0.728822, 0.728822, 0.728822, 1)
+position = Vector2(338, 186)
 
 [node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
 position = Vector2(826, -96)
@@ -309,7 +382,7 @@ mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
 [node name="Plane" parent="." instance=ExtResource("5_m4pxb")]
-position = Vector2(27, 175)
+position = Vector2(36, 177)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane")]
@@ -351,10 +424,10 @@ shape = SubResource("SegmentShape2D_jalv0")
 position = Vector2(623, 140)
 
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(644, 265)
+position = Vector2(718, 227)
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(537, 94)
+position = Vector2(556, 176)
 
 [node name="Nak" parent="Obstacles" node_paths=PackedStringArray("plane_boundary") instance=ExtResource("20_ol3ea")]
 position = Vector2(73, -56)

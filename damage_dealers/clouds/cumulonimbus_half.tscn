@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://m5iasrjjtqhk"]
+
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="1_3ibc1"]
+[ext_resource type="Script" path="res://damage_dealers/clouds/cloud.gd" id="1_xi03n"]
+[ext_resource type="Texture2D" uid="uid://di5aenqw42cwb" path="res://damage_dealers/clouds/cumulonimbus_half.png" id="2_3o8jd"]
+
+[node name="CumulonimbusHalf" type="Node2D"]
+script = ExtResource("1_xi03n")
+
+[node name="DamageDealer" parent="." instance=ExtResource("1_3ibc1")]
+damage = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageDealer"]
+position = Vector2(0, -37.3)
+polygon = PackedVector2Array(-26, -13, -34, -13, -41, -12, -44, -9, -47, -8, -51, -4, -50, 1, -47, 6, -50, 7, -51, 11, -48, 14, -44, 17, -40, 23, -43, 27, -42, 29, -40, 31, -39, 32, -39, 37, -38, 41, -38, 44, -40, 48, -44, 52, -45, 56, -41, 59, -43, 62, -45, 65, -45, 70, -44, 72, -46, 76, -49, 78, -51, 80, -51, 87, -44, 92, -38, 91, -33, 94, 27, 94, 31, 93, 42, 90, 49, 85, 44, 78, 42, 74, 35, 72, 43, 70, 42, 64, 34, 62, 41, 60, 42, 56, 38, 54, 34, 51, 38, 50, 44, 50, 44, 46, 37, 46, 37, 44, 45, 44, 45, 40, 36, 34, 44, 34, 45, 31, 42, 28, 44, 24, 48, 24, 44, 17, 49, 9, 45, 5, 44, 4, 43, -2, 31, -7, 24, -10, 17, -10, 14, -13, 8, -14, 1, -15, -5, -14, -8, -11, -9, -7, -17, -7)
+
+[node name="CumulonimbusHalf" type="Sprite2D" parent="."]
+position = Vector2(-1, 1.7)
+texture = ExtResource("2_3o8jd")

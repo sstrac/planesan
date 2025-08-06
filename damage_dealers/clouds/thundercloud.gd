@@ -13,11 +13,6 @@ func _ready() -> void:
 	timer.timeout.connect(_lightning_bolt)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _lightning_bolt():
 	lightning.show()
 	cloud.hide()
