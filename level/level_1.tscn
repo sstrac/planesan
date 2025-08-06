@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=27 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://level/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
+[ext_resource type="PackedScene" uid="uid://6ffxla8vu1on" path="res://damage_dealers/nak.tscn" id="20_ol3ea"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -360,6 +361,10 @@ position = Vector2(644, 265)
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(537, 94)
+
+[node name="Nak" parent="Obstacles" node_paths=PackedStringArray("plane_boundary") instance=ExtResource("20_ol3ea")]
+position = Vector2(73, -56)
+plane_boundary = NodePath("../../PlaneBoundary")
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="PlaneBoundary/FinishImage/Retry/RetryButton" to="PlaneBoundary/FinishImage/Retry/RetryButton" method="_on_button_down"]

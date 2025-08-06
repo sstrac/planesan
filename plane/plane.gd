@@ -31,6 +31,7 @@ var current_damage = 0
 
 var game_over: bool = false
 var won: bool = false
+var crashed_on_ground = false
 
 var x_acceleration: float = 0
 var y_speed: int = 100
@@ -50,6 +51,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 50
 		else:
 			velocity.y = 0
+			_hit_ground()
 
 	elif won:
 		velocity.x = x_acceleration
@@ -84,6 +86,15 @@ func _physics_process(delta: float) -> void:
 			
 	move_and_slide()
 
+
+func _hit_ground():
+	if not crashed_on_ground:
+		add_child(EXPLOSION_SCENE.instantiate())
+		scream_audio.stop()
+		audio_anim.stop()
+		crashed_on_ground = true
+	
+	
 func _take_damage():
 	health_comp.decrease(current_damage)
 
@@ -101,12 +112,12 @@ func _on_finish(finish_type):
 		Finish.FinishType.GAME_OVER:
 			game_over = true
 			health_comp.died.disconnect(_on_death)
-			area2d.queue_free()
 			planesan.switch_to_broken_texture()
 			add_child(EXPLOSION_SCENE.instantiate())
 			hide_health_bar_timer.stop()
 			health_bar.hide()
 			cabin_audio.stop()
+
 			for boundary in get_tree().get_nodes_in_group('boundary'):
 				boundary.set_deferred('disabled', true)
 				
@@ -117,19 +128,22 @@ func _on_finish(finish_type):
 func _on_area_2d_entered(area: Area2D) -> void:
 	if not won:
 		if area.collision_layer == 1: #damage dealer
-			health_bar.show()
-			hide_health_bar_timer.stop()
-			
-			current_damage += area.damage
-			_take_damage()
-			damage_timer.start()
-			
-			anim.play(TURBULENCE)
-			scream_audio.play(calculate_scream_audio_position())
-			audio_anim.play('louden_screams')
-			
-			if not scream_audio.playing:
+			if game_over:
+				anim.play(TURBULENCE)
+			else:
+				health_bar.show()
+				hide_health_bar_timer.stop()
+				
+				current_damage += area.damage
+				_take_damage()
+				damage_timer.start()
+				
+				anim.play(TURBULENCE)
 				scream_audio.play(calculate_scream_audio_position())
+				audio_anim.play('louden_screams')
+				
+				if not scream_audio.playing:
+					scream_audio.play(calculate_scream_audio_position())
 		
 		elif area.collision_layer == 2: #healer
 			health_bar.show()
@@ -140,18 +154,21 @@ func _on_area_2d_entered(area: Area2D) -> void:
 func _on_area_2d_exited(area: Area2D) -> void:
 	if not won:
 		if area.collision_layer == 1: #damage dealer
-			current_damage -= area.damage
-			damage_timer.stop()
-			
-			if current_damage <= 0:
-				hide_health_bar_timer.start()
-			
-			anim.stop()
-			audio_anim.play_backwards('louden_screams')
-			
-			await audio_anim.animation_finished
-			if audio_anim.current_animation_position == 0:
-				scream_audio.stop()
+			if game_over:
+				anim.stop()
+			else:
+				current_damage -= area.damage
+				damage_timer.stop()
+				
+				if current_damage <= 0:
+					hide_health_bar_timer.start()
+				
+				anim.stop()
+				audio_anim.play_backwards('louden_screams')
+				
+				await audio_anim.animation_finished
+				if audio_anim.current_animation_position == 0:
+					scream_audio.stop()
 				
 		elif area.collision_layer == 2: #healer
 			hide_health_bar_timer.start()
