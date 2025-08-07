@@ -1,11 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvv1otabm7ygf"]
 
 [ext_resource type="Shader" path="res://invert.gdshader" id="1_ilqpx"]
-[ext_resource type="Texture2D" uid="uid://cvfvrnjmr1rwm" path="res://img/retry_icon.svg" id="2_6xv54"]
 [ext_resource type="Script" path="res://level/retry_button.gd" id="3_5n86k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_anre6"]
 shader = ExtResource("1_ilqpx")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_80r3t"]
+load_path = "res://.godot/imported/retry_icon.svg-cfc8909ab4d11173de72408384ffb807.ctex"
 
 [node name="GameOver" type="Node2D"]
 
@@ -34,7 +36,7 @@ color = Color(0.0588235, 0.0588235, 0.0588235, 0.129412)
 material = SubResource("ShaderMaterial_anre6")
 position = Vector2(58, 6)
 scale = Vector2(0.333333, 0.333333)
-texture = ExtResource("2_6xv54")
+texture = SubResource("CompressedTexture2D_80r3t")
 
 [node name="RetryButton" type="Button" parent="RetryIcon"]
 self_modulate = Color(1, 1, 1, 0)

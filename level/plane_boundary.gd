@@ -5,7 +5,6 @@ const MIN_DISTANCE_TO_PLANE_TO_FOLLOW = 6
 
 @export var plane: CharacterBody2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
@@ -15,6 +14,7 @@ func _process(delta: float) -> void:
 	if not plane.won:
 		if not plane.game_over:
 			position.x += delta * Speed.X_PAN_SPEED
+			
 			global_position.y = lerp(global_position.y, plane.global_position.y, delta)
 			
 		else:

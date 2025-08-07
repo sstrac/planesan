@@ -13,6 +13,7 @@ const BOLT_CHANCE_WHEN_IN_RANGE = 8
 @onready var lightning_polygon = get_node("DamageDealer2/LightningPolygon")
 
 var plane_position
+var intial_bolt_triggered = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,14 +28,14 @@ func _process(delta: float) -> void:
 	
 	position.x -= randf() * delta * x_speed
 
-	#TODO increase chance of lightning bolt when underneath it
-	#var y_diff = plane_position.y - global_position.y
-	#var x_diff = abs(plane_position.x - global_position.x)
-	#
-	#if not audio.is_playing:
-		#if plane_position.y - global_position.y < PLANE_IN_RANGE_Y and y_diff > 0 and x_diff < PLANE_IN_RANGE_X:
-			#if range(1,10).pick_random() <= BOLT_CHANCE_WHEN_IN_RANGE:
-				#_lightning_bolt()
+	var y_diff = plane_position.y - global_position.y
+	var x_diff = abs(plane_position.x - global_position.x)
+
+	if not intial_bolt_triggered:
+		if plane_position.y - global_position.y < PLANE_IN_RANGE_Y and y_diff > 0 and x_diff < PLANE_IN_RANGE_X:
+			if range(1,10).pick_random() <= BOLT_CHANCE_WHEN_IN_RANGE:
+				_lightning_bolt()
+				intial_bolt_triggered = true
 			
 
 func _lightning_bolt():

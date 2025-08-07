@@ -1,15 +1,18 @@
 extends CharacterBody2D
 
+@export var plane_boundary: Camera2D
+
 const TURBULENCE = 'turbulence'
 const EXPLOSION_SCENE = preload("res://plane/explosion.tscn")
-const MAX_X_ACCELERATION = 50
-const ACCELERATION_FACTOR = 300
 const SILENT = -40
 const NORMAL_VOLUME = 0
-const REDUCE_GRAVITY_Y_POSITION = 0
-const NORMAL_Y_SPEED: int = 100
+
+const MAX_X_VELOCITY = 50
+const MAX_Y_POS = -50
+const REDUCTION_FACTOR_START_Y_POS = 0
 const GROUND_Y_POS = 375
 const BOUNDARY_DISTANCE_FROM_CENTER = 32
+const MAX_SCROLL_STRENGTH = 30
 
 @onready var health_comp: Node = get_node("HealthComponent")
 @onready var damage_timer: Timer = get_node("DamageTimer")
@@ -29,8 +32,8 @@ var game_over: bool = false
 var won: bool = false
 var crashed_on_ground = false
 
-var x_acceleration: float = 0
-var y_speed: int = 100
+var scroll_strength: float = 0
+var movement_weight: float = 1
 
 var exposure_damage = 0
 
@@ -42,6 +45,8 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+
 	if game_over:
 		velocity.x = 0
 		if position.y < GROUND_Y_POS:
@@ -51,54 +56,70 @@ func _physics_process(delta: float) -> void:
 			_hit_ground()
 
 	elif won:
-		velocity.x = x_acceleration
+		position.x += 1
 	
 	else:
-		var camera = get_viewport().get_camera_2d()
-		var breaches_right_boundary = global_position.x > camera.global_position.x + BOUNDARY_DISTANCE_FROM_CENTER
-		var breaches_left_boundary = global_position.x < camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER
-
-		var x_direction := Input.get_axis("left", "right")
+		_x_movement(delta)
+		_y_movement(delta)
 		
-		if breaches_left_boundary:
-			x_acceleration = Speed.X_PAN_SPEED * 2
-		
-		elif breaches_right_boundary:
-			x_acceleration = -Speed.X_PAN_SPEED * 2
-
-		elif x_direction:
-			if abs(x_acceleration) < MAX_X_ACCELERATION:
-				x_acceleration += delta * ACCELERATION_FACTOR * x_direction
-		else:
-			x_acceleration = lerp(x_acceleration, Speed.X_PAN_SPEED, delta)
-			
-		velocity.x = x_acceleration
-		
-		var breaches_bottom_boundary = global_position.y > camera.global_position.y + BOUNDARY_DISTANCE_FROM_CENTER
-		var breaches_top_boundary = global_position.y < camera.global_position.y - BOUNDARY_DISTANCE_FROM_CENTER
-#
-		if breaches_top_boundary or breaches_bottom_boundary:
-			velocity.y = 0
-		
-		if Input.is_action_just_pressed("scroll_up"):
-			velocity.y = -y_speed
-			
-		elif Input.is_action_just_pressed("scroll_down"):
-			velocity.y = y_speed
-		
-		else:
-			velocity.y = 0
-			
-		if global_position.y < REDUCE_GRAVITY_Y_POSITION:
-			y_speed = NORMAL_Y_SPEED - (abs(global_position.y - REDUCE_GRAVITY_Y_POSITION) * 2)
-			
-		else:
-			y_speed = lerp(y_speed, NORMAL_Y_SPEED, delta )
-			
-		if y_speed < 1.0:
+		if movement_weight < 0.1:
 			Finish.game_over()
 		
 	move_and_slide()
+
+
+func _x_movement(delta):
+	var camera = get_viewport().get_camera_2d()
+	var left_bound_pos = camera.global_position.x - BOUNDARY_DISTANCE_FROM_CENTER
+	var right_bound_pos = camera.global_position.x + BOUNDARY_DISTANCE_FROM_CENTER
+	
+	var breaches_left_boundary = global_position.x < left_bound_pos
+	var breaches_right_boundary = global_position.x > right_bound_pos
+	
+	if breaches_left_boundary:
+		position.x = left_bound_pos + 1
+		velocity.x = 0
+	elif breaches_right_boundary:
+		position.x = right_bound_pos - 1
+		velocity.x = 0
+	
+	if Input.is_action_pressed("left_click"):
+		print(velocity.x)
+		if abs(velocity.x) < MAX_X_VELOCITY:
+			velocity.x -= 1
+	elif Input.is_action_pressed("right_click"):
+		if abs(velocity.x) < MAX_X_VELOCITY:
+			velocity.x += 1
+	
+	velocity.x = lerp(velocity.x, 0.0, delta * 1)
+
+
+func _y_movement(delta):
+	if Input.is_action_just_pressed("scroll_up"):
+		if sign(scroll_strength) == 1:
+			scroll_strength = 0
+		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
+			scroll_strength -= 3
+	if Input.is_action_just_pressed("scroll_down"):
+		if sign(scroll_strength) == -1:
+			scroll_strength = 0
+		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
+			scroll_strength += 3
+	
+	if abs(scroll_strength) < 1:
+		scroll_strength = 0
+	elif scroll_strength != 0:
+		scroll_strength = lerp(scroll_strength, 0.0, delta)
+		
+	#Space logic
+	var distance_to_max_y = abs(MAX_Y_POS - global_position.y)
+	
+	if distance_to_max_y > abs((MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)):
+		movement_weight = 1
+	else:
+		movement_weight = distance_to_max_y / abs(MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)
+	
+	velocity.y = scroll_strength * movement_weight
 
 
 func _hit_ground():
@@ -141,7 +162,7 @@ func _on_finish(finish_type):
 	
 func _on_area_2d_entered(area: Area2D) -> void:
 	if not won:
-		if area.collision_layer == 1: #damage dealer
+		if area.get_collision_layer_value(1): #damage dealer
 			if game_over:
 				anim.play(TURBULENCE)
 			else:
@@ -160,7 +181,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 				if not scream_audio.playing:
 					scream_audio.play(calculate_scream_audio_position())
 		
-		elif area.collision_layer == 2: #healer
+		elif area.get_collision_layer_value(2): #healer
 			health_bar.show()
 			hide_health_bar_timer.stop()
 			health_comp.increase(area.health)
@@ -168,7 +189,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	if not won:
-		if area.collision_layer == 1: #damage dealer
+		if area.get_collision_layer_value(1): #damage dealer
 			if game_over:
 				anim.stop()
 			else:
@@ -185,7 +206,7 @@ func _on_area_2d_exited(area: Area2D) -> void:
 				if audio_anim.current_animation_position == 0:
 					scream_audio.stop()
 				
-		elif area.collision_layer == 2: #healer
+		elif area.get_collision_layer_value(2): #healer
 			hide_health_bar_timer.start()
 			
 			
