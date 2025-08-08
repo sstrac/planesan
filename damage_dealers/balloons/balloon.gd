@@ -1,6 +1,5 @@
 extends Path2D
 
-
 @onready var follow: PathFollow2D = get_node("PathFollow2D")
 
 var position_reset: bool = false

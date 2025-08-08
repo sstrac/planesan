@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://n83pmdc3g4jd"]
+[gd_scene load_steps=4 format=3 uid="uid://cjqnlqeuvcb18"]
 
 [ext_resource type="Script" path="res://damage_dealers/clouds/cirrocumulus.gd" id="1_q3m40"]
 [ext_resource type="Texture2D" uid="uid://cujorl1p6x1wx" path="res://damage_dealers/clouds/cirrocumulus.png" id="1_yvjnb"]
@@ -6,9 +6,6 @@
 
 [node name="Cirrocumulus" type="Node2D"]
 script = ExtResource("1_q3m40")
-
-[node name="Cirrocumulus" type="Sprite2D" parent="."]
-texture = ExtResource("1_yvjnb")
 
 [node name="DamageDealer" parent="." instance=ExtResource("3_gq753")]
 damage = 1
@@ -19,3 +16,6 @@ polygon = PackedVector2Array(-1, -2, 2, -2, 2, -1, 3, -1, 3, 2, 2, 2, 2, 3, -1, 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="Cirrocumulus" type="Sprite2D" parent="."]
+texture = ExtResource("1_yvjnb")

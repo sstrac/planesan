@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d4i3f8y532v2b"]
 
-[ext_resource type="PackedScene" uid="uid://c6xq5rp2g005l" path="res://level/small_balloon.tscn" id="1_0ism3"]
-[ext_resource type="Script" path="res://level/balloon_ring.gd" id="1_hp25r"]
+[ext_resource type="PackedScene" uid="uid://c6xq5rp2g005l" path="res://health_dealers/small_balloon.tscn" id="1_0ism3"]
+[ext_resource type="Script" path="res://health_dealers/balloon_ring.gd" id="1_hp25r"]
 [ext_resource type="AudioStream" uid="uid://cdq2gnur1yo2g" path="res://audio/balloon_pop.wav" id="3_7w8o0"]
 [ext_resource type="PackedScene" uid="uid://c47yeqvumvykv" path="res://health_dealers/HealthDealer.tscn" id="3_k60qv"]
 

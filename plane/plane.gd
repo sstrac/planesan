@@ -84,7 +84,6 @@ func _x_movement(delta):
 		velocity.x = 0
 	
 	if Input.is_action_pressed("left_click"):
-		print(velocity.x)
 		if abs(velocity.x) < MAX_X_VELOCITY:
 			velocity.x -= 1
 	elif Input.is_action_pressed("right_click"):

@@ -2,9 +2,8 @@ extends Node2D
 
 
 @onready var audio: AudioStreamPlayer2D = get_node("AudioStreamPlayer2D")
+@onready var health_dealer: Area2D = get_node("HealthDealer")
 
-var popped = false
-# Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -16,8 +15,8 @@ func _process(delta: float) -> void:
 
 
 func _on_health_dealer_area_entered(area: Area2D) -> void:
-	if not popped:
-		popped = true
+	if area.get_collision_layer_value(16):
+		health_dealer.set_deferred('monitoring', false)
 		for balloon in get_node("Balloons").get_children():
 			balloon.pop()
 		

@@ -1,14 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=31 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
 [ext_resource type="PackedScene" uid="uid://ddw3b0pes1coy" path="res://damage_dealers/clouds/cumulonimbus.tscn" id="3_fxevg"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
+[ext_resource type="Texture2D" uid="uid://djiaj2ffwgmyv" path="res://damage_dealers/balloons/balloon_1.png" id="3_nguqn"]
 [ext_resource type="PackedScene" uid="uid://m5iasrjjtqhk" path="res://damage_dealers/clouds/cumulonimbus_half.tscn" id="3_x0lly"]
+[ext_resource type="Texture2D" uid="uid://bbfr2ygyd64uk" path="res://damage_dealers/balloons/balloon_2.png" id="4_ak85d"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
-[ext_resource type="PackedScene" uid="uid://qy6lcspp5s4f" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
+[ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="5_m4pxb"]
 [ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="6_d3cfc"]
 [ext_resource type="PackedScene" uid="uid://cnub8ykfqllq3" path="res://damage_dealers/clouds/cirrocumulus_cluster.tscn" id="6_h3gqr"]
@@ -18,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://6da2o1wm4jwn" path="res://img/retry.png" id="9_56p3l"]
 [ext_resource type="Texture2D" uid="uid://d2i4d5x0h3cho" path="res://img/space.png" id="9_f30ae"]
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
-[ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://level/balloon_ring.tscn" id="11_t8w75"]
+[ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
 [ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="20_gd8o2"]
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
@@ -59,8 +61,14 @@ position = Vector2(609, 132)
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(718, 227)
 
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon"]
+texture = ExtResource("3_nguqn")
+
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(556, 176)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon2"]
+texture = ExtResource("4_ak85d")
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -274,15 +282,19 @@ scale = Vector2(-1, 1)
 
 [node name="CirrusCluster" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(207, 260)
+script = null
 
 [node name="CirrusCluster2" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(278, 215)
+script = null
 
 [node name="CirrusCluster3" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(288, 115)
+script = null
 
 [node name="CirrusCluster4" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(270, 69)
+script = null
 
 [node name="Cirrus16" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(745, 290)
@@ -465,6 +477,9 @@ shape = SubResource("SegmentShape2D_irxpe")
 [node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundary" groups=["boundary"]]
 position = Vector2(0, -677)
 shape = SubResource("SegmentShape2D_jalv0")
+
+[node name="BalloonRing" parent="." instance=ExtResource("11_t8w75")]
+position = Vector2(61, 183)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="PlaneBoundary/FinishImage/RetryButton" to="PlaneBoundary/FinishImage/RetryButton" method="_on_button_down"]
