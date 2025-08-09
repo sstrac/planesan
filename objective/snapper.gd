@@ -11,7 +11,8 @@ var objective_3_area: Node2D
 
 @onready var area2d = get_node("Area2D")
 @onready var anim: AnimationPlayer = get_node("AnimationPlayer")
-@onready var audio: AudioStreamPlayer2D = get_node("AudioStreamPlayer2D")
+@onready var shutter: AudioStreamPlayer2D = get_node("Shutter")
+@onready var jingle: AudioStreamPlayer2D = get_node("ObjectiveFound")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +29,8 @@ func _process(delta: float) -> void:
 func play():
 	anim.stop()
 	anim.play('snap')
-	audio.play()
+	shutter.play()
+
 
 func _on_snap_finished(animation):
 	area2d.monitoring = false
@@ -36,4 +38,6 @@ func _on_snap_finished(animation):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	area.set_collision_layer_value(4, false)
-	print('found')
+	jingle.play()
+
+	ObjectiveTracker.mark_found(area)

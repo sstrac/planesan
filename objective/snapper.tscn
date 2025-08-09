@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3000n1t58ww7"]
+[gd_scene load_steps=8 format=3 uid="uid://b3000n1t58ww7"]
 
-[ext_resource type="Script" path="res://snapper.gd" id="1_qmifw"]
+[ext_resource type="Script" path="res://objective/snapper.gd" id="1_qmifw"]
 [ext_resource type="AudioStream" uid="uid://bef6ixx7p7r8m" path="res://audio/camera_shutter.wav" id="2_gae2p"]
+[ext_resource type="AudioStream" uid="uid://bc3lqn0t0a2p" path="res://audio/jingle.wav" id="2_vm7qw"]
 
 [sub_resource type="Animation" id="Animation_k2xyc"]
 length = 0.001
@@ -56,7 +57,10 @@ libraries = {
 "": SubResource("AnimationLibrary_05dt0")
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ObjectiveFound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_vm7qw")
+
+[node name="Shutter" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_gae2p")
 volume_db = -3.925
 

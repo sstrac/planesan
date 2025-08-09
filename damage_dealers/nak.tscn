@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://6ffxla8vu1on"]
 
-[ext_resource type="Texture2D" uid="uid://dgh6io08hdr45" path="res://img/nak.png" id="1_rbfqs"]
+[ext_resource type="Texture2D" uid="uid://dgh6io08hdr45" path="res://damage_dealers/nak.png" id="1_rbfqs"]
 [ext_resource type="Script" path="res://damage_dealers/nak.gd" id="2_dmqdj"]
 [ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_w7yri"]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddrjy2klhqhol"]
+
+[ext_resource type="Script" path="res://objective/objective_manager.gd" id="1_2xyo6"]
+
+[node name="ObjectiveManager" type="Node"]
+script = ExtResource("1_2xyo6")

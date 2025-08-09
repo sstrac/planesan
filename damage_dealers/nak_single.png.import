@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgh6io08hdr45"
-path="res://.godot/imported/nak.png-35a056588e44d555958ac6c7213dd266.ctex"
+uid="uid://ftq4h2v22ru2"
+path="res://.godot/imported/nak_single.png-8779605035f5e9d178dc38229718397e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/nak.png"
-dest_files=["res://.godot/imported/nak.png-35a056588e44d555958ac6c7213dd266.ctex"]
+source_file="res://damage_dealers/nak_single.png"
+dest_files=["res://.godot/imported/nak_single.png-8779605035f5e9d178dc38229718397e.ctex"]
 
 [params]
 

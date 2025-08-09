@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8elh3y6t8t46"]
+
+[ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
+
+[node name="ObjectiveList" type="HBoxContainer"]
+script = ExtResource("1_2eic5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.509804)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.509804)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.509804)
+layout_mode = 2

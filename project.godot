@@ -21,6 +21,7 @@ config/icon="res://plane/planesan.png"
 Finish="*res://finish.gd"
 Speed="*res://speed.gd"
 PlaneTracker="*res://plane_tracker.gd"
+ObjectiveTracker="*res://objective/objective_tracker.gd"
 
 [display]
 

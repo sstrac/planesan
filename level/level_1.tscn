@@ -1,14 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=33 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
 [ext_resource type="PackedScene" uid="uid://ddw3b0pes1coy" path="res://damage_dealers/clouds/cumulonimbus.tscn" id="3_fxevg"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
-[ext_resource type="Texture2D" uid="uid://djiaj2ffwgmyv" path="res://damage_dealers/balloons/balloon_1.png" id="3_nguqn"]
 [ext_resource type="PackedScene" uid="uid://m5iasrjjtqhk" path="res://damage_dealers/clouds/cumulonimbus_half.tscn" id="3_x0lly"]
 [ext_resource type="Texture2D" uid="uid://bbfr2ygyd64uk" path="res://damage_dealers/balloons/balloon_2.png" id="4_ak85d"]
+[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/objective_list.tscn" id="4_b3pgn"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
+[ext_resource type="Texture2D" uid="uid://hy240nyy6wle" path="res://damage_dealers/balloons/balloon_3.png" id="4_or2l3"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
 [ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="5_m4pxb"]
@@ -22,7 +23,7 @@
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
-[ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://snapper.tscn" id="19_b3d0q"]
+[ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="19_b3d0q"]
 [ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="20_gd8o2"]
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 
@@ -55,22 +56,22 @@ b = Vector2(0, 2500)
 
 [node name="BalloonRing" parent="Obstacles" instance=ExtResource("11_t8w75")]
 position = Vector2(136, 99)
-is_objective = true
 
 [node name="BalloonRing2" parent="Obstacles" instance=ExtResource("11_t8w75")]
 position = Vector2(609, 132)
 
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(556, 176)
-
-[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon"]
+is_objective = true
 texture = ExtResource("4_ak85d")
+
+[node name="Balloon3" parent="Obstacles" instance=ExtResource("1_g122v")]
+position = Vector2(59, 162)
+is_objective = true
+texture = ExtResource("4_or2l3")
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(718, 227)
-
-[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon2"]
-texture = ExtResource("3_nguqn")
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -444,6 +445,15 @@ color = Color(0, 0.431373, 0.0941176, 1)
 position = Vector2(33, 182)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
+offset_left = 4.0
+offset_top = 54.0
+offset_right = 12.0
+offset_bottom = 54.0
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane")]
 position = Vector2(33, 182)
