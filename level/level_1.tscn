@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=32 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
+[ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://snapper.tscn" id="19_b3d0q"]
 [ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="20_gd8o2"]
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 
@@ -54,21 +55,22 @@ b = Vector2(0, 2500)
 
 [node name="BalloonRing" parent="Obstacles" instance=ExtResource("11_t8w75")]
 position = Vector2(136, 99)
+is_objective = true
 
 [node name="BalloonRing2" parent="Obstacles" instance=ExtResource("11_t8w75")]
 position = Vector2(609, 132)
 
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(718, 227)
-
-[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon"]
-texture = ExtResource("3_nguqn")
-
-[node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(556, 176)
 
-[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon2"]
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon"]
 texture = ExtResource("4_ak85d")
+
+[node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
+position = Vector2(718, 227)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/Balloon2"]
+texture = ExtResource("3_nguqn")
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -282,19 +284,15 @@ scale = Vector2(-1, 1)
 
 [node name="CirrusCluster" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(207, 260)
-script = null
 
 [node name="CirrusCluster2" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(278, 215)
-script = null
 
 [node name="CirrusCluster3" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(288, 115)
-script = null
 
 [node name="CirrusCluster4" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(270, 69)
-script = null
 
 [node name="Cirrus16" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(745, 290)
@@ -452,6 +450,9 @@ position = Vector2(33, 182)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 
+[node name="Snapper" parent="PlaneBoundary" node_paths=PackedStringArray("objective_1") instance=ExtResource("19_b3d0q")]
+objective_1 = NodePath("../../Obstacles/Balloon2")
+
 [node name="FinishImage" type="Sprite2D" parent="PlaneBoundary"]
 visible = false
 position = Vector2(-1, -16)
@@ -477,9 +478,6 @@ shape = SubResource("SegmentShape2D_irxpe")
 [node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundary" groups=["boundary"]]
 position = Vector2(0, -677)
 shape = SubResource("SegmentShape2D_jalv0")
-
-[node name="BalloonRing" parent="." instance=ExtResource("11_t8w75")]
-position = Vector2(61, 183)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="PlaneBoundary/FinishImage/RetryButton" to="PlaneBoundary/FinishImage/RetryButton" method="_on_button_down"]

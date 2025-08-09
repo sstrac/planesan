@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3000n1t58ww7"]
+
+[ext_resource type="Script" path="res://snapper.gd" id="1_qmifw"]
+[ext_resource type="AudioStream" uid="uid://bef6ixx7p7r8m" path="res://audio/camera_shutter.wav" id="2_gae2p"]
+
+[sub_resource type="Animation" id="Animation_k2xyc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nd6u4"]
+resource_name = "snap"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_05dt0"]
+_data = {
+"RESET": SubResource("Animation_k2xyc"),
+"snap": SubResource("Animation_nd6u4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1twfy"]
+size = Vector2(76, 76)
+
+[node name="Snapper" type="ColorRect"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -38.0
+offset_top = -38.0
+offset_right = 38.0
+offset_bottom = 38.0
+script = ExtResource("1_qmifw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_05dt0")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gae2p")
+volume_db = -3.925
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(38, 38)
+shape = SubResource("RectangleShape2D_1twfy")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

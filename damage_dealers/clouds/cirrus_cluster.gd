@@ -1,7 +1,7 @@
 extends Node2D
 
 const SPEED = 2
-const TRIGGER_X_DISTANCE = 100
+const TRIGGER_X_DISTANCE = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

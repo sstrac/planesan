@@ -4,10 +4,12 @@ extends Node2D
 @onready var audio: AudioStreamPlayer2D = get_node("AudioStreamPlayer2D")
 @onready var health_dealer: Area2D = get_node("HealthDealer")
 
+@export var is_objective: bool
+
 
 func _ready() -> void:
-	pass # Replace with function body.
-
+	if is_objective:
+		health_dealer.set_collision_layer_value(4, true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

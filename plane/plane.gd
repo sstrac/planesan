@@ -45,8 +45,6 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-
 	if game_over:
 		velocity.x = 0
 		if position.y < GROUND_Y_POS:
@@ -62,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		_x_movement(delta)
 		_y_movement(delta)
 		
-		if movement_weight < 0.1:
+		if movement_weight < 0.05:
 			Finish.game_over()
 		
 	move_and_slide()
@@ -99,11 +97,12 @@ func _y_movement(delta):
 			scroll_strength = 0
 		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
 			scroll_strength -= 3
-	if Input.is_action_just_pressed("scroll_down"):
+	elif Input.is_action_just_pressed("scroll_down"):
 		if sign(scroll_strength) == -1:
 			scroll_strength = 0
 		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
 			scroll_strength += 3
+
 	
 	if abs(scroll_strength) < 1:
 		scroll_strength = 0

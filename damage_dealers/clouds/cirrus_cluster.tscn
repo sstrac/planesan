@@ -29,4 +29,4 @@ position = Vector2(51, 21)
 stream = ExtResource("3_h026y")
 volume_db = 16.352
 autoplay = true
-max_distance = 200.0
+max_distance = 100.0
