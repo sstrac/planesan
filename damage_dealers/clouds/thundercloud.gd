@@ -6,6 +6,8 @@ const PLANE_IN_RANGE_Y = 32
 const PLANE_IN_RANGE_X = 10
 const BOLT_CHANCE_WHEN_IN_RANGE = 8
 
+@export var is_objective: bool
+
 @onready var cloud = get_node("AnimatedSprite2D")
 @onready var lightning = get_node("ThundercloudLightning")
 @onready var timer: Timer = get_node("Timer")
@@ -17,7 +19,8 @@ var intial_bolt_triggered = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	if is_objective:
+		get_node("ObjectiveManager").activate_objective_collision_layer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

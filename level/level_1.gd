@@ -1,8 +1,6 @@
 extends Node2D
 
 
-@export var x_speed: float = 1
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -10,4 +8,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x -= randf() * delta * x_speed
+	pass

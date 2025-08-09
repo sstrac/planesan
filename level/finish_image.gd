@@ -1,7 +1,6 @@
 extends Sprite2D
 
 const GAME_OVER = preload("res://img/end.png")
-const WON = preload("res://img/finish.png")
 
 func _ready():
 	Finish.finished.connect(_on_finish)
@@ -9,7 +8,4 @@ func _ready():
 	
 func _on_finish(finish_type):
 	match finish_type:
-		Finish.FinishType.GAME_OVER: texture = GAME_OVER
-		Finish.FinishType.WON: texture = WON
-		
-	show()
+		Finish.FinishType.GAME_OVER: texture = GAME_OVER; show()

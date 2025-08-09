@@ -4,6 +4,7 @@ const BOUNDARY_LERP_SPEED = 12
 const MIN_DISTANCE_TO_PLANE_TO_FOLLOW = 6
 
 @export var plane: CharacterBody2D
+@export var finish_flag: AnimatedSprite2D
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -22,3 +23,5 @@ func _process(delta: float) -> void:
 				global_position = lerp(global_position, plane.global_position, delta * BOUNDARY_LERP_SPEED)
 			else:
 				global_position = round(plane.global_position)
+	else:
+		global_position = lerp(global_position, finish_flag.global_position + Vector2(0, 10), delta)

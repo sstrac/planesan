@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://cw3hax6yk4aos"]
+
+[ext_resource type="Texture2D" uid="uid://chdxetf05khvs" path="res://img/finish_flag.png" id="1_kmi1a"]
+[ext_resource type="Script" path="res://level/finish_flag.gd" id="2_ehtg0"]
+[ext_resource type="AudioStream" uid="uid://f1ssodp3t8yo" path="res://audio/finish_fanfare.wav" id="3_g6hu2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb0lp"]
+atlas = ExtResource("1_kmi1a")
+region = Rect2(0, 0, 32, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yrsw"]
+atlas = ExtResource("1_kmi1a")
+region = Rect2(32, 0, 32, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjwu2"]
+atlas = ExtResource("1_kmi1a")
+region = Rect2(64, 0, 32, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgjhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb0lp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yrsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjwu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yrsw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_x0c1q"]
+offsets = PackedFloat32Array(0, 0.428571, 0.787645, 0.988417)
+colors = PackedColorArray(1, 0, 0, 1, 0.940299, 0.974025, 0.537979, 1, 7.70092e-07, 0.564912, 0.364083, 1, 0, 0.25098, 0.74902, 1)
+
+[node name="FinishFlag" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_cgjhh")
+autoplay = "default"
+frame_progress = 0.345309
+script = ExtResource("2_ehtg0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-23, -10)
+emitting = false
+amount = 30
+lifetime = 10.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 5)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+color_initial_ramp = SubResource("Gradient_x0c1q")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(0, 15)
+emitting = false
+amount = 30
+lifetime = 10.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 5)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+color_initial_ramp = SubResource("Gradient_x0c1q")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(22, -10)
+emitting = false
+amount = 30
+lifetime = 10.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 5)
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+color_initial_ramp = SubResource("Gradient_x0c1q")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g6hu2")
+volume_db = -8.503

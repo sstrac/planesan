@@ -4,15 +4,18 @@ extends Path2D
 @export var texture: Texture2D
 
 @onready var follow: PathFollow2D = get_node("PathFollow2D")
+@onready var objective_manager = get_node("PathFollow2D/ObjectiveManager")
 
 var position_reset: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if is_objective:
-		get_node("ObjectiveManager").set_objective(get_node("PathFollow2D/DamageDealer"), texture)
 	if texture:
 		get_node("PathFollow2D/Sprite2D").set_texture(texture)
+		objective_manager.texture = texture
+
+	if is_objective:
+		objective_manager.activate_objective_collision_layer()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
