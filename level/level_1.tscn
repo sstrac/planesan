@@ -480,21 +480,18 @@ is_objective = true
 position = Vector2(304, 272)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
-position = Vector2(33, 173)
+position = Vector2(32, 163)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
-position = Vector2(33, 173)
+position = Vector2(32, 163)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
 
 [node name="Snapper" parent="PlaneBoundary" node_paths=PackedStringArray("objective_1") instance=ExtResource("19_b3d0q")]
 objective_1 = NodePath("../../Obstacles/Balloon2")
-
-[node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
-position = Vector2(848, 112)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
@@ -517,6 +514,7 @@ script = ExtResource("14_f1j5w")
 
 [node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
 offset_bottom = 0.0
+mouse_filter = 2
 
 [node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 53.0
@@ -527,6 +525,9 @@ texture_normal = ExtResource("20_gd8o2")
 texture_pressed = ExtResource("21_ov4go")
 texture_hover = ExtResource("9_56p3l")
 script = ExtResource("10_0167p")
+
+[node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
+position = Vector2(848, 112)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]

@@ -17,5 +17,6 @@ func _process(delta: float) -> void:
 func _on_finish(finish_type):
 	if finish_type == Finish.FinishType.WON:
 		follow_plane = false
-		get_children().map(func(p): if p.is_class('CPUParticles2D'): p.emitting = true)
-		get_node("AudioStreamPlayer2D").play()
+		if ObjectiveTracker.all_found:
+			get_children().map(func(p): if p.is_class('CPUParticles2D'): p.emitting = true)
+			get_node("AudioStreamPlayer2D").play()

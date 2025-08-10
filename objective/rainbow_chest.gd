@@ -8,7 +8,7 @@ var follow
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	audio.finished.connect(queue_free)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,7 +21,5 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	audio.play()
 	get_node("PopParticles").emitting = true
 	var follow_balloon = FOLLOW_BALLOON.instantiate()
-	add_sibling(follow_balloon)
+	call_deferred('add_sibling', follow_balloon)
 	hide()
-	await audio.finished 
-	queue_free()

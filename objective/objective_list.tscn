@@ -76,14 +76,17 @@ theme_override_constants/separation = 1
 [node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.486275)
 layout_mode = 2
+stretch_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 2
+stretch_mode = 2
 
 [node name="TextureRect3" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 2
+stretch_mode = 2
 
 [node name="OpenBook" parent="." instance=ExtResource("6_edlwe")]
 visible = false
