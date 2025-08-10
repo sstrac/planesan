@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://wl5uq2350isk"]
+
+[ext_resource type="Texture2D" uid="uid://cjg3osrrbfwv2" path="res://img/click_icon.png" id="1_rrqao"]
+[ext_resource type="Texture2D" uid="uid://ca0g2ehtb5cum" path="res://img/scroll_icon.png" id="2_aywg3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkr25"]
+atlas = ExtResource("1_rrqao")
+region = Rect2(0, 0, 12, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkcmk"]
+atlas = ExtResource("1_rrqao")
+region = Rect2(12, 0, 12, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cu5hy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkr25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkcmk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wfa1"]
+atlas = ExtResource("2_aywg3")
+region = Rect2(0, 0, 12, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsgnk"]
+atlas = ExtResource("2_aywg3")
+region = Rect2(12, 0, 12, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rb1rn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wfa1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsgnk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="MouseControls" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_cu5hy")
+frame_progress = 0.75679
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_rb1rn")
+autoplay = "default"
+frame_progress = 0.139731

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=41 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="Script" path="res://level/level_1.gd" id="1_djapk"]
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="27_03j5k"]
 [ext_resource type="PackedScene" uid="uid://cqoxqskf20iuk" path="res://objective/rainbow_chest.tscn" id="30_dl2ma"]
+[ext_resource type="Texture2D" uid="uid://cjg3osrrbfwv2" path="res://img/click_icon.png" id="30_uc6rl"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -53,6 +54,28 @@ b = Vector2(2500, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jalv0"]
 b = Vector2(0, 2500)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkr25"]
+atlas = ExtResource("30_uc6rl")
+region = Rect2(0, 0, 12, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkcmk"]
+atlas = ExtResource("30_uc6rl")
+region = Rect2(12, 0, 12, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g1oaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkr25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkcmk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_djapk")
@@ -525,6 +548,12 @@ texture_normal = ExtResource("20_gd8o2")
 texture_pressed = ExtResource("21_ov4go")
 texture_hover = ExtResource("9_56p3l")
 script = ExtResource("10_0167p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.65098)
+position = Vector2(31, 10)
+sprite_frames = SubResource("SpriteFrames_g1oaa")
+autoplay = "default"
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
 position = Vector2(848, 112)
