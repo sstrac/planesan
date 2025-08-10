@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1ve10b5u3voi"]
+
+[ext_resource type="Texture2D" uid="uid://bu0y3hk4gflqu" path="res://damage_dealers/alien.png" id="1_h5yka"]
+[ext_resource type="Script" path="res://damage_dealers/alien.gd" id="1_yex5e"]
+[ext_resource type="Script" path="res://damage_dealers/circle.gd" id="3_w0baq"]
+
+[node name="Alien" type="Node2D"]
+script = ExtResource("1_yex5e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13.5465, -14.7137)
+texture = ExtResource("1_h5yka")
+script = ExtResource("3_w0baq")

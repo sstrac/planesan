@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=35 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="Script" path="res://level/level_1.gd" id="1_djapk"]
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
+[ext_resource type="PackedScene" uid="uid://c1ve10b5u3voi" path="res://damage_dealers/alien.tscn" id="18_n0u2s"]
 [ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="19_b3d0q"]
 [ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="20_gd8o2"]
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
@@ -54,25 +55,6 @@ b = Vector2(0, 2500)
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_djapk")
 
-[node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
-position = Vector2(775, 152)
-
-[node name="Obstacles" type="Node2D" parent="."]
-
-[node name="BalloonRing" parent="Obstacles" instance=ExtResource("11_t8w75")]
-position = Vector2(136, 99)
-
-[node name="BalloonRing2" parent="Obstacles" instance=ExtResource("11_t8w75")]
-position = Vector2(609, 132)
-
-[node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(556, 176)
-is_objective = true
-texture = ExtResource("4_ak85d")
-
-[node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(718, 227)
-
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
 
@@ -102,6 +84,9 @@ position = Vector2(659, 33)
 
 [node name="CirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
 position = Vector2(741, 32)
+
+[node name="Cumulonimbus4" parent="UpperClouds" instance=ExtResource("3_fxevg")]
+position = Vector2(393, -45)
 
 [node name="MiddleClouds" type="Node2D" parent="."]
 
@@ -412,7 +397,7 @@ modulate = Color(0.728822, 0.728822, 0.728822, 1)
 position = Vector2(338, 186)
 
 [node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
-position = Vector2(775, -89)
+position = Vector2(775, -90)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
@@ -448,19 +433,43 @@ offset_bottom = 415.0
 mouse_filter = 2
 color = Color(0, 0.431373, 0.0941176, 1)
 
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="BalloonRing" parent="Obstacles" instance=ExtResource("11_t8w75")]
+position = Vector2(136, 99)
+
+[node name="BalloonRing2" parent="Obstacles" instance=ExtResource("11_t8w75")]
+position = Vector2(609, 132)
+
+[node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
+position = Vector2(556, 176)
+is_objective = true
+texture = ExtResource("4_ak85d")
+
+[node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
+position = Vector2(718, 227)
+
+[node name="Alien" parent="Obstacles" instance=ExtResource("18_n0u2s")]
+position = Vector2(548, -45)
+activation_min_pos = Vector2(500, -90)
+activation_max_pos = Vector2(775, 0)
+
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
-position = Vector2(737, 166)
+position = Vector2(526, -28)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
-position = Vector2(737, 166)
+position = Vector2(526, -28)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
 
 [node name="Snapper" parent="PlaneBoundary" node_paths=PackedStringArray("objective_1") instance=ExtResource("19_b3d0q")]
 objective_1 = NodePath("../../Obstacles/Balloon2")
+
+[node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
+position = Vector2(775, 152)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 
@@ -482,10 +491,7 @@ texture = ExtResource("8_4unrb")
 script = ExtResource("14_f1j5w")
 
 [node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
-offset_left = 4.0
-offset_top = 54.0
-offset_right = 12.0
-offset_bottom = 54.0
+offset_bottom = 0.0
 
 [node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 53.0

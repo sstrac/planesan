@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cws6b3rywswu5"]
+
+[ext_resource type="Texture2D" uid="uid://bqbs8xpbifpw6" path="res://damage_dealers/flying_pig_spritesheet.png" id="1_4yjpg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp1ft"]
+atlas = ExtResource("1_4yjpg")
+region = Rect2(0, 0, 58, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8wug"]
+atlas = ExtResource("1_4yjpg")
+region = Rect2(58, 0, 58, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f52y"]
+atlas = ExtResource("1_4yjpg")
+region = Rect2(116, 0, 58, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh8el"]
+atlas = ExtResource("1_4yjpg")
+region = Rect2(174, 0, 58, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1asq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sp1ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8wug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f52y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh8el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f52y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8wug")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FlyingPig" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_l1asq")
+frame_progress = 0.0133736

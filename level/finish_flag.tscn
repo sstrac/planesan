@@ -43,7 +43,7 @@ colors = PackedColorArray(1, 0, 0, 1, 0.940299, 0.974025, 0.537979, 1, 7.70092e-
 [node name="FinishFlag" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_cgjhh")
 autoplay = "default"
-frame_progress = 0.345309
+frame_progress = 0.204087
 script = ExtResource("2_ehtg0")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
