@@ -15,6 +15,7 @@ func _ready() -> void:
 		objective_manager.texture = texture
 
 	if is_objective:
+		objective_manager.set_objective()
 		objective_manager.activate_objective_collision_layer()
 
 

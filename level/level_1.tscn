@@ -453,6 +453,7 @@ position = Vector2(718, 227)
 position = Vector2(548, -45)
 activation_min_pos = Vector2(500, -90)
 activation_max_pos = Vector2(775, 0)
+is_objective = true
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
 position = Vector2(526, -28)

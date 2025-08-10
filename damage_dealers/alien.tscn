@@ -1,13 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1ve10b5u3voi"]
+[gd_scene load_steps=8 format=3 uid="uid://c1ve10b5u3voi"]
 
 [ext_resource type="Texture2D" uid="uid://bu0y3hk4gflqu" path="res://damage_dealers/alien.png" id="1_h5yka"]
 [ext_resource type="Script" path="res://damage_dealers/alien.gd" id="1_yex5e"]
+[ext_resource type="PackedScene" uid="uid://ddrjy2klhqhol" path="res://objective/objective_manager.tscn" id="2_e7yaw"]
+[ext_resource type="Texture2D" uid="uid://dsju8odppjfs" path="res://damage_dealers/alien_pink.png" id="3_11qie"]
 [ext_resource type="Script" path="res://damage_dealers/circle.gd" id="3_w0baq"]
+[ext_resource type="AudioStream" uid="uid://cwyhbblp20bwf" path="res://audio/uptone.wav" id="5_hf2i5"]
+[ext_resource type="Texture2D" uid="uid://boasjee116ulv" path="res://plane/heart.png" id="5_lsvee"]
 
 [node name="Alien" type="Node2D"]
 script = ExtResource("1_yex5e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(13.5465, -14.7137)
+position = Vector2(-5.07843, 19.3445)
 texture = ExtResource("1_h5yka")
 script = ExtResource("3_w0baq")
+
+[node name="ObjectiveManager" parent="Sprite2D" node_paths=PackedStringArray("area") instance=ExtResource("2_e7yaw")]
+texture = ExtResource("3_11qie")
+area = NodePath("../Area2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sprite2D"]
+position = Vector2(5.07843, -19.3445)
+stream = ExtResource("5_hf2i5")
+
+[node name="Heart" type="CPUParticles2D" parent="Sprite2D"]
+position = Vector2(1.07843, -7.3445)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+texture = ExtResource("5_lsvee")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 13.07
+initial_velocity_max = 13.07
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(-0.362476, -0.0464625)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Area2D"]
+polygon = PackedVector2Array(-2.55909, -5.29804, 3.44091, -5.29804, 3.44091, -4.29804, 4.44091, -4.29804, 4.44091, 0.701963, 5.44091, 0.701963, 5.44091, 1.70196, 4.44091, 1.70196, 4.44091, 2.70196, 4.44091, 3.70196, 3.44091, 3.70196, 3.44091, 4.70196, -2.55909, 4.70196, -2.55909, 3.70196, -3.55909, 3.70196, -3.55909, 2.70196, -3.55909, 1.70196, -4.55909, 1.70196, -4.55909, 0.701963, -3.55909, 0.701963, -3.55909, -4.29804, -2.55909, -4.29804)

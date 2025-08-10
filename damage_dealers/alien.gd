@@ -1,13 +1,19 @@
 extends Node2D
 
 
+const PINK = preload("res://damage_dealers/alien_pink.png")
+
 @export var activation_min_pos: Vector2
 @export var activation_max_pos: Vector2
+@export var is_objective: bool
 
 @onready var alien = get_node("Sprite2D")
+@onready var objective_manager = get_node("Sprite2D/ObjectiveManager")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if is_objective:
+		objective_manager.set_objective()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,4 +32,9 @@ func _process(delta: float) -> void:
 			global_position = Vector2(new_center_pos.x, global_position.y)
 		else:
 			global_position = Vector2(new_center_pos.x + delta * 10, new_center_pos.y)
-		
+
+func _alien_happy():
+	get_node("Sprite2D/Heart").emitting = true
+	get_node("Sprite2D/AudioStreamPlayer2D").play()
+	alien.texture = PINK
+	objective_manager.activate_objective_collision_layer()

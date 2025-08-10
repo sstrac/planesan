@@ -1,4 +1,4 @@
-@tool
+
 extends Sprite2D
 
 const R = 20

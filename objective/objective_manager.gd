@@ -6,4 +6,7 @@ extends Node
 
 func activate_objective_collision_layer():
 	area.set_collision_layer_value(4, true)
+
+
+func set_objective():
 	area.add_to_group('objective')

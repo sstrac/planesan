@@ -118,7 +118,9 @@ libraries = {
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("heart", "sfx")]
 script = ExtResource("4_g1x0u")
 heart = NodePath("../Heart")
-sfx = NodePath("../SFXAudio")
+sfx = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HealthComponent"]
 
 [node name="HideHealthbarTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -144,9 +146,6 @@ max_polyphony = 2
 [node name="ScreamAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_olre1")
 volume_db = -20.0
-
-[node name="SFXAudio" type="AudioStreamPlayer2D" parent="."]
-volume_db = 4.0
 
 [node name="AudioAnimation" type="AnimationPlayer" parent="."]
 libraries = {

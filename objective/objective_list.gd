@@ -6,8 +6,8 @@ var i = 0
 var area_to_i = {}
 
 @onready var anim = get_node("AnimationPlayer")
-@onready var container = get_node("HBoxContainer")
-@onready var book = get_node("Book")
+@onready var container = get_node("CenterContainer2/HBoxContainer")
+@onready var book = get_node("CenterContainer/Book")
 @onready var open_book = get_node("OpenBook")
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +29,8 @@ func _set_objectives():
 
 
 func _on_objective_found(area):
-	get_children()[area_to_i.get(area)].modulate.a = 1
+	var texture_rect = container.get_children()[area_to_i.get(area)]
+	texture_rect.modulate.a = 1
 	
 
 #TODO Create a new scene which has an animation player for a sprite to drag to the centre of the screen
