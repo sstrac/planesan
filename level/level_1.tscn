@@ -1,6 +1,5 @@
-[gd_scene load_steps=41 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=38 format=3 uid="uid://cb1fcmrhenqhh"]
 
-[ext_resource type="Script" path="res://level/level_1.gd" id="1_djapk"]
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
@@ -30,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="27_03j5k"]
 [ext_resource type="PackedScene" uid="uid://cqoxqskf20iuk" path="res://objective/rainbow_chest.tscn" id="30_dl2ma"]
-[ext_resource type="Texture2D" uid="uid://cjg3osrrbfwv2" path="res://img/click_icon.png" id="30_uc6rl"]
+[ext_resource type="PackedScene" uid="uid://wl5uq2350isk" path="res://mouse_controls.tscn" id="31_drn3p"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -55,30 +54,10 @@ b = Vector2(2500, 0)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jalv0"]
 b = Vector2(0, 2500)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vkr25"]
-atlas = ExtResource("30_uc6rl")
-region = Rect2(0, 0, 12, 15)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkcmk"]
-atlas = ExtResource("30_uc6rl")
-region = Rect2(12, 0, 12, 15)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g1oaa"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vkr25")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dkcmk")
-}],
-"loop": true,
-"name": &"default",
-"speed": 1.0
-}]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wg08w"]
+radius = 16.1245
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_djapk")
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -549,14 +528,21 @@ texture_pressed = ExtResource("21_ov4go")
 texture_hover = ExtResource("9_56p3l")
 script = ExtResource("10_0167p")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
-modulate = Color(1, 1, 1, 0.65098)
-position = Vector2(31, 10)
-sprite_frames = SubResource("SpriteFrames_g1oaa")
-autoplay = "default"
+[node name="MouseControls" parent="CanvasLayer" instance=ExtResource("31_drn3p")]
+modulate = Color(1, 1, 1, 0.796078)
+position = Vector2(31, 21)
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
 position = Vector2(848, 112)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(353, 210)
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_wg08w")
+
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
+[connection signal="area_entered" from="Area2D" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]

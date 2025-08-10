@@ -8,3 +8,4 @@ func _on_button_down() -> void:
 	get_tree().root.add_child(level1)
 	PlaneTracker.plane = level1.get_node('Plane')
 	get_tree().current_scene = level1
+	level1.get_node("CanvasLayer").get_node("MouseControls").queue_free()

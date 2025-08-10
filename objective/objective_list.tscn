@@ -1,17 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8elh3y6t8t46"]
+[gd_scene load_steps=10 format=3 uid="uid://b8elh3y6t8t46"]
 
 [ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
+[ext_resource type="Texture2D" uid="uid://c8sgh4cxqmvxn" path="res://img/camera.png" id="2_8hprw"]
 [ext_resource type="Texture2D" uid="uid://b566hhwdp56xs" path="res://img/book_raised.png" id="2_bpa76"]
 [ext_resource type="Texture2D" uid="uid://djhulpxv8dim7" path="res://img/book_pressed.png" id="3_82jh5"]
 [ext_resource type="Texture2D" uid="uid://pbeuumvj7tvi" path="res://img/book_hover.png" id="4_ejxhy"]
-[ext_resource type="PackedScene" uid="uid://beq3ihwlalhr1" path="res://objective/open_book.tscn" id="6_edlwe"]
+[ext_resource type="PackedScene" uid="uid://beq3ihwlalhr1" path="res://storybook/open_book.tscn" id="6_edlwe"]
 
 [sub_resource type="Animation" id="Animation_5jhj4"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../CenterContainer:position")
+tracks/0/path = NodePath("../../../CenterContainer:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,14 +27,14 @@ resource_name = "center_book"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../CenterContainer:position")
+tracks/0/path = NodePath("../../../CenterContainer:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(27, 38)]
+"values": [Vector2(0, 0), Vector2(27, 37)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjyhd"]
@@ -53,40 +54,52 @@ size_flags_vertical = 3
 script = ExtResource("1_2eic5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../CenterContainer2/HBoxContainer")
+root_node = NodePath("../HBoxContainer/CenterContainer2/HBoxContainer")
 libraries = {
 "": SubResource("AnimationLibrary_cjyhd")
 }
 
-[node name="CenterContainer2" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(21, 10)
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -12.0
-offset_right = 27.0
+offset_top = -10.0
+offset_right = 21.0
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
-custom_minimum_size = Vector2(19, 8)
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(12, 9)
+layout_mode = 2
+texture = ExtResource("2_8hprw")
+stretch_mode = 3
+
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(21, 10)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/CenterContainer2"]
+custom_minimum_size = Vector2(19, 10)
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.486275)
 layout_mode = 2
-stretch_mode = 2
+stretch_mode = 3
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 2
-stretch_mode = 2
+stretch_mode = 3
 
-[node name="TextureRect3" type="TextureRect" parent="CenterContainer2/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
 modulate = Color(1, 1, 1, 0.509804)
 layout_mode = 2
-stretch_mode = 2
+stretch_mode = 3
 
 [node name="OpenBook" parent="." instance=ExtResource("6_edlwe")]
 visible = false
@@ -99,8 +112,10 @@ offset_right = 13.0
 offset_bottom = 11.0
 
 [node name="Book" type="TextureButton" parent="CenterContainer"]
+modulate = Color(1, 1, 1, 0.286275)
 custom_minimum_size = Vector2(11, 9)
 layout_mode = 2
+disabled = true
 texture_normal = ExtResource("2_bpa76")
 texture_pressed = ExtResource("3_82jh5")
 texture_hover = ExtResource("4_ejxhy")

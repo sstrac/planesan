@@ -6,7 +6,7 @@ var i = 0
 var area_to_i = {}
 
 @onready var anim = get_node("AnimationPlayer")
-@onready var container = get_node("CenterContainer2/HBoxContainer")
+@onready var container = get_node("HBoxContainer/CenterContainer2/HBoxContainer")
 @onready var book = get_node("CenterContainer/Book")
 @onready var open_book = get_node("OpenBook")
 
@@ -40,6 +40,8 @@ func _on_finish(finish_type):
 	if finish_type == Finish.FinishType.WON:
 		ObjectiveTracker.all_found = container.get_children().all(func(t): return t.modulate.a == 1)
 		if ObjectiveTracker.all_found:
+			book.disabled = false
+			book.modulate.a = 1
 			anim.play('center_book')
 			await anim.animation_finished
 			
