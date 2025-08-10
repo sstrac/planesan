@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://do58tpbk0k4ky"]
+
+[ext_resource type="Texture2D" uid="uid://djiaj2ffwgmyv" path="res://damage_dealers/balloons/balloon_1.png" id="1_av83o"]
+[ext_resource type="Script" path="res://objective/follow_balloon.gd" id="2_6qijx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m0qs3"]
+radius = 2.0
+height = 6.0
+
+[node name="FollowBalloon" type="Sprite2D"]
+texture = ExtResource("1_av83o")
+script = ExtResource("2_6qijx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_m0qs3")

@@ -1,7 +1,7 @@
 extends Node2D
 
-
 @onready var sprite = get_node("AnimatedSprite2D")
+
 func pop():
 	sprite.hide()
 	get_node("PopParticles").emitting = true

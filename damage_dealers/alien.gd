@@ -33,6 +33,11 @@ func _process(delta: float) -> void:
 		else:
 			global_position = Vector2(new_center_pos.x + delta * 10, new_center_pos.y)
 
+
+func _on_balloon_detection_area_area_entered(area: Area2D) -> void:
+	_alien_happy()
+
+
 func _alien_happy():
 	get_node("Sprite2D/Heart").emitting = true
 	get_node("Sprite2D/AudioStreamPlayer2D").play()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://by7jp6eqcrmlb"]
 
-[ext_resource type="PackedScene" uid="uid://cbnviwfhlgk0t" path="res://damage_dealers/clouds/nimbocirrocumulus.tscn" id="1_s7vtj"]
+[ext_resource type="PackedScene" uid="uid://ctbj0kfqw0dgc" path="res://damage_dealers/clouds/nimbocirrocumulus.tscn" id="1_s7vtj"]
 
 [node name="NimbocirrocumulusCluster" type="Node2D"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=37 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="Script" path="res://level/level_1.gd" id="1_djapk"]
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
@@ -23,11 +23,13 @@
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
+[ext_resource type="Texture2D" uid="uid://hy240nyy6wle" path="res://damage_dealers/balloons/balloon_3.png" id="17_gc3h7"]
 [ext_resource type="PackedScene" uid="uid://c1ve10b5u3voi" path="res://damage_dealers/alien.tscn" id="18_n0u2s"]
 [ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="19_b3d0q"]
 [ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="20_gd8o2"]
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="27_03j5k"]
+[ext_resource type="PackedScene" uid="uid://cqoxqskf20iuk" path="res://objective/rainbow_chest.tscn" id="30_dl2ma"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -73,17 +75,32 @@ position = Vector2(242, 31)
 [node name="CirrocumulusCluster7" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
 position = Vector2(319, 32)
 
+[node name="CirrocumulusCluster8" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(-8, -21)
+
+[node name="CirrocumulusCluster9" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(75, -21)
+
+[node name="CirrocumulusCluster10" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(158, -24)
+
+[node name="CirrocumulusCluster11" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(241, -24)
+
+[node name="CirrocumulusCluster12" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
+position = Vector2(318, -23)
+
 [node name="NimbocirrocumulusCluster" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
 position = Vector2(396, 30)
 
+[node name="NimbocirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(489, 48)
+
+[node name="NimbocirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
+position = Vector2(595, 32)
+
 [node name="NimbocirrocumulusCluster2" parent="UpperClouds" instance=ExtResource("7_lgkxy")]
-position = Vector2(549, 29)
-
-[node name="CirrocumulusCluster3" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(659, 33)
-
-[node name="CirrocumulusCluster4" parent="UpperClouds" instance=ExtResource("6_h3gqr")]
-position = Vector2(741, 32)
+position = Vector2(734, 31)
 
 [node name="Cumulonimbus4" parent="UpperClouds" instance=ExtResource("3_fxevg")]
 position = Vector2(393, -45)
@@ -397,7 +414,7 @@ modulate = Color(0.728822, 0.728822, 0.728822, 1)
 position = Vector2(338, 186)
 
 [node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
-position = Vector2(775, -90)
+position = Vector2(846, -86)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
@@ -439,6 +456,9 @@ color = Color(0, 0.431373, 0.0941176, 1)
 position = Vector2(136, 99)
 
 [node name="BalloonRing2" parent="Obstacles" instance=ExtResource("11_t8w75")]
+position = Vector2(507, 267)
+
+[node name="BalloonRing3" parent="Obstacles" instance=ExtResource("11_t8w75")]
 position = Vector2(609, 132)
 
 [node name="Balloon" parent="Obstacles" instance=ExtResource("1_g122v")]
@@ -448,20 +468,24 @@ texture = ExtResource("4_ak85d")
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
 position = Vector2(718, 227)
+texture = ExtResource("17_gc3h7")
 
 [node name="Alien" parent="Obstacles" instance=ExtResource("18_n0u2s")]
-position = Vector2(548, -45)
+position = Vector2(724, -32)
 activation_min_pos = Vector2(500, -90)
 activation_max_pos = Vector2(775, 0)
 is_objective = true
 
+[node name="RainbowChest" parent="Obstacles" instance=ExtResource("30_dl2ma")]
+position = Vector2(304, 272)
+
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
-position = Vector2(526, -28)
+position = Vector2(33, 173)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
-position = Vector2(526, -28)
+position = Vector2(33, 173)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
@@ -470,7 +494,7 @@ finish_flag = NodePath("../FinishFlag")
 objective_1 = NodePath("../../Obstacles/Balloon2")
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
-position = Vector2(775, 152)
+position = Vector2(848, 112)
 
 [node name="WorldBoundary" type="StaticBody2D" parent="."]
 

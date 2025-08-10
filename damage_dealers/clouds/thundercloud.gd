@@ -4,7 +4,7 @@ const LIGHTNING_TIME = 8.11
 const ACTIVATION_X_DISTANCE_TO_PLANE = 50
 const PLANE_IN_RANGE_Y = 32
 const PLANE_IN_RANGE_X = 10
-const BOLT_CHANCE_WHEN_IN_RANGE = 8
+const BOLT_CHANCE_WHEN_IN_RANGE = 3
 
 @export var is_objective: bool
 

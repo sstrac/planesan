@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqoxqskf20iuk"]
+
+[ext_resource type="Texture2D" uid="uid://bec0ljjwx54ar" path="res://img/immunity_chest.png" id="1_7ghap"]
+[ext_resource type="Script" path="res://objective/rainbow_chest.gd" id="2_betsw"]
+[ext_resource type="AudioStream" uid="uid://cdq2gnur1yo2g" path="res://audio/balloon_pop.wav" id="2_tvbj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg2ug"]
+atlas = ExtResource("1_7ghap")
+region = Rect2(0, 0, 7, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h20g"]
+atlas = ExtResource("1_7ghap")
+region = Rect2(7, 0, 7, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdbki"]
+atlas = ExtResource("1_7ghap")
+region = Rect2(14, 0, 7, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydhea"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg2ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h20g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdbki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h20g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1cykh"]
+size = Vector2(4, 4)
+
+[node name="RainbowChest" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ydhea")
+autoplay = "default"
+frame_progress = 0.940894
+script = ExtResource("2_betsw")
+
+[node name="PopParticles" type="CPUParticles2D" parent="AnimatedSprite2D"]
+emitting = false
+amount = 20
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+color = Color(1, 0.984314, 1, 1)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AnimatedSprite2D"]
+stream = ExtResource("2_tvbj8")
+volume_db = -7.849
+max_distance = 64.0
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_1cykh")
+
+[connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="AnimatedSprite2D" method="_on_area_2d_area_entered"]

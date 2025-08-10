@@ -22,7 +22,10 @@ func _set_objectives():
 		var parent = objective.get_parent()
 		if parent.has_node("ObjectiveManager"):
 			var obj_man_texture = parent.get_node("ObjectiveManager").texture
-			if not container.get_children().map(func(n): return n.texture).has(obj_man_texture):
+			var existing_textures = container.get_children().map(func(n): return n.texture)
+			if existing_textures.has(obj_man_texture):
+				area_to_i[objective] = existing_textures.find(obj_man_texture)
+			else:
 				container.get_children()[i].texture = obj_man_texture
 				area_to_i[objective] = i
 				i += 1
@@ -35,18 +38,17 @@ func _on_objective_found(area):
 
 #TODO Create a new scene which has an animation player for a sprite to drag to the centre of the screen
 func _on_finish(finish_type):
-	book.show()
-	
-	anim.play('center_book')
-	await anim.animation_finished
-	
-	for texture_rect in container.get_children():
-		if texture_rect.modulate.a == 1:
-			var sprite = ANIM_OBJ_SCENE.instantiate()
-			sprite.texture = texture_rect.texture
-			sprite.book = book
-			texture_rect.add_child(sprite)
-			await sprite.tree_exited
+	if finish_type == Finish.FinishType.WON:
+		anim.play('center_book')
+		await anim.animation_finished
+		
+		for texture_rect in container.get_children():
+			if texture_rect.modulate.a == 1:
+				var sprite = ANIM_OBJ_SCENE.instantiate()
+				sprite.texture = texture_rect.texture
+				sprite.book = book
+				texture_rect.add_child(sprite)
+				await sprite.tree_exited
 	
 	
 
