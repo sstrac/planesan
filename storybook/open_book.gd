@@ -4,6 +4,7 @@ extends Node2D
 @onready var pages = get_node("Pages").get_children()
 @onready var right_button = get_node("TextureButton2")
 @onready var left_button = get_node("TextureButton3")
+@onready var audio = get_node("AudioStreamPlayer2D")
 
 var i = 0
 
@@ -19,6 +20,7 @@ func _process(delta: float) -> void:
 
 func _on_texture_button_button_down() -> void:
 	hide()
+	audio.play()
 
 
 func _on_texture_button_2_button_down() -> void:
@@ -26,6 +28,7 @@ func _on_texture_button_2_button_down() -> void:
 
 	if i < pages.size() - 1:
 		i += 1
+		audio.play()
 		left_button.show()
 		right_button.show()
 	
@@ -39,6 +42,7 @@ func _on_texture_button_3_button_down() -> void:
 	pages[i].hide()
 	if i > 0:
 		i -= 1
+		audio.play()
 		left_button.show()
 		right_button.show()
 	

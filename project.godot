@@ -23,6 +23,7 @@ Speed="*res://singletons/speed.gd"
 PlaneTracker="*res://singletons/plane_tracker.gd"
 ObjectiveTracker="*res://singletons/objective_tracker.gd"
 RetryTracker="*res://singletons/retry_tracker.gd"
+SnapperTracker="*res://snapper_tracker.gd"
 
 [display]
 

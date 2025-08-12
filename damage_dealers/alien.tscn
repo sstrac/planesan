@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1ve10b5u3voi"]
+[gd_scene load_steps=14 format=3 uid="uid://c1ve10b5u3voi"]
 
 [ext_resource type="Texture2D" uid="uid://bu0y3hk4gflqu" path="res://damage_dealers/alien.png" id="1_h5yka"]
 [ext_resource type="Script" path="res://damage_dealers/alien.gd" id="1_yex5e"]
@@ -7,9 +7,19 @@
 [ext_resource type="Script" path="res://damage_dealers/circle.gd" id="3_w0baq"]
 [ext_resource type="AudioStream" uid="uid://cwyhbblp20bwf" path="res://audio/uptone.wav" id="5_hf2i5"]
 [ext_resource type="Texture2D" uid="uid://boasjee116ulv" path="res://plane/heart.png" id="5_lsvee"]
+[ext_resource type="AudioStream" uid="uid://sx4gpvswx8c4" path="res://audio/alien_sounds.wav" id="8_lcpvp"]
+[ext_resource type="AudioStream" uid="uid://sy6pamet72ty" path="res://audio/alien_annoyed1.wav" id="9_xilmg"]
+[ext_resource type="AudioStream" uid="uid://c6bkrens2ke7y" path="res://audio/alien_annoyed2.wav" id="10_b3ats"]
+[ext_resource type="AudioStream" uid="uid://donj14ygwkv44" path="res://audio/alien_annoyed3.wav" id="11_nnorj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkwfv"]
 radius = 22.0227
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_aqt2u"]
+streams_count = 3
+stream_0/stream = ExtResource("9_xilmg")
+stream_1/stream = ExtResource("10_b3ats")
+stream_2/stream = ExtResource("11_nnorj")
 
 [node name="Alien" type="Node2D"]
 script = ExtResource("1_yex5e")
@@ -42,7 +52,7 @@ initial_velocity_max = 13.07
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 position = Vector2(-0.362476, -0.0464625)
-collision_layer = 0
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/Area2D"]
@@ -54,5 +64,14 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BalloonDetectionArea"]
 shape = SubResource("CircleShape2D_vkwfv")
+
+[node name="DefaultAlienAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_lcpvp")
+autoplay = true
+
+[node name="AnnoyedAlienAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_aqt2u")
+
+[node name="ReturnTimer" type="Timer" parent="."]
 
 [connection signal="area_entered" from="BalloonDetectionArea" to="." method="_on_balloon_detection_area_area_entered"]

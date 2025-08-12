@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8elh3y6t8t46"]
+[gd_scene load_steps=11 format=3 uid="uid://b8elh3y6t8t46"]
 
 [ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
 [ext_resource type="Texture2D" uid="uid://c8sgh4cxqmvxn" path="res://img/camera.png" id="2_8hprw"]
 [ext_resource type="Texture2D" uid="uid://b566hhwdp56xs" path="res://img/book_raised.png" id="2_bpa76"]
 [ext_resource type="Texture2D" uid="uid://djhulpxv8dim7" path="res://img/book_pressed.png" id="3_82jh5"]
+[ext_resource type="AudioStream" uid="uid://ccya6tl6i7wxm" path="res://audio/book_open.wav" id="4_8j1y8"]
 [ext_resource type="Texture2D" uid="uid://pbeuumvj7tvi" path="res://img/book_hover.png" id="4_ejxhy"]
 [ext_resource type="PackedScene" uid="uid://beq3ihwlalhr1" path="res://storybook/open_book.tscn" id="6_edlwe"]
 
@@ -111,11 +112,13 @@ layout_mode = 0
 offset_right = 13.0
 offset_bottom = 11.0
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CenterContainer"]
+stream = ExtResource("4_8j1y8")
+
 [node name="Book" type="TextureButton" parent="CenterContainer"]
 modulate = Color(1, 1, 1, 0.286275)
 custom_minimum_size = Vector2(11, 9)
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("2_bpa76")
 texture_pressed = ExtResource("3_82jh5")
 texture_hover = ExtResource("4_ejxhy")

@@ -9,6 +9,7 @@ var area_to_i = {}
 @onready var container = get_node("HBoxContainer/CenterContainer2/HBoxContainer")
 @onready var book = get_node("CenterContainer/Book")
 @onready var open_book = get_node("OpenBook")
+@onready var open_book_audio = get_node("CenterContainer/AudioStreamPlayer2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -55,4 +56,5 @@ func _on_finish(finish_type):
 	
 
 func _on_book_button_down() -> void:
+	open_book_audio.play()
 	open_book.show()

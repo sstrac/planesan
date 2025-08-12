@@ -37,7 +37,10 @@ func _on_snap_finished(animation):
 	
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	area.set_collision_layer_value(4, false)
-	jingle.play()
+	if area.get_collision_layer_value(4):
+		area.set_collision_layer_value(4, false)
+		jingle.play()
 
-	ObjectiveTracker.mark_found(area)
+		ObjectiveTracker.mark_found(area)
+	elif area.get_collision_layer_value(7):
+		SnapperTracker.snapped.emit(area)
