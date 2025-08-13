@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8elh3y6t8t46"]
+[gd_scene load_steps=14 format=3 uid="uid://b8elh3y6t8t46"]
 
 [ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
 [ext_resource type="Texture2D" uid="uid://c8sgh4cxqmvxn" path="res://img/camera.png" id="2_8hprw"]
 [ext_resource type="Texture2D" uid="uid://b566hhwdp56xs" path="res://img/book_raised.png" id="2_bpa76"]
 [ext_resource type="Texture2D" uid="uid://djhulpxv8dim7" path="res://img/book_pressed.png" id="3_82jh5"]
+[ext_resource type="Script" path="res://objective/objective.gd" id="3_a5ej7"]
 [ext_resource type="AudioStream" uid="uid://ccya6tl6i7wxm" path="res://audio/book_open.wav" id="4_8j1y8"]
 [ext_resource type="Texture2D" uid="uid://pbeuumvj7tvi" path="res://img/book_hover.png" id="4_ejxhy"]
 [ext_resource type="PackedScene" uid="uid://beq3ihwlalhr1" path="res://storybook/open_book.tscn" id="6_edlwe"]
+[ext_resource type="AudioStream" uid="uid://dpdwk3tik07db" path="res://audio/cash_in_enhanced.wav" id="9_k0mpy"]
 
 [sub_resource type="Animation" id="Animation_5jhj4"]
 length = 0.001
@@ -44,6 +46,10 @@ _data = {
 "center_book": SubResource("Animation_s65e1")
 }
 
+[sub_resource type="Gradient" id="Gradient_sbl1f"]
+offsets = PackedFloat32Array(0.621622, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="ObjectiveList" type="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
@@ -55,7 +61,7 @@ size_flags_vertical = 3
 script = ExtResource("1_2eic5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../HBoxContainer/CenterContainer2/HBoxContainer")
+root_node = NodePath("../HBoxContainer/CenterObjectives/Objectives")
 libraries = {
 "": SubResource("AnimationLibrary_cjyhd")
 }
@@ -69,38 +75,44 @@ offset_top = -10.0
 offset_right = 21.0
 grow_vertical = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterCameraTexture" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterCameraTexture"]
 custom_minimum_size = Vector2(12, 9)
 layout_mode = 2
 texture = ExtResource("2_8hprw")
 stretch_mode = 3
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterObjectives" type="CenterContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(21, 10)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/CenterContainer2"]
+[node name="Objectives" type="HBoxContainer" parent="HBoxContainer/CenterObjectives"]
 custom_minimum_size = Vector2(19, 10)
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Objective" type="TextureRect" parent="HBoxContainer/CenterObjectives/Objectives"]
 modulate = Color(1, 1, 1, 0.486275)
+z_index = 1
 layout_mode = 2
 stretch_mode = 3
+script = ExtResource("3_a5ej7")
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Objective2" type="TextureRect" parent="HBoxContainer/CenterObjectives/Objectives"]
 modulate = Color(1, 1, 1, 0.509804)
+z_index = 1
 layout_mode = 2
 stretch_mode = 3
+script = ExtResource("3_a5ej7")
 
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/CenterContainer2/HBoxContainer"]
+[node name="Objective3" type="TextureRect" parent="HBoxContainer/CenterObjectives/Objectives"]
 modulate = Color(1, 1, 1, 0.509804)
+z_index = 1
 layout_mode = 2
 stretch_mode = 3
+script = ExtResource("3_a5ej7")
 
 [node name="OpenBook" parent="." instance=ExtResource("6_edlwe")]
 visible = false
@@ -116,11 +128,30 @@ offset_bottom = 11.0
 stream = ExtResource("4_8j1y8")
 
 [node name="Book" type="TextureButton" parent="CenterContainer"]
-modulate = Color(1, 1, 1, 0.286275)
 custom_minimum_size = Vector2(11, 9)
 layout_mode = 2
 texture_normal = ExtResource("2_bpa76")
 texture_pressed = ExtResource("3_82jh5")
 texture_hover = ExtResource("4_ejxhy")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CenterContainer"]
+z_index = 1
+position = Vector2(7, 3)
+emitting = false
+amount = 30
+lifetime = 0.7
+one_shot = true
+speed_scale = 4.0
+explosiveness = 1.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("Gradient_sbl1f")
+
+[node name="CashInAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_k0mpy")
 
 [connection signal="button_down" from="CenterContainer/Book" to="." method="_on_book_button_down"]

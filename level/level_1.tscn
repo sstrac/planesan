@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=41 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
+[ext_resource type="Script" path="res://level/level_1.gd" id="1_lhva5"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="1_vqud4"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="2_4vlbo"]
 [ext_resource type="PackedScene" uid="uid://ddw3b0pes1coy" path="res://damage_dealers/clouds/cumulonimbus.tscn" id="3_fxevg"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://6da2o1wm4jwn" path="res://img/retry.png" id="9_56p3l"]
 [ext_resource type="Texture2D" uid="uid://d2i4d5x0h3cho" path="res://img/space.png" id="9_f30ae"]
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
+[ext_resource type="PackedScene" uid="uid://cieelbv48v7un" path="res://level/long_cloud.tscn" id="10_xfdw4"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
 [ext_resource type="Texture2D" uid="uid://hy240nyy6wle" path="res://damage_dealers/balloons/balloon_3.png" id="17_gc3h7"]
@@ -29,7 +31,10 @@
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="27_03j5k"]
 [ext_resource type="PackedScene" uid="uid://cqoxqskf20iuk" path="res://objective/rainbow_chest.tscn" id="30_dl2ma"]
+[ext_resource type="Texture2D" uid="uid://7ks5fnsk45ec" path="res://img/play_button.png" id="31_7lmev"]
 [ext_resource type="PackedScene" uid="uid://wl5uq2350isk" path="res://mouse_controls.tscn" id="31_drn3p"]
+[ext_resource type="Texture2D" uid="uid://djuok87p20su" path="res://img/play_button_pressed.png" id="32_5by2f"]
+[ext_resource type="Script" path="res://level/play_button.gd" id="32_d78wa"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -48,16 +53,11 @@ width = 2000
 height = 500
 fill_from = Vector2(1, 1)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_irxpe"]
-b = Vector2(2500, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jalv0"]
-b = Vector2(0, 2500)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_wg08w"]
 radius = 16.1245
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_lhva5")
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -312,9 +312,8 @@ position = Vector2(784, 297)
 [node name="LowerClouds" type="Node2D" parent="."]
 position = Vector2(43, 137)
 
-[node name="Cumulus" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(-21, 184)
-scale = Vector2(1, -1)
+[node name="LongCloud" parent="LowerClouds" instance=ExtResource("10_xfdw4")]
+position = Vector2(464, 205)
 
 [node name="Cumulus3" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(44, 192)
@@ -327,7 +326,7 @@ position = Vector2(75, 177)
 scale = Vector2(-1, 1)
 
 [node name="Lenticular2" parent="LowerClouds" instance=ExtResource("4_gb0ih")]
-position = Vector2(24, 163)
+position = Vector2(20, 158)
 
 [node name="Cumulus6" parent="LowerClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(107, 196)
@@ -482,28 +481,18 @@ is_objective = true
 position = Vector2(304, 272)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
-position = Vector2(675, -32)
+position = Vector2(32, 168)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
-position = Vector2(675, -32)
+position = Vector2(32, 168)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
 
 [node name="Snapper" parent="PlaneBoundary" node_paths=PackedStringArray("objective_1") instance=ExtResource("19_b3d0q")]
 objective_1 = NodePath("../../Obstacles/Balloon2")
-
-[node name="WorldBoundary" type="StaticBody2D" parent="."]
-
-[node name="BottomBoundary" type="CollisionShape2D" parent="WorldBoundary" groups=["boundary"]]
-position = Vector2(-197, 328)
-shape = SubResource("SegmentShape2D_irxpe")
-
-[node name="LeftBoundary" type="CollisionShape2D" parent="WorldBoundary" groups=["boundary"]]
-position = Vector2(0, -677)
-shape = SubResource("SegmentShape2D_jalv0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 5
@@ -513,10 +502,6 @@ visible = false
 position = Vector2(31, 20)
 texture = ExtResource("8_4unrb")
 script = ExtResource("14_f1j5w")
-
-[node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
-offset_bottom = 0.0
-mouse_filter = 2
 
 [node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 53.0
@@ -530,7 +515,20 @@ script = ExtResource("10_0167p")
 
 [node name="MouseControls" parent="CanvasLayer" instance=ExtResource("31_drn3p")]
 modulate = Color(1, 1, 1, 0.796078)
-position = Vector2(31, 21)
+position = Vector2(31, 10)
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 1
+texture_normal = ExtResource("31_7lmev")
+texture_pressed = ExtResource("32_5by2f")
+script = ExtResource("32_d78wa")
+
+[node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
+mouse_filter = 2
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
 position = Vector2(848, 112)
@@ -545,4 +543,5 @@ shape = SubResource("CircleShape2D_wg08w")
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
+[connection signal="button_down" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_down"]
 [connection signal="area_entered" from="Area2D" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]

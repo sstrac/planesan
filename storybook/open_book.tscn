@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://beq3ihwlalhr1"]
+[gd_scene load_steps=15 format=3 uid="uid://beq3ihwlalhr1"]
 
 [ext_resource type="Script" path="res://storybook/open_book.gd" id="1_0tetd"]
 [ext_resource type="Texture2D" uid="uid://u0c8rwbhegx" path="res://img/x.png" id="2_yqduk"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dnky5p3bpo62" path="res://storybook/page3.png" id="6_q2nly"]
 [ext_resource type="Texture2D" uid="uid://cxxoosupahds5" path="res://storybook/page4.png" id="7_qxi1r"]
 [ext_resource type="Texture2D" uid="uid://bhlqn1x2lats2" path="res://storybook/page5.png" id="8_nc1ji"]
+[ext_resource type="Texture2D" uid="uid://dnolv4mjbte3r" path="res://storybook/page6.png" id="9_lpw81"]
 [ext_resource type="Texture2D" uid="uid://crm22317shkf1" path="res://img/arrow.png" id="9_qkioi"]
 [ext_resource type="Texture2D" uid="uid://boi31j0307q2v" path="res://img/arrow_hover.png" id="10_p0yc6"]
 [ext_resource type="AudioStream" uid="uid://dd4s7s8rqfkqv" path="res://audio/page_turn.wav" id="12_jqtrn"]
+[ext_resource type="AudioStream" uid="uid://sx4gpvswx8c4" path="res://audio/alien_sounds.wav" id="14_n6dpt"]
 
 [node name="OpenBook" type="Node2D"]
 script = ExtResource("1_0tetd")
@@ -73,8 +75,21 @@ texture = ExtResource("7_qxi1r")
 
 [node name="Page5" type="Sprite2D" parent="Pages"]
 visible = false
-position = Vector2(33, 28)
+position = Vector2(32, 28)
 texture = ExtResource("8_nc1ji")
+
+[node name="ColorRect" type="ColorRect" parent="Pages"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+clip_children = 1
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 52.0
+offset_bottom = 47.0
+
+[node name="Page6" type="Sprite2D" parent="Pages/ColorRect"]
+position = Vector2(20, 21)
+texture = ExtResource("9_lpw81")
 
 [node name="TextureButton2" type="TextureButton" parent="."]
 offset_left = 53.0
@@ -96,6 +111,10 @@ flip_h = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_jqtrn")
+volume_db = 6.0
+
+[node name="AlienNoises" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_n6dpt")
 
 [connection signal="button_down" from="TextureButton" to="." method="_on_texture_button_button_down"]
 [connection signal="button_down" from="TextureButton2" to="." method="_on_texture_button_2_button_down"]

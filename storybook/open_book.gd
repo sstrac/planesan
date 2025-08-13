@@ -7,15 +7,18 @@ extends Node2D
 @onready var audio = get_node("AudioStreamPlayer2D")
 
 var i = 0
+var complete
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	set_process_mode(ProcessMode.PROCESS_MODE_ALWAYS)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if ObjectiveTracker.all_found and not complete:
+		_reveal_page()
+		complete = true
 
 
 func _on_texture_button_button_down() -> void:
@@ -35,10 +38,16 @@ func _on_texture_button_2_button_down() -> void:
 	if i == pages.size() - 1:
 		right_button.hide()
 
+	if i == 6 and complete:
+		get_node("AlienNoises").play()
+	else:
+		get_node("AlienNoises").stop()
+		
 	pages[i].show()
 
 
 func _on_texture_button_3_button_down() -> void:
+	get_node("AlienNoises").stop()
 	pages[i].hide()
 	if i > 0:
 		i -= 1
@@ -50,3 +59,7 @@ func _on_texture_button_3_button_down() -> void:
 		left_button.hide()
 		
 	pages[i].show()
+
+
+func _reveal_page():
+	get_node("Pages/ColorRect").modulate = Color.WHITE

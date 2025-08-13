@@ -68,6 +68,7 @@ shape = SubResource("CircleShape2D_vkwfv")
 [node name="DefaultAlienAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_lcpvp")
 autoplay = true
+max_distance = 100.0
 
 [node name="AnnoyedAlienAudio" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_aqt2u")

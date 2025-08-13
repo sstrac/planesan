@@ -104,7 +104,6 @@ animations = [{
 script = ExtResource("1_can61")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_cu5hy")
 autoplay = "default"
 frame_progress = 0.764052
@@ -117,6 +116,7 @@ frame_progress = 0.713274
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
 visible = false
+position = Vector2(0, 7)
 sprite_frames = SubResource("SpriteFrames_0iv6h")
 autoplay = "default"
 frame_progress = 0.508015

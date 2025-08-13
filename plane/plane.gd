@@ -34,8 +34,10 @@ var crashed_on_ground = false
 
 var scroll_strength: float = 0
 var movement_weight: float = 1
-
+var bounce = false
 var exposure_damage = 0
+var theta = 0
+
 
 func _ready():
 	Finish.finished.connect(_on_finish)
@@ -92,32 +94,43 @@ func _x_movement(delta):
 
 
 func _y_movement(delta):
-	if Input.is_action_just_pressed("scroll_up"):
-		if sign(scroll_strength) == 1:
-			scroll_strength = 0
-		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
-			scroll_strength -= 3
-	elif Input.is_action_just_pressed("scroll_down"):
-		if sign(scroll_strength) == -1:
-			scroll_strength = 0
-		if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
-			scroll_strength += 3
-
-	
-	if abs(scroll_strength) < 1:
+	if bounce:
 		scroll_strength = 0
-	elif scroll_strength != 0:
-		scroll_strength = lerp(scroll_strength, 0.0, delta)
+		velocity.y = -cos(theta) * 30
 		
-	#Space logic
-	var distance_to_max_y = abs(MAX_Y_POS - global_position.y)
-	
-	if distance_to_max_y > abs((MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)):
-		movement_weight = 1
+		
+		theta += delta
+
+		if theta >= PI/2:
+			bounce = false
+
 	else:
-		movement_weight = distance_to_max_y / abs(MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)
-	
-	velocity.y = scroll_strength * movement_weight
+		if Input.is_action_just_pressed("scroll_up"):
+			if sign(scroll_strength) == 1:
+				scroll_strength = 0
+			if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
+				scroll_strength -= 3
+		elif Input.is_action_just_pressed("scroll_down"):
+			if sign(scroll_strength) == -1:
+				scroll_strength = 0
+			if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
+				scroll_strength += 3
+
+		
+		if abs(scroll_strength) < 1:
+			scroll_strength = 0
+		elif scroll_strength != 0:
+			scroll_strength = lerp(scroll_strength, 0.0, delta)
+			
+		#Space logic
+		var distance_to_max_y = abs(MAX_Y_POS - global_position.y)
+		
+		if distance_to_max_y > abs((MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)):
+			movement_weight = 1
+		else:
+			movement_weight = distance_to_max_y / abs(MAX_Y_POS - REDUCTION_FACTOR_START_Y_POS)
+		
+		velocity.y = scroll_strength * movement_weight
 
 
 func _hit_ground():
@@ -151,8 +164,6 @@ func _on_finish(finish_type):
 			health_bar.hide()
 			cabin_audio.stop()
 
-			for boundary in get_tree().get_nodes_in_group('boundary'):
-				boundary.set_deferred('disabled', true)
 				
 		Finish.FinishType.WON:
 			pass
@@ -183,6 +194,10 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			health_bar.show()
 			hide_health_bar_timer.stop()
 			health_comp.increase(area.health)
+			
+		elif area.get_collision_layer_value(8):
+			theta = 0
+			bounce = true
 		
 
 func _on_area_2d_exited(area: Area2D) -> void:
