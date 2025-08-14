@@ -11,7 +11,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if follow_plane:
-		global_position.y = lerp(global_position.y, PlaneTracker.plane.global_position.y - 20, delta)
+		global_position.y = lerp(global_position.y, LevelTracker.plane.global_position.y - 20, delta)
 
 
 func _on_finish(finish_type):

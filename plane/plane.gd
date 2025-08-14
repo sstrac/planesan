@@ -38,6 +38,8 @@ var bounce = false
 var exposure_damage = 0
 var theta = 0
 
+var current_num_colliding_damage_dealers = 0
+
 
 func _ready():
 	Finish.finished.connect(_on_finish)
@@ -172,6 +174,8 @@ func _on_finish(finish_type):
 func _on_area_2d_entered(area: Area2D) -> void:
 	if not won:
 		if area.get_collision_layer_value(1): #damage dealer
+			current_num_colliding_damage_dealers += 1
+			
 			if game_over:
 				anim.play(TURBULENCE)
 			else:
@@ -203,21 +207,24 @@ func _on_area_2d_entered(area: Area2D) -> void:
 func _on_area_2d_exited(area: Area2D) -> void:
 	if not won:
 		if area.get_collision_layer_value(1): #damage dealer
-			if game_over:
-				anim.stop()
-			else:
-				exposure_damage -= area.damage
-				damage_timer.stop()
-				
-				if exposure_damage <= 0:
-					hide_health_bar_timer.start()
-				
-				anim.stop()
-				audio_anim.play_backwards('louden_screams')
-				
-				await audio_anim.animation_finished
-				if audio_anim.current_animation_position == 0:
-					scream_audio.stop()
+			current_num_colliding_damage_dealers -= 1
+			
+			if current_num_colliding_damage_dealers == 0:
+				if game_over:
+					anim.stop()
+				else:
+					exposure_damage -= area.damage
+					damage_timer.stop()
+					
+					if exposure_damage <= 0:
+						hide_health_bar_timer.start()
+					
+					anim.stop()
+					audio_anim.play_backwards('louden_screams')
+					
+					await audio_anim.animation_finished
+					if audio_anim.current_animation_position == 0:
+						scream_audio.stop()
 				
 		elif area.get_collision_layer_value(2): #healer
 			hide_health_bar_timer.start()

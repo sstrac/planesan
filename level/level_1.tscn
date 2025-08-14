@@ -300,6 +300,12 @@ position = Vector2(288, 115)
 [node name="CirrusCluster4" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
 position = Vector2(270, 69)
 
+[node name="CirrusCluster5" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(846, 171)
+
+[node name="CirrusCluster6" parent="MiddleClouds" instance=ExtResource("5_hlpsl")]
+position = Vector2(807, 218)
+
 [node name="Cirrus16" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
 position = Vector2(745, 290)
 
@@ -468,7 +474,7 @@ is_objective = true
 texture = ExtResource("4_ak85d")
 
 [node name="Balloon2" parent="Obstacles" instance=ExtResource("1_g122v")]
-position = Vector2(718, 227)
+position = Vector2(1083, 144)
 texture = ExtResource("17_gc3h7")
 
 [node name="Alien" parent="Obstacles" instance=ExtResource("18_n0u2s")]
@@ -480,13 +486,13 @@ is_objective = true
 [node name="RainbowChest" parent="Obstacles" instance=ExtResource("30_dl2ma")]
 position = Vector2(304, 272)
 
-[node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") groups=["plane"] instance=ExtResource("5_m4pxb")]
-position = Vector2(32, 168)
+[node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") instance=ExtResource("5_m4pxb")]
+position = Vector2(808, 135)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
-position = Vector2(32, 168)
+position = Vector2(808, 135)
 script = ExtResource("2_4vlbo")
 plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
@@ -514,6 +520,7 @@ texture_hover = ExtResource("9_56p3l")
 script = ExtResource("10_0167p")
 
 [node name="MouseControls" parent="CanvasLayer" instance=ExtResource("31_drn3p")]
+visible = false
 modulate = Color(1, 1, 1, 0.796078)
 position = Vector2(31, 10)
 

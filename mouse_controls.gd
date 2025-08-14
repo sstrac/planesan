@@ -2,6 +2,7 @@ extends Node2D
 
 
 var timer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for mouse_sprite in get_children().slice(0,2):
@@ -12,7 +13,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if hidden:
+		show()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

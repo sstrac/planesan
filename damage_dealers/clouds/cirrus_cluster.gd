@@ -10,5 +10,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if abs(PlaneTracker.plane.global_position.x - global_position.x) < TRIGGER_X_DISTANCE:
+	if abs(LevelTracker.plane.global_position.x - global_position.x) < TRIGGER_X_DISTANCE:
 		position.x -= SPEED

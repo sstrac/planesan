@@ -26,7 +26,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	plane_position = PlaneTracker.plane.global_position
+	plane_position = LevelTracker.plane.global_position
 	if abs(global_position.distance_to(plane_position)) < ACTIVATION_X_DISTANCE_TO_PLANE:
 		if not timer.timeout.is_connected(_lightning_bolt):
 			timer.timeout.connect(_lightning_bolt)
@@ -39,7 +39,6 @@ func _process(delta: float) -> void:
 	if not intial_bolt_attempt_triggered:
 		if plane_position.y - global_position.y < PLANE_IN_RANGE_Y and y_diff > 0 and x_diff < PLANE_IN_RANGE_X:
 			var rand = range(1,10).pick_random()
-			print(rand)
 			if rand <= BOLT_CHANCE_WHEN_IN_RANGE:
 				_lightning_bolt()
 			

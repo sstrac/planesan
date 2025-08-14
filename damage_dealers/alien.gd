@@ -28,7 +28,7 @@ func _unhide():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var plane_pos = PlaneTracker.plane.global_position
+	var plane_pos = LevelTracker.plane.global_position
 	
 	if hide:
 		var direction_away = plane_pos.direction_to(sprite.global_position)

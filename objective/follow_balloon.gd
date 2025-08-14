@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if follow:
-		var plane_pos = PlaneTracker.plane.global_position
+		var plane_pos = LevelTracker.plane.global_position
 		
 		if global_position.distance_to(plane_pos) > MAX_DISTANCE_FROM_PLANE:
 			global_position += global_position.direction_to(plane_pos).normalized()

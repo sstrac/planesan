@@ -99,7 +99,7 @@ colors = PackedColorArray(1, 0.268772, 0.654902, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tgsnk"]
 gradient = SubResource("Gradient_s72i8")
 
-[node name="Plane" type="CharacterBody2D"]
+[node name="Plane" type="CharacterBody2D" groups=["plane"]]
 script = ExtResource("1_50gcs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
