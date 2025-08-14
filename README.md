@@ -3,7 +3,7 @@ TODO
 Finish nak
 
 Required
-Fix bug where celebration triggers twice
+Look at bug with healthbar glitching at half health
 
 Collision Layers
 Layer 1 - damage dealers

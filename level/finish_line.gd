@@ -13,5 +13,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	plane.win_actions()
-	Finish.won()
+	if area.get_collision_layer_value(16):
+		area.set_collision_layer_value(16, false)
+		plane.win_actions()
+		Finish.won()
