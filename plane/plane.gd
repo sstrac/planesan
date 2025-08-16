@@ -180,7 +180,6 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			if game_over:
 				anim.play(TURBULENCE)
 			else:
-				print(area.damage)
 				health_bar.show()
 				hide_health_bar_timer.stop()
 				

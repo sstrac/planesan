@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://4y6herjgokcn"]
+[gd_scene load_steps=12 format=3 uid="uid://4y6herjgokcn"]
 
 [ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="1_5i5dm"]
 [ext_resource type="Script" path="res://damage_dealers/tornado.gd" id="1_b4yxt"]
+[ext_resource type="Texture2D" uid="uid://bqv3csrpptf8y" path="res://img/tornado.png" id="3_qqf7o"]
 
 [sub_resource type="Curve2D" id="Curve2D_utrgy"]
 _data = {
@@ -9,8 +10,55 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dliu"]
-size = Vector2(4, 4.5)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehpx3"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d02n"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqror"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lixe"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(21, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpm58"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(28, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ijuw"]
+atlas = ExtResource("3_qqf7o")
+region = Rect2(35, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvws3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehpx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d02n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqror")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lixe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpm58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ijuw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Tornado" type="Path2D"]
 curve = SubResource("Curve2D_utrgy")
@@ -20,12 +68,12 @@ script = ExtResource("1_b4yxt")
 rotates = false
 
 [node name="DamageDealer" parent="PathFollow2D" instance=ExtResource("1_5i5dm")]
+damage = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/DamageDealer"]
-shape = SubResource("RectangleShape2D_8dliu")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PathFollow2D/DamageDealer"]
+polygon = PackedVector2Array(-2, -3, 3, -3, 3, -2, 4, -2, 4, -1, 3, -1, 3, 1, 2, 1, 2, 3, 1, 3, 1, 4, 0, 4, 0, 3, -1, 3, -1, 1, -2, 1, -2, -1, -3, -1, -3, -2, -2, -2)
 
-[node name="ColorRect" type="ColorRect" parent="PathFollow2D/DamageDealer/CollisionShape2D"]
-offset_left = -2.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 2.0
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D"]
+sprite_frames = SubResource("SpriteFrames_rvws3")
+autoplay = "default"
+frame_progress = 0.930978

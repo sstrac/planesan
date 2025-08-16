@@ -61,11 +61,13 @@ func _on_finish(finish_type):
 
 
 func _on_level_1_button_pressed() -> void:
-	LevelTracker.change_level_to(1)
+	if LevelTracker.current_level != 1:
+		LevelTracker.change_level_to(1)
 
 
 func _on_level_2_button_pressed() -> void:
-	LevelTracker.change_level_to(2)
+	if LevelTracker.current_level != 2:
+		LevelTracker.change_level_to(2)
 
 
 func _on_book_pressed() -> void:

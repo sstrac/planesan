@@ -18,4 +18,4 @@ func _process(delta: float) -> void:
 	elif follow.progress_ratio <= 0.1:
 		dir = 1
 	
-	follow.progress_ratio = follow.progress_ratio + dir * delta * 0.5
+	follow.progress_ratio = follow.progress_ratio + dir * delta * 0.4
