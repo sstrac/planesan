@@ -92,7 +92,7 @@ func _x_movement(delta):
 		if abs(velocity.x) < MAX_X_VELOCITY:
 			velocity.x += 1
 	
-	velocity.x = lerp(velocity.x, 0.0, delta * 1)
+	velocity.x = lerp(velocity.x, Speed.X_PAN_SPEED, delta)
 
 
 func _y_movement(delta):
@@ -227,7 +227,8 @@ func _on_area_2d_exited(area: Area2D) -> void:
 					if audio_anim.current_animation_position == 0:
 						scream_audio.stop()
 		elif area.get_collision_layer_value(2): #healer
-			hide_health_bar_timer.start()
+			if current_num_colliding_damage_dealers == 0:
+				hide_health_bar_timer.start()
 			
 			
 func win_actions():

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://6rtf6b5lljb5" path="res://level/sky2.tres" id="11_mu1xm"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="12_uwej4"]
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="13_axt40"]
+[ext_resource type="PackedScene" uid="uid://4y6herjgokcn" path="res://damage_dealers/tornado/tornado.tscn" id="13_op6dd"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="14_als33"]
 [ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="15_6pb47"]
 [ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="15_608lu"]
@@ -20,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="17_gk6w7"]
 [ext_resource type="PackedScene" uid="uid://by7jp6eqcrmlb" path="res://damage_dealers/clouds/nimbocirrocumulus_cluster.tscn" id="17_pfrpq"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="18_7x0vw"]
-[ext_resource type="PackedScene" uid="uid://4y6herjgokcn" path="res://damage_dealers/tornado.tscn" id="18_bsadv"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="18_ijol7"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="19_g8pb2"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="19_pks5e"]
@@ -144,7 +144,7 @@ position = Vector2(339, 44)
 position = Vector2(884, 73)
 
 [node name="Thundercloud10" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(741, 167)
+position = Vector2(770, 141)
 
 [node name="Thundercloud11" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
 position = Vector2(810, 146)
@@ -157,7 +157,7 @@ position = Vector2(787, 315)
 scale = Vector2(1, -1)
 
 [node name="Thundercloud6" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(772, 216)
+position = Vector2(782, 242)
 scale = Vector2(1, -1)
 
 [node name="Thundercloud4" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
@@ -174,7 +174,7 @@ position = Vector2(32, 247)
 scale = Vector2(1, -1)
 
 [node name="Thundercloud9" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(857, 190)
+position = Vector2(856, 199)
 scale = Vector2(1, -1)
 
 [node name="Cumulus" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
@@ -242,15 +242,17 @@ position = Vector2(626, 90)
 
 [node name="Lenticular" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(836, 128)
+position = Vector2(842, 146)
+x_speed = 1.0
 
 [node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(856, 140)
+position = Vector2(579, 91)
 
 [node name="Lenticular3" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(669, 196)
+position = Vector2(661, 285)
+x_speed = 1.0
 
 [node name="Lenticular4" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.601222, 0.601223, 0.601223, 1)
@@ -302,11 +304,13 @@ position = Vector2(3, 0)
 
 [node name="Lenticular4" parent="MiddleCloudsTopLevel" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(822, 215)
+position = Vector2(740, 215)
+x_speed = 0.0
 
 [node name="Lenticular5" parent="MiddleCloudsTopLevel" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(822, 179)
+position = Vector2(740, 179)
+x_speed = 0.0
 
 [node name="LongCloud" parent="." instance=ExtResource("17_7d603")]
 modulate = Color(0.74978, 0.74978, 0.74978, 1)
@@ -329,13 +333,13 @@ position = Vector2(335, 131)
 position = Vector2(445, 285)
 
 [node name="BalloonRing4" parent="Obstacles" instance=ExtResource("12_uwej4")]
-position = Vector2(606, 188)
+position = Vector2(679, 188)
 
-[node name="Tornado" parent="Obstacles" instance=ExtResource("18_bsadv")]
-position = Vector2(307, 87)
+[node name="Tornado" parent="Obstacles" instance=ExtResource("13_op6dd")]
+position = Vector2(305, 103)
 
-[node name="Tornado2" parent="Obstacles" instance=ExtResource("18_bsadv")]
-position = Vector2(358, 85)
+[node name="Tornado2" parent="Obstacles" instance=ExtResource("13_op6dd")]
+position = Vector2(358, 102)
 path_start_ratio = 0.5
 
 [node name="FinishLine" type="Area2D" parent="."]
@@ -351,11 +355,11 @@ shape = SubResource("SegmentShape2D_yy8uv")
 position = Vector2(848, 112)
 
 [node name="Plane" parent="." instance=ExtResource("13_axt40")]
-position = Vector2(33, 194)
+position = Vector2(341, 180)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(33, 194)
+position = Vector2(341, 180)
 script = ExtResource("14_als33")
 finish_flag = NodePath("../FinishFlag")
 

@@ -4,7 +4,9 @@ Finish nak
 
 Required
 Look at bug with healthbar glitching at half health
-Fix bug with healthbar being hidden while in nimbocumulus cloud for long time
+reduce lighning frequency for level 2 and clouds
+make plane stay in center
+
 
 Collision Layers
 Layer 1 - damage dealers

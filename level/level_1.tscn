@@ -34,13 +34,6 @@
 [ext_resource type="PackedScene" uid="uid://wl5uq2350isk" path="res://mouse_controls.tscn" id="31_drn3p"]
 [ext_resource type="AudioStream" uid="uid://duk4p8knkj8gw" path="res://audio/distant seagull.wav" id="33_5s418"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
-a = Vector2(0, -800)
-b = Vector2(0, 2000)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_go5lg"]
-shader = ExtResource("8_3dmqn")
-
 [sub_resource type="Gradient" id="Gradient_riruk"]
 offsets = PackedFloat32Array(0, 0.140684, 0.148289, 0.209125, 0.39924, 0.574144, 0.749049)
 colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.316103, 0.326374, 0.343344, 1, 0.251365, 0.260083, 0.274489, 1, 0.0509804, 0.478431, 1, 1, 0.0509804, 0.627451, 0.964706, 1, 0.0478649, 0.449194, 0.938889, 1, 0, 0, 0.0588235, 1)
@@ -51,11 +44,36 @@ width = 2000
 height = 500
 fill_from = Vector2(1, 1)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
+a = Vector2(0, -800)
+b = Vector2(0, 2000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_go5lg"]
+shader = ExtResource("8_3dmqn")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_wg08w"]
 radius = 16.1245
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_lhva5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -6.0
+offset_top = -101.0
+offset_right = 1994.0
+offset_bottom = 399.0
+scale = Vector2(1.00013, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ua6vm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_top = 375.0
+offset_right = 2000.0
+offset_bottom = 415.0
+mouse_filter = 2
+color = Color(0, 0.431373, 0.0941176, 1)
 
 [node name="UpperClouds" type="Node2D" parent="."]
 position = Vector2(-4, -27)
@@ -192,12 +210,15 @@ position = Vector2(239, 129)
 position = Vector2(29, 106)
 
 [node name="Cirrus13" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+modulate = Color(0.851769, 0.851769, 0.851769, 1)
 position = Vector2(546, 133)
 
 [node name="Cirrus14" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+modulate = Color(0.851769, 0.851769, 0.851769, 1)
 position = Vector2(559, 123)
 
 [node name="Cirrus15" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
+modulate = Color(0.851769, 0.851769, 0.851769, 1)
 position = Vector2(585, 140)
 
 [node name="Cirrus9" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
@@ -234,21 +255,12 @@ position = Vector2(298, 89)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus16" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(458, 112)
+position = Vector2(494, 118)
 rotation = 3.14159
 scale = Vector2(-1, -1)
 
 [node name="Cumulus17" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
 position = Vector2(522, 197)
-scale = Vector2(-1, 1)
-
-[node name="Cumulus18" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(396, 143)
-rotation = 3.14159
-scale = Vector2(-1, -1)
-
-[node name="Cumulus19" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(377, 152)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus20" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
@@ -435,24 +447,6 @@ texture = ExtResource("9_f30ae")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 2000, 200)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-z_index = -2
-offset_left = -6.0
-offset_top = -101.0
-offset_right = 1994.0
-offset_bottom = 399.0
-scale = Vector2(1.00013, 1)
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_ua6vm")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -2
-offset_top = 375.0
-offset_right = 2000.0
-offset_bottom = 415.0
-mouse_filter = 2
-color = Color(0, 0.431373, 0.0941176, 1)
 
 [node name="Obstacles" type="Node2D" parent="."]
 
