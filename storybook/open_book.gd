@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var pages = get_node("Pages").get_children()
+@onready var level_1_pages = get_node("Level1Pages").get_children()
 @onready var right_button = get_node("TextureButton2")
 @onready var left_button = get_node("TextureButton3")
 @onready var audio = get_node("AudioStreamPlayer2D")
@@ -27,15 +27,15 @@ func _on_texture_button_button_down() -> void:
 
 
 func _on_texture_button_2_button_down() -> void:
-	pages[i].hide()
+	level_1_pages[i].hide()
 
-	if i < pages.size() - 1:
+	if i < level_1_pages.size() - 1:
 		i += 1
 		audio.play()
 		left_button.show()
 		right_button.show()
 	
-	if i == pages.size() - 1:
+	if i == level_1_pages.size() - 1:
 		right_button.hide()
 
 	if i == 6 and complete:
@@ -43,12 +43,12 @@ func _on_texture_button_2_button_down() -> void:
 	else:
 		get_node("AlienNoises").stop()
 		
-	pages[i].show()
+	level_1_pages[i].show()
 
 
 func _on_texture_button_3_button_down() -> void:
 	get_node("AlienNoises").stop()
-	pages[i].hide()
+	level_1_pages[i].hide()
 	if i > 0:
 		i -= 1
 		audio.play()
@@ -58,8 +58,8 @@ func _on_texture_button_3_button_down() -> void:
 	if i == 0:
 		left_button.hide()
 		
-	pages[i].show()
+	level_1_pages[i].show()
 
 
 func _reveal_page():
-	get_node("Pages/ColorRect").modulate = Color.WHITE
+	get_node("Level1Pages/ColorRect").modulate = Color.WHITE

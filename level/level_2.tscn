@@ -374,11 +374,11 @@ script = ExtResource("18_7x0vw")
 shape = SubResource("SegmentShape2D_yy8uv")
 
 [node name="Plane" parent="." instance=ExtResource("13_axt40")]
-position = Vector2(616, 245)
+position = Vector2(32, 198)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(616, 245)
+position = Vector2(32, 198)
 script = ExtResource("14_als33")
 finish_flag = NodePath("../FinishFlag")
 
@@ -424,3 +424,4 @@ position = Vector2(899, 112)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_up"]

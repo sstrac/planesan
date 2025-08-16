@@ -47,38 +47,38 @@ offset_bottom = 22.0
 texture_normal = ExtResource("2_yqduk")
 texture_pressed = ExtResource("3_kfopb")
 
-[node name="Pages" type="Node2D" parent="."]
+[node name="Level1Pages" type="Node2D" parent="."]
 
-[node name="Page1" type="Sprite2D" parent="Pages"]
+[node name="Page1" type="Sprite2D" parent="Level1Pages"]
 position = Vector2(31, 28)
 texture = ExtResource("3_pueff")
 
-[node name="Page1_5" type="Sprite2D" parent="Pages"]
+[node name="Page1_5" type="Sprite2D" parent="Level1Pages"]
 visible = false
 position = Vector2(32, 28)
 texture = ExtResource("4_alo1u")
 
-[node name="Page2" type="Sprite2D" parent="Pages"]
+[node name="Page2" type="Sprite2D" parent="Level1Pages"]
 visible = false
 position = Vector2(31, 27)
 texture = ExtResource("5_5t8oh")
 
-[node name="Page3" type="Sprite2D" parent="Pages"]
+[node name="Page3" type="Sprite2D" parent="Level1Pages"]
 visible = false
 position = Vector2(31, 28)
 texture = ExtResource("6_q2nly")
 
-[node name="Page4" type="Sprite2D" parent="Pages"]
+[node name="Page4" type="Sprite2D" parent="Level1Pages"]
 visible = false
 position = Vector2(30, 28)
 texture = ExtResource("7_qxi1r")
 
-[node name="Page5" type="Sprite2D" parent="Pages"]
+[node name="Page5" type="Sprite2D" parent="Level1Pages"]
 visible = false
 position = Vector2(32, 28)
 texture = ExtResource("8_nc1ji")
 
-[node name="ColorRect" type="ColorRect" parent="Pages"]
+[node name="ColorRect" type="ColorRect" parent="Level1Pages"]
 visible = false
 modulate = Color(0, 0, 0, 1)
 clip_children = 1
@@ -88,7 +88,7 @@ offset_right = 52.0
 offset_bottom = 47.0
 mouse_filter = 2
 
-[node name="Page6" type="Sprite2D" parent="Pages/ColorRect"]
+[node name="Page6" type="Sprite2D" parent="Level1Pages/ColorRect"]
 position = Vector2(20, 21)
 texture = ExtResource("9_lpw81")
 

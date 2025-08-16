@@ -23,6 +23,7 @@ Speed="*res://singletons/speed.gd"
 LevelTracker="*res://singletons/level_tracker.gd"
 ObjectiveTracker="*res://singletons/objective_tracker.gd"
 SnapperTracker="*res://snapper_tracker.gd"
+KeySounds="*res://singletons/key_sounds.gd"
 
 [display]
 

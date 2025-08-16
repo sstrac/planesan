@@ -264,12 +264,12 @@ position = Vector2(522, 197)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus20" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(697, 246)
+position = Vector2(768, 246)
 rotation = 3.14159
 scale = Vector2(-1, -1)
 
 [node name="Cumulus21" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
-position = Vector2(678, 255)
+position = Vector2(749, 255)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus22" parent="MiddleClouds" instance=ExtResource("3_kn7ie")]
@@ -317,13 +317,16 @@ position = Vector2(846, 171)
 position = Vector2(807, 218)
 
 [node name="Cirrus16" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
-position = Vector2(745, 290)
+position = Vector2(792, 151)
+x_speed = 1.0
 
 [node name="Cirrus17" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
-position = Vector2(758, 280)
+position = Vector2(805, 141)
+x_speed = 1.0
 
 [node name="Cirrus18" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
-position = Vector2(784, 297)
+position = Vector2(831, 158)
+x_speed = 1.0
 
 [node name="LowerClouds" type="Node2D" parent="."]
 position = Vector2(43, 137)
@@ -431,7 +434,7 @@ modulate = Color(0.728822, 0.728822, 0.728822, 1)
 position = Vector2(338, 186)
 
 [node name="FinishLine" type="Area2D" parent="."]
-position = Vector2(846, -86)
+position = Vector2(862, -84)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
@@ -478,12 +481,12 @@ is_objective = true
 position = Vector2(304, 272)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") instance=ExtResource("5_m4pxb")]
-position = Vector2(32, 176)
+position = Vector2(818, 113)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(32, 176)
+position = Vector2(818, 113)
 script = ExtResource("2_4vlbo")
 finish_flag = NodePath("../FinishFlag")
 
@@ -518,7 +521,7 @@ script = ExtResource("10_0167p")
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
-position = Vector2(848, 112)
+position = Vector2(864, 114)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(353, 210)
@@ -535,4 +538,5 @@ max_polyphony = 2
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
+[connection signal="button_up" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_up"]
 [connection signal="area_entered" from="Area2D" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]

@@ -8,7 +8,11 @@ const ANIM_OBJ_SCENE = preload("res://objective/animated_objective.tscn")
 @onready var open_book = get_node("OpenBook")
 @onready var open_book_audio = get_node("CenterContainer/AudioStreamPlayer2D")
 @onready var cash_in_audio = get_node("CashInAudio")
-@onready var yellow_sparkles = get_node("CenterContainer/CPUParticles2D")
+@onready var book_sparkles = get_node("CenterContainer/BookSparkles")
+@onready var level_sparkles = get_node("Levels/Level2Button/LevelSparkles")
+@onready var level_1_button = get_node("Levels/Level1Button")
+@onready var level_2_button = get_node("Levels/Level2Button")
+@onready var audio = get_node("AudioStreamPlayer2D")
 
 var i = 0
 var area_to_i = {}
@@ -18,7 +22,15 @@ func _ready() -> void:
 	Finish.finished.connect(_on_finish)
 	ObjectiveTracker.found.connect(_on_objective_found)
 	_set_objectives()
-
+	
+	if LevelTracker.current_level == 2:
+		level_1_button.disabled = false
+		level_1_button.modulate.a = 1
+	
+	if LevelTracker.level_1_complete:
+		level_2_button.disabled = false
+		level_2_button.modulate.a = 1
+		
 
 func _set_objectives():
 	for objective: Area2D in get_tree().get_nodes_in_group('objective'):
@@ -44,6 +56,7 @@ func _on_finish(finish_type):
 	if finish_type == Finish.FinishType.WON:
 		ObjectiveTracker.all_found = objectives.all(func(t): return t.obtained)
 		if ObjectiveTracker.all_found:
+			LevelTracker.level_1_complete = true
 			book.disabled = false
 			book.modulate.a = 1
 			anim.play('center_book')
@@ -57,7 +70,13 @@ func _on_finish(finish_type):
 					objective.add_child(sprite)
 					await sprite.tree_exited
 					cash_in_audio.play()
-					yellow_sparkles.emitting = true
+					book_sparkles.emitting = true
+					
+			await get_tree().create_timer(1).timeout
+			level_2_button.disabled = false
+			level_2_button.modulate.a = 1
+			cash_in_audio.play()
+			level_sparkles.emitting = true
 
 
 func _on_level_1_button_pressed() -> void:
@@ -73,3 +92,17 @@ func _on_level_2_button_pressed() -> void:
 func _on_book_pressed() -> void:
 	open_book_audio.play()
 	open_book.show()
+
+
+func _on_level_2_button_button_down() -> void:
+	KeySounds.key_down()
+
+func _on_level_1_button_button_down() -> void:
+	KeySounds.key_down()
+
+
+func _on_level_1_button_button_up() -> void:
+	KeySounds.key_up()
+	
+func _on_level_2_button_button_up() -> void:
+	KeySounds.key_up()
