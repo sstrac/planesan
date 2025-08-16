@@ -4,6 +4,7 @@ Finish nak
 
 Required
 Look at bug with healthbar glitching at half health
+Fix bug with healthbar being hidden while in nimbocumulus cloud for long time
 
 Collision Layers
 Layer 1 - damage dealers

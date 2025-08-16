@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cb1fcmrhenqhh"]
+[gd_scene load_steps=39 format=3 uid="uid://cb1fcmrhenqhh"]
 
 [ext_resource type="PackedScene" uid="uid://b25yipogarcjh" path="res://damage_dealers/balloons/balloon.tscn" id="1_g122v"]
 [ext_resource type="Script" path="res://level/level_1.gd" id="1_lhva5"]
@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://6da2o1wm4jwn" path="res://img/retry.png" id="9_56p3l"]
 [ext_resource type="Texture2D" uid="uid://d2i4d5x0h3cho" path="res://img/space.png" id="9_f30ae"]
 [ext_resource type="Script" path="res://level/retry_button.gd" id="10_0167p"]
-[ext_resource type="PackedScene" uid="uid://cieelbv48v7un" path="res://level/long_cloud.tscn" id="10_xfdw4"]
+[ext_resource type="PackedScene" uid="uid://cieelbv48v7un" path="res://damage_dealers/clouds/long_cloud.tscn" id="10_xfdw4"]
 [ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="11_t8w75"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="14_f1j5w"]
 [ext_resource type="Texture2D" uid="uid://hy240nyy6wle" path="res://damage_dealers/balloons/balloon_3.png" id="17_gc3h7"]
@@ -31,10 +31,8 @@
 [ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="21_ov4go"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="27_03j5k"]
 [ext_resource type="PackedScene" uid="uid://cqoxqskf20iuk" path="res://objective/rainbow_chest.tscn" id="30_dl2ma"]
-[ext_resource type="Texture2D" uid="uid://7ks5fnsk45ec" path="res://img/play_button.png" id="31_7lmev"]
 [ext_resource type="PackedScene" uid="uid://wl5uq2350isk" path="res://mouse_controls.tscn" id="31_drn3p"]
-[ext_resource type="Texture2D" uid="uid://djuok87p20su" path="res://img/play_button_pressed.png" id="32_5by2f"]
-[ext_resource type="Script" path="res://level/play_button.gd" id="32_d78wa"]
+[ext_resource type="AudioStream" uid="uid://duk4p8knkj8gw" path="res://audio/distant seagull.wav" id="33_5s418"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_rap3p"]
 a = Vector2(0, -800)
@@ -43,12 +41,12 @@ b = Vector2(0, 2000)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_go5lg"]
 shader = ExtResource("8_3dmqn")
 
-[sub_resource type="Gradient" id="Gradient_h1uxu"]
+[sub_resource type="Gradient" id="Gradient_riruk"]
 offsets = PackedFloat32Array(0, 0.140684, 0.148289, 0.209125, 0.39924, 0.574144, 0.749049)
 colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.316103, 0.326374, 0.343344, 1, 0.251365, 0.260083, 0.274489, 1, 0.0509804, 0.478431, 1, 1, 0.0509804, 0.627451, 0.964706, 1, 0.0478649, 0.449194, 0.938889, 1, 0, 0, 0.0588235, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jfnjs"]
-gradient = SubResource("Gradient_h1uxu")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ua6vm"]
+gradient = SubResource("Gradient_riruk")
 width = 2000
 height = 500
 fill_from = Vector2(1, 1)
@@ -420,12 +418,11 @@ position = Vector2(326, 186)
 modulate = Color(0.728822, 0.728822, 0.728822, 1)
 position = Vector2(338, 186)
 
-[node name="FinishLine" type="Area2D" parent="." node_paths=PackedStringArray("plane")]
+[node name="FinishLine" type="Area2D" parent="."]
 position = Vector2(846, -86)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("1_vqud4")
-plane = NodePath("../Plane")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
 shape = SubResource("SegmentShape2D_rap3p")
@@ -447,7 +444,7 @@ offset_right = 1994.0
 offset_bottom = 399.0
 scale = Vector2(1.00013, 1)
 mouse_filter = 2
-texture = SubResource("GradientTexture2D_jfnjs")
+texture = SubResource("GradientTexture2D_ua6vm")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -2
@@ -491,10 +488,9 @@ position = Vector2(32, 176)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
-[node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("plane", "finish_flag")]
+[node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
 position = Vector2(32, 176)
 script = ExtResource("2_4vlbo")
-plane = NodePath("../Plane")
 finish_flag = NodePath("../FinishFlag")
 
 [node name="Snapper" parent="PlaneBoundary" node_paths=PackedStringArray("objective_1") instance=ExtResource("19_b3d0q")]
@@ -509,33 +505,23 @@ position = Vector2(31, 20)
 texture = ExtResource("8_4unrb")
 script = ExtResource("14_f1j5w")
 
-[node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
-offset_left = 53.0
-offset_top = 53.0
-offset_right = 63.0
-offset_bottom = 63.0
-texture_normal = ExtResource("20_gd8o2")
-texture_pressed = ExtResource("21_ov4go")
-texture_hover = ExtResource("9_56p3l")
-script = ExtResource("10_0167p")
-
 [node name="MouseControls" parent="CanvasLayer" instance=ExtResource("31_drn3p")]
 visible = false
 modulate = Color(1, 1, 1, 0.796078)
 position = Vector2(31, 10)
 
-[node name="PlayButton" type="TextureButton" parent="CanvasLayer"]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 48.0
-mouse_filter = 1
-texture_normal = ExtResource("31_7lmev")
-texture_pressed = ExtResource("32_5by2f")
-script = ExtResource("32_d78wa")
+[node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 53.0
+offset_top = 53.0
+offset_right = 63.0
+offset_bottom = 63.0
+disabled = true
+texture_normal = ExtResource("20_gd8o2")
+texture_pressed = ExtResource("21_ov4go")
+texture_hover = ExtResource("9_56p3l")
+script = ExtResource("10_0167p")
 
-[node name="ObjectiveList" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
-mouse_filter = 2
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_b3pgn")]
 
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
 position = Vector2(848, 112)
@@ -548,7 +534,11 @@ collision_mask = 32768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_wg08w")
 
+[node name="SkyAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("33_5s418")
+autoplay = true
+max_polyphony = 2
+
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
-[connection signal="button_down" from="CanvasLayer/PlayButton" to="CanvasLayer/PlayButton" method="_on_button_down"]
 [connection signal="area_entered" from="Area2D" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]

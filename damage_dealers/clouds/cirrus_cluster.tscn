@@ -1,32 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3ia20706f2ch"]
+[gd_scene load_steps=5 format=3 uid="uid://b3ia20706f2ch"]
 
 [ext_resource type="Script" path="res://damage_dealers/clouds/cirrus_cluster.gd" id="1_w20q1"]
-[ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="2_4vuri"]
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_ibd0j"]
 [ext_resource type="AudioStream" uid="uid://d3j767i7y5jvy" path="res://audio/wind.wav" id="3_h026y"]
+[ext_resource type="Texture2D" uid="uid://c80k7ps1rksw6" path="res://damage_dealers/clouds/cirrus.png" id="4_ivhsc"]
 
 [node name="CirrusCluster" type="Node2D"]
 script = ExtResource("1_w20q1")
 
-[node name="Cirrus" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(11, 9)
+[node name="DamageDealer" parent="." instance=ExtResource("2_ibd0j")]
+damage = 6
 
-[node name="Cirrus2" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(15, 18)
-
-[node name="Cirrus3" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(22, 27)
-
-[node name="Cirrus4" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(31, 15)
-
-[node name="Cirrus5" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(37, 25)
-
-[node name="Cirrus6" parent="." instance=ExtResource("2_4vuri")]
-position = Vector2(51, 21)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageDealer"]
+polygon = PackedVector2Array(5, 4, 11, 4, 11, 5, 13, 5, 13, 6, 15, 6, 15, 7, 17, 7, 17, 8, 21, 8, 21, 10, 21, 11, 23, 11, 25, 11, 25, 10, 31, 10, 31, 11, 33, 11, 33, 13, 33, 12, 35, 12, 35, 13, 37, 13, 37, 14, 41, 14, 41, 17, 43, 17, 45, 17, 45, 16, 51, 16, 51, 17, 53, 17, 53, 18, 55, 18, 55, 19, 57, 19, 57, 20, 61, 20, 61, 23, 59, 23, 59, 24, 57, 24, 57, 25, 54, 25, 54, 26, 47, 26, 47, 27, 45, 27, 45, 28, 43, 28, 43, 29, 40, 29, 40, 30, 33, 30, 33, 29, 29, 29, 29, 30, 27, 30, 27, 31, 24, 31, 24, 32, 17, 32, 17, 31, 14, 31, 14, 30, 13, 30, 13, 29, 12, 29, 12, 28, 11, 28, 11, 25, 12, 25, 12, 24, 13, 24, 13, 23, 11, 23, 11, 22, 8, 22, 8, 21, 7, 21, 7, 20, 6, 20, 6, 19, 5, 19, 5, 16, 6, 16, 6, 15, 7, 15, 7, 13, 4, 13, 4, 12, 3, 12, 3, 11, 2, 11, 2, 10, 1, 10, 1, 7, 2, 7, 2, 6, 3, 6, 3, 5, 5, 5)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_h026y")
 volume_db = 16.352
 autoplay = true
 max_distance = 100.0
+
+[node name="Cirrus7" type="Sprite2D" parent="."]
+position = Vector2(11, 9)
+texture = ExtResource("4_ivhsc")
+
+[node name="Cirrus8" type="Sprite2D" parent="."]
+position = Vector2(31, 15)
+texture = ExtResource("4_ivhsc")
+
+[node name="Cirrus9" type="Sprite2D" parent="."]
+position = Vector2(15, 18)
+texture = ExtResource("4_ivhsc")
+
+[node name="Cirrus10" type="Sprite2D" parent="."]
+position = Vector2(21, 27)
+texture = ExtResource("4_ivhsc")
+
+[node name="Cirrus11" type="Sprite2D" parent="."]
+position = Vector2(37, 25)
+texture = ExtResource("4_ivhsc")
+
+[node name="Cirrus12" type="Sprite2D" parent="."]
+position = Vector2(51, 21)
+texture = ExtResource("4_ivhsc")

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c47yeqvumvykv" path="res://health_dealers/HealthDealer.tscn" id="3_k60qv"]
 
 [node name="BalloonRing" type="Node2D"]
+z_index = 1
 script = ExtResource("1_hp25r")
 
 [node name="Balloons" type="Node2D" parent="."]

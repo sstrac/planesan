@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8elh3y6t8t46"]
+[gd_scene load_steps=26 format=3 uid="uid://b8elh3y6t8t46"]
 
 [ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
 [ext_resource type="Texture2D" uid="uid://c8sgh4cxqmvxn" path="res://img/camera.png" id="2_8hprw"]
@@ -8,7 +8,18 @@
 [ext_resource type="AudioStream" uid="uid://ccya6tl6i7wxm" path="res://audio/book_open.wav" id="4_8j1y8"]
 [ext_resource type="Texture2D" uid="uid://pbeuumvj7tvi" path="res://img/book_hover.png" id="4_ejxhy"]
 [ext_resource type="PackedScene" uid="uid://beq3ihwlalhr1" path="res://storybook/open_book.tscn" id="6_edlwe"]
+[ext_resource type="Script" path="res://objective/book.gd" id="9_hn2hs"]
 [ext_resource type="AudioStream" uid="uid://dpdwk3tik07db" path="res://audio/cash_in_enhanced.wav" id="9_k0mpy"]
+[ext_resource type="Texture2D" uid="uid://b7y1sxtafvxbv" path="res://img/1_button.png" id="10_y4tvi"]
+[ext_resource type="Texture2D" uid="uid://yq5ywnq5wcp0" path="res://img/1_button_pressed.png" id="11_4uxu7"]
+[ext_resource type="Texture2D" uid="uid://ua0x30gucrop" path="res://img/1_button_hover.png" id="11_2283q"]
+[ext_resource type="Texture2D" uid="uid://ipvf5ko5hakm" path="res://img/2_button.png" id="12_qrndl"]
+[ext_resource type="Script" path="res://objective/level_button.gd" id="13_clrxn"]
+[ext_resource type="Texture2D" uid="uid://cx0qojx8edspw" path="res://img/2_button_hover.png" id="13_fsboy"]
+[ext_resource type="Texture2D" uid="uid://7ks5fnsk45ec" path="res://img/play_button.png" id="13_x4q2u"]
+[ext_resource type="Texture2D" uid="uid://djuok87p20su" path="res://img/play_button_pressed.png" id="14_oyme3"]
+[ext_resource type="Texture2D" uid="uid://bjo3sb81tmd7t" path="res://img/2_button_pressed.png" id="14_tvom6"]
+[ext_resource type="Script" path="res://level/play_button.gd" id="15_8pcv3"]
 
 [sub_resource type="Animation" id="Animation_5jhj4"]
 length = 0.001
@@ -40,17 +51,22 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(27, 37)]
 }
 
+[sub_resource type="Animation" id="Animation_leu3n"]
+resource_name = "flash_arrow"
+loop_mode = 1
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cjyhd"]
 _data = {
 "RESET": SubResource("Animation_5jhj4"),
-"center_book": SubResource("Animation_s65e1")
+"center_book": SubResource("Animation_s65e1"),
+"flash_arrow": SubResource("Animation_leu3n")
 }
 
 [sub_resource type="Gradient" id="Gradient_sbl1f"]
 offsets = PackedFloat32Array(0.621622, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="ObjectiveList" type="Control"]
+[node name="HUD" type="Control"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 3
 anchors_preset = 0
@@ -58,6 +74,7 @@ offset_right = 64.0
 offset_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("1_2eic5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -65,6 +82,7 @@ root_node = NodePath("../HBoxContainer/CenterObjectives/Objectives")
 libraries = {
 "": SubResource("AnimationLibrary_cjyhd")
 }
+autoplay = "flash_arrow"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -114,9 +132,63 @@ layout_mode = 2
 stretch_mode = 3
 script = ExtResource("3_a5ej7")
 
-[node name="OpenBook" parent="." instance=ExtResource("6_edlwe")]
-visible = false
-position = Vector2(1, 0)
+[node name="CashInAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_k0mpy")
+
+[node name="Levels" type="HBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -21.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 9.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 2
+
+[node name="Level1Button" type="TextureButton" parent="Levels"]
+custom_minimum_size = Vector2(7, 7)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("10_y4tvi")
+texture_pressed = ExtResource("11_4uxu7")
+texture_hover = ExtResource("11_2283q")
+stretch_mode = 3
+script = ExtResource("13_clrxn")
+
+[node name="Level2Button" type="TextureButton" parent="Levels"]
+custom_minimum_size = Vector2(7, 7)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("12_qrndl")
+texture_pressed = ExtResource("14_tvom6")
+texture_hover = ExtResource("13_fsboy")
+stretch_mode = 3
+script = ExtResource("13_clrxn")
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 1
+texture_normal = ExtResource("13_x4q2u")
+texture_pressed = ExtResource("14_oyme3")
+script = ExtResource("15_8pcv3")
+
+[node name="ColorRect" type="ColorRect" parent="PlayButton"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.247059)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(13, 11)
@@ -130,9 +202,11 @@ stream = ExtResource("4_8j1y8")
 [node name="Book" type="TextureButton" parent="CenterContainer"]
 custom_minimum_size = Vector2(11, 9)
 layout_mode = 2
+disabled = true
 texture_normal = ExtResource("2_bpa76")
 texture_pressed = ExtResource("3_82jh5")
 texture_hover = ExtResource("4_ejxhy")
+script = ExtResource("9_hn2hs")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="CenterContainer"]
 z_index = 1
@@ -151,7 +225,11 @@ initial_velocity_max = 40.0
 color = Color(1, 1, 0, 1)
 color_ramp = SubResource("Gradient_sbl1f")
 
-[node name="CashInAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_k0mpy")
+[node name="OpenBook" parent="." instance=ExtResource("6_edlwe")]
+visible = false
+position = Vector2(1, 0)
 
-[connection signal="button_down" from="CenterContainer/Book" to="." method="_on_book_button_down"]
+[connection signal="pressed" from="Levels/Level1Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="Levels/Level2Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="button_down" from="PlayButton" to="PlayButton" method="_on_button_down"]
+[connection signal="pressed" from="CenterContainer/Book" to="." method="_on_book_pressed"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cieelbv48v7un"]
+
+[ext_resource type="Texture2D" uid="uid://u0dyepxtta6d" path="res://img/long_cloud.png" id="1_47rqo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8m2i"]
+size = Vector2(1184, 28)
+
+[node name="LongCloud" type="Node2D"]
+
+[node name="LongCloud" type="Sprite2D" parent="."]
+texture = ExtResource("1_47rqo")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_t8m2i")

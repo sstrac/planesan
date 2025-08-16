@@ -1,3 +1,355 @@
-[gd_scene format=3 uid="uid://c54rhpdfek4l5"]
+[gd_scene load_steps=28 format=3 uid="uid://bko4tdx6b07rg"]
+
+[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/objective_list.tscn" id="1_l2e1s"]
+[ext_resource type="Script" path="res://level/level_2.gd" id="1_q71hb"]
+[ext_resource type="Texture2D" uid="uid://de2117o72lftm" path="res://img/finish.png" id="2_r0l6x"]
+[ext_resource type="Script" path="res://level/finish_image.gd" id="3_chdn8"]
+[ext_resource type="Texture2D" uid="uid://c11bue2tmuc45" path="res://img/retry_raised.png" id="4_cippc"]
+[ext_resource type="Texture2D" uid="uid://bhai6onoup3xd" path="res://img/retry_pressed.png" id="5_mhn1y"]
+[ext_resource type="Texture2D" uid="uid://6da2o1wm4jwn" path="res://img/retry.png" id="6_l5j47"]
+[ext_resource type="Script" path="res://level/retry_button.gd" id="7_cug1f"]
+[ext_resource type="PackedScene" uid="uid://drrgre854qlq6" path="res://damage_dealers/clouds/nimbocumulus_cluster.tscn" id="10_igsxv"]
+[ext_resource type="Texture2D" uid="uid://6rtf6b5lljb5" path="res://level/sky2.tres" id="11_mu1xm"]
+[ext_resource type="PackedScene" uid="uid://d4i3f8y532v2b" path="res://health_dealers/balloon_ring.tscn" id="12_uwej4"]
+[ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="13_axt40"]
+[ext_resource type="Script" path="res://level/plane_boundary.gd" id="14_als33"]
+[ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="15_6pb47"]
+[ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="15_608lu"]
+[ext_resource type="PackedScene" uid="uid://cnub8ykfqllq3" path="res://damage_dealers/clouds/cirrocumulus_cluster.tscn" id="16_cvhoq"]
+[ext_resource type="PackedScene" uid="uid://cieelbv48v7un" path="res://damage_dealers/clouds/long_cloud.tscn" id="17_7d603"]
+[ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="17_gk6w7"]
+[ext_resource type="PackedScene" uid="uid://by7jp6eqcrmlb" path="res://damage_dealers/clouds/nimbocirrocumulus_cluster.tscn" id="17_pfrpq"]
+[ext_resource type="Script" path="res://level/finish_line.gd" id="18_7x0vw"]
+[ext_resource type="PackedScene" uid="uid://4y6herjgokcn" path="res://damage_dealers/tornado.tscn" id="18_bsadv"]
+[ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="18_ijol7"]
+[ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="19_g8pb2"]
+[ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="19_pks5e"]
+[ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="20_ommao"]
+[ext_resource type="AudioStream" uid="uid://qrvqmnlf4jg8" path="res://audio/thunder_and_rain.wav" id="26_gpfhd"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yy8uv"]
+a = Vector2(0, -800)
+b = Vector2(0, 2000)
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_q71hb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("1_l2e1s")]
+
+[node name="GameOverImage" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(31, 20)
+texture = ExtResource("2_r0l6x")
+script = ExtResource("3_chdn8")
+
+[node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 53.0
+offset_top = 53.0
+offset_right = 63.0
+offset_bottom = 63.0
+texture_normal = ExtResource("4_cippc")
+texture_pressed = ExtResource("5_mhn1y")
+texture_hover = ExtResource("6_l5j47")
+script = ExtResource("7_cug1f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -6.0
+offset_top = -101.0
+offset_right = 1994.0
+offset_bottom = 399.0
+scale = Vector2(1.00013, 1)
+mouse_filter = 2
+texture = ExtResource("11_mu1xm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+offset_top = 375.0
+offset_right = 2000.0
+offset_bottom = 415.0
+mouse_filter = 2
+color = Color(0, 0.431373, 0.0941176, 1)
+
+[node name="MiddleClouds" type="Node2D" parent="."]
+modulate = Color(0.868985, 0.868985, 0.868985, 1)
+
+[node name="NimbocumulusCluster" parent="MiddleClouds" instance=ExtResource("10_igsxv")]
+position = Vector2(184, 59)
+
+[node name="NimbocumulusCluster2" parent="MiddleClouds" instance=ExtResource("10_igsxv")]
+position = Vector2(430, 61)
+
+[node name="CirrusCluster" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(195, 87)
+
+[node name="CirrusCluster2" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(196, 163)
+
+[node name="CirrusCluster3" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(109, 274)
+
+[node name="CirrusCluster4" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(102, 191)
+
+[node name="CirrusCluster5" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+modulate = Color(0.813258, 0.813258, 0.813258, 1)
+position = Vector2(90, 113)
+
+[node name="CirrusCluster6" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(314, 270)
+
+[node name="CirrusCluster7" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+modulate = Color(0.813258, 0.813258, 0.813258, 1)
+position = Vector2(361, 172)
+
+[node name="CirrusCluster8" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(450, 100)
+
+[node name="CirrusCluster9" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(492, 241)
+
+[node name="CirrusCluster10" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(578, 126)
+
+[node name="CirrusCluster11" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(512, 226)
+
+[node name="CirrusCluster12" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+modulate = Color(0.813258, 0.813258, 0.813258, 1)
+position = Vector2(617, 255)
+
+[node name="CirrusCluster13" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(735, 152)
+
+[node name="CirrusCluster14" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(654, 117)
+
+[node name="CirrusCluster15" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+modulate = Color(0.813258, 0.813258, 0.813258, 1)
+position = Vector2(606, 84)
+
+[node name="CirrusCluster16" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(814, 289)
+
+[node name="CirrusCluster17" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(849, 169)
+
+[node name="CirrusCluster18" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(832, 68)
+
+[node name="CirrusCluster19" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(240, 296)
+
+[node name="CirrusCluster20" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(285, 54)
+
+[node name="CirrusCluster21" parent="MiddleClouds" instance=ExtResource("15_608lu")]
+position = Vector2(549, 51)
+
+[node name="CirrocumulusCluster" parent="MiddleClouds" instance=ExtResource("16_cvhoq")]
+position = Vector2(-21, 69)
+
+[node name="CirrocumulusCluster2" parent="MiddleClouds" instance=ExtResource("16_cvhoq")]
+position = Vector2(59, 69)
+
+[node name="CirrocumulusCluster3" parent="MiddleClouds" instance=ExtResource("16_cvhoq")]
+position = Vector2(140, 69)
+
+[node name="NimbocirrocumulusCluster" parent="MiddleClouds" instance=ExtResource("17_pfrpq")]
+position = Vector2(339, 44)
+
+[node name="Thundercloud" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(884, 73)
+
+[node name="Thundercloud3" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(168, 136)
+
+[node name="Thundercloud5" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(787, 315)
+scale = Vector2(1, -1)
+
+[node name="Thundercloud6" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(796, 107)
+scale = Vector2(1, -1)
+
+[node name="Thundercloud4" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(137, 229)
+
+[node name="Thundercloud2" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(705, 73)
+
+[node name="Thundercloud7" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(11, 157)
+
+[node name="Thundercloud8" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
+position = Vector2(32, 247)
+scale = Vector2(1, -1)
+
+[node name="Cumulus" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(845, 83)
+
+[node name="Cumulus2" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(677, 83)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus3" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(120, 132)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus4" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(76, 206)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus7" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(30, 233)
+
+[node name="Cumulus5" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(162, 216)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus8" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(132, 292)
+scale = Vector2(-1, 1)
+
+[node name="Cumulus6" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+position = Vector2(651, 314)
+scale = Vector2(-1, 1)
+
+[node name="NimbocirrocumulusCluster2" parent="MiddleClouds" instance=ExtResource("17_pfrpq")]
+position = Vector2(666, 213)
+
+[node name="NimbocirrocumulusCluster3" parent="MiddleClouds" instance=ExtResource("17_pfrpq")]
+position = Vector2(626, 90)
+
+[node name="Lenticular" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.609329, 0.60933, 0.60933, 1)
+position = Vector2(836, 128)
+
+[node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.609329, 0.60933, 0.60933, 1)
+position = Vector2(856, 140)
+
+[node name="Lenticular3" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.609329, 0.60933, 0.60933, 1)
+position = Vector2(669, 196)
+
+[node name="Lenticular4" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.601222, 0.601223, 0.601223, 1)
+position = Vector2(112, 219)
+
+[node name="Lenticular6" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.601222, 0.601223, 0.601223, 1)
+position = Vector2(33, 158)
+
+[node name="Lenticular5" parent="MiddleClouds" instance=ExtResource("20_ommao")]
+modulate = Color(0.601222, 0.601223, 0.601223, 1)
+position = Vector2(46, 295)
+
+[node name="Cirrus" parent="MiddleClouds" instance=ExtResource("17_gk6w7")]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+position = Vector2(71, 172)
+
+[node name="Cirrus2" parent="MiddleClouds" instance=ExtResource("17_gk6w7")]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+position = Vector2(102, 155)
+
+[node name="Cirrus3" parent="MiddleClouds" instance=ExtResource("17_gk6w7")]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+position = Vector2(87, 258)
+
+[node name="Cirrus4" parent="MiddleClouds" instance=ExtResource("17_gk6w7")]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+position = Vector2(155, 282)
+
+[node name="MiddleCloudsTopLevel" type="Node2D" parent="."]
+z_index = 2
+position = Vector2(3, 0)
+
+[node name="Lenticular4" parent="MiddleCloudsTopLevel" instance=ExtResource("20_ommao")]
+modulate = Color(0.609329, 0.60933, 0.60933, 1)
+position = Vector2(822, 215)
+
+[node name="Lenticular5" parent="MiddleCloudsTopLevel" instance=ExtResource("20_ommao")]
+modulate = Color(0.609329, 0.60933, 0.60933, 1)
+position = Vector2(822, 179)
+
+[node name="LongCloud" parent="." instance=ExtResource("17_7d603")]
+modulate = Color(0.74978, 0.74978, 0.74978, 1)
+position = Vector2(575, 338)
+
+[node name="LongCloud2" parent="." instance=ExtResource("17_7d603")]
+modulate = Color(0.74978, 0.74978, 0.74978, 1)
+position = Vector2(577, 53)
+
+[node name="Obstacles" type="Node2D" parent="."]
+position = Vector2(63, 10)
+
+[node name="BalloonRing" parent="Obstacles" instance=ExtResource("12_uwej4")]
+position = Vector2(206, 196)
+
+[node name="BalloonRing2" parent="Obstacles" instance=ExtResource("12_uwej4")]
+position = Vector2(335, 131)
+
+[node name="BalloonRing3" parent="Obstacles" instance=ExtResource("12_uwej4")]
+position = Vector2(445, 285)
+
+[node name="BalloonRing4" parent="Obstacles" instance=ExtResource("12_uwej4")]
+position = Vector2(606, 188)
+
+[node name="Tornado" parent="Obstacles" instance=ExtResource("18_bsadv")]
+position = Vector2(307, 87)
+
+[node name="Tornado2" parent="Obstacles" instance=ExtResource("18_bsadv")]
+position = Vector2(358, 85)
+path_start_ratio = 0.5
+
+[node name="FinishLine" type="Area2D" parent="."]
+position = Vector2(846, -86)
+collision_layer = 0
+collision_mask = 32768
+script = ExtResource("18_7x0vw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
+shape = SubResource("SegmentShape2D_yy8uv")
+
+[node name="FinishFlag" parent="." instance=ExtResource("19_g8pb2")]
+position = Vector2(848, 112)
+
+[node name="Plane" parent="." instance=ExtResource("13_axt40")]
+position = Vector2(33, 194)
+collision_mask = 3
+
+[node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
+position = Vector2(33, 194)
+script = ExtResource("14_als33")
+finish_flag = NodePath("../FinishFlag")
+
+[node name="Snapper" parent="PlaneBoundary" instance=ExtResource("15_6pb47")]
+
+[node name="Rain" type="CPUParticles2D" parent="."]
+position = Vector2(413, 59)
+amount = 100
+speed_scale = 0.3
+emission_shape = 3
+emission_rect_extents = Vector2(500, 1)
+gravity = Vector2(-200, 980)
+radial_accel_max = 35.29
+color = Color(0.699728, 0.998632, 1, 1)
+
+[node name="SkyAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("26_gpfhd")
+autoplay = true
+max_polyphony = 2
+
+[connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
+[connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]

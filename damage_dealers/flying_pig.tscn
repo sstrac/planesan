@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cws6b3rywswu5"]
+[gd_scene load_steps=9 format=3 uid="uid://cws6b3rywswu5"]
 
 [ext_resource type="Texture2D" uid="uid://bqbs8xpbifpw6" path="res://damage_dealers/flying_pig_spritesheet.png" id="1_4yjpg"]
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_35q46"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sp1ft"]
 atlas = ExtResource("1_4yjpg")
@@ -44,6 +45,17 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tsqcm"]
+radius = 7.0
+
 [node name="FlyingPig" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_l1asq")
-frame_progress = 0.0133736
+autoplay = "default"
+frame_progress = 0.744446
+
+[node name="DamageDealer" parent="." instance=ExtResource("2_35q46")]
+position = Vector2(-2, 3)
+damage = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealer"]
+shape = SubResource("CircleShape2D_tsqcm")

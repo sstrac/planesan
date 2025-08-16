@@ -17,7 +17,6 @@ var area_to_i = {}
 func _ready() -> void:
 	Finish.finished.connect(_on_finish)
 	ObjectiveTracker.found.connect(_on_objective_found)
-	book.set_process_mode(ProcessMode.PROCESS_MODE_ALWAYS)
 	_set_objectives()
 
 
@@ -61,6 +60,14 @@ func _on_finish(finish_type):
 					yellow_sparkles.emitting = true
 
 
-func _on_book_button_down() -> void:
+func _on_level_1_button_pressed() -> void:
+	LevelTracker.change_level_to(1)
+
+
+func _on_level_2_button_pressed() -> void:
+	LevelTracker.change_level_to(2)
+
+
+func _on_book_pressed() -> void:
 	open_book_audio.play()
 	open_book.show()

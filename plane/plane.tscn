@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtwrv4qlgeneo"]
+[gd_scene load_steps=19 format=3 uid="uid://dtwrv4qlgeneo"]
 
 [ext_resource type="Script" path="res://plane/plane.gd" id="1_50gcs"]
 [ext_resource type="Texture2D" uid="uid://cl0qouhya6ce7" path="res://plane/planesan.png" id="2_fkjgi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://plane/planesan.gd" id="3_26gxl"]
 [ext_resource type="Script" path="res://plane/health_component.gd" id="4_g1x0u"]
 [ext_resource type="AudioStream" uid="uid://dj7jsu7vf3ks4" path="res://audio/cabin_calm.wav" id="6_ocw5u"]
-[ext_resource type="AudioStream" uid="uid://duk4p8knkj8gw" path="res://audio/distant seagull.wav" id="7_aqqc4"]
 [ext_resource type="AudioStream" uid="uid://k25hi2cdoq6y" path="res://audio/full_screams.wav" id="8_olre1"]
 [ext_resource type="Texture2D" uid="uid://boasjee116ulv" path="res://plane/heart.png" id="9_xkcjm"]
 
@@ -100,6 +99,7 @@ colors = PackedColorArray(1, 0.268772, 0.654902, 1)
 gradient = SubResource("Gradient_s72i8")
 
 [node name="Plane" type="CharacterBody2D" groups=["plane"]]
+z_index = 1
 script = ExtResource("1_50gcs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -132,11 +132,6 @@ polygon = PackedVector2Array(-8, -3, -7, -3, -7, -2, -6, -2, -6, -1, -1, -1, -1,
 
 [node name="CabinAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ocw5u")
-autoplay = true
-max_polyphony = 2
-
-[node name="SkyAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_aqqc4")
 autoplay = true
 max_polyphony = 2
 

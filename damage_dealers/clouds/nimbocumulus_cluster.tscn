@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://drrgre854qlq6"]
+
+[ext_resource type="Texture2D" uid="uid://dqrcw6sdj3wvs" path="res://damage_dealers/clouds/cumulonimbus.png" id="1_hsbe4"]
+[ext_resource type="Texture2D" uid="uid://di5aenqw42cwb" path="res://damage_dealers/clouds/cumulonimbus_half.png" id="2_nuxj2"]
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="3_b1mn5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rw6r4"]
+size = Vector2(143, 257)
+
+[node name="NimbocumulusCluster" type="Node2D"]
+
+[node name="Cumulonimbus" type="Sprite2D" parent="."]
+position = Vector2(50, 94)
+texture = ExtResource("1_hsbe4")
+
+[node name="CumulonimbusHalf" type="Sprite2D" parent="."]
+position = Vector2(52, 212)
+texture = ExtResource("2_nuxj2")
+
+[node name="CumulonimbusHalf2" type="Sprite2D" parent="."]
+position = Vector2(122, 53)
+texture = ExtResource("2_nuxj2")
+
+[node name="Cumulonimbus2" type="Sprite2D" parent="."]
+position = Vector2(121, 173)
+texture = ExtResource("1_hsbe4")
+
+[node name="DamageDealer" parent="." instance=ExtResource("3_b1mn5")]
+position = Vector2(2, 2)
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealer"]
+position = Vector2(84.5, 135.5)
+shape = SubResource("RectangleShape2D_rw6r4")

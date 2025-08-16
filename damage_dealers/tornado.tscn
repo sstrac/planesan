@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://4y6herjgokcn"]
+
+[ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="1_5i5dm"]
+[ext_resource type="Script" path="res://damage_dealers/tornado.gd" id="1_b4yxt"]
+
+[sub_resource type="Curve2D" id="Curve2D_utrgy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dliu"]
+size = Vector2(4, 4.5)
+
+[node name="Tornado" type="Path2D"]
+curve = SubResource("Curve2D_utrgy")
+script = ExtResource("1_b4yxt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="DamageDealer" parent="PathFollow2D" instance=ExtResource("1_5i5dm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/DamageDealer"]
+shape = SubResource("RectangleShape2D_8dliu")
+
+[node name="ColorRect" type="ColorRect" parent="PathFollow2D/DamageDealer/CollisionShape2D"]
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0

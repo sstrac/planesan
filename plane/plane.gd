@@ -34,7 +34,7 @@ var crashed_on_ground = false
 
 var scroll_strength: float = 0
 var movement_weight: float = 1
-var bounce = false
+var bounce_direction = false
 var exposure_damage = 0
 var theta = 0
 
@@ -96,27 +96,29 @@ func _x_movement(delta):
 
 
 func _y_movement(delta):
-	if bounce:
+	if bounce_direction:
 		scroll_strength = 0
-		velocity.y = -cos(theta) * 30
+		velocity.y = bounce_direction * cos(theta) * 30
 		
 		
 		theta += delta
 
 		if theta >= PI/2:
-			bounce = false
+			bounce_direction = null
 
 	else:
+		var movement_factor = 6
+		
 		if Input.is_action_just_pressed("scroll_up"):
 			if sign(scroll_strength) == 1:
 				scroll_strength = 0
 			if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
-				scroll_strength -= 3
+				scroll_strength -= 1 * movement_factor
 		elif Input.is_action_just_pressed("scroll_down"):
 			if sign(scroll_strength) == -1:
 				scroll_strength = 0
 			if abs(scroll_strength) < MAX_SCROLL_STRENGTH:
-				scroll_strength += 3
+				scroll_strength += 1 * movement_factor
 
 		
 		if abs(scroll_strength) < 1:
@@ -145,7 +147,6 @@ func _hit_ground():
 	
 func _take_damage():
 	health_comp.decrease(exposure_damage)
-
 
 func calculate_scream_audio_position():
 	return scream_audio.stream.get_length() * (1.0 - float(health_comp.health) / health_comp.max_health)
@@ -179,6 +180,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			if game_over:
 				anim.play(TURBULENCE)
 			else:
+				print(area.damage)
 				health_bar.show()
 				hide_health_bar_timer.stop()
 				
@@ -199,9 +201,9 @@ func _on_area_2d_entered(area: Area2D) -> void:
 			hide_health_bar_timer.stop()
 			health_comp.increase(area.health)
 			
-		elif area.get_collision_layer_value(8):
+		elif area.get_collision_layer_value(8): #bouncy cloud
 			theta = 0
-			bounce = true
+			bounce_direction = sign(area.global_position.direction_to(global_position).y)
 		
 
 func _on_area_2d_exited(area: Area2D) -> void:
@@ -225,7 +227,6 @@ func _on_area_2d_exited(area: Area2D) -> void:
 					await audio_anim.animation_finished
 					if audio_anim.current_animation_position == 0:
 						scream_audio.stop()
-				
 		elif area.get_collision_layer_value(2): #healer
 			hide_health_bar_timer.start()
 			
