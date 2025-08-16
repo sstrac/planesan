@@ -12,3 +12,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if abs(LevelTracker.plane.global_position.x - global_position.x) < TRIGGER_X_DISTANCE:
 		position.x -= SPEED
+
+
+func _on_damage_dealer_area_entered(area: Area2D) -> void:
+	area.set_collision_layer_value(1, false)

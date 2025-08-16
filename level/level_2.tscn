@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bko4tdx6b07rg"]
+[gd_scene load_steps=33 format=3 uid="uid://bko4tdx6b07rg"]
 
 [ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/objective_list.tscn" id="1_l2e1s"]
 [ext_resource type="Script" path="res://level/level_2.gd" id="1_q71hb"]
@@ -14,18 +14,23 @@
 [ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="13_axt40"]
 [ext_resource type="PackedScene" uid="uid://4y6herjgokcn" path="res://damage_dealers/tornado/tornado.tscn" id="13_op6dd"]
 [ext_resource type="Script" path="res://level/plane_boundary.gd" id="14_als33"]
+[ext_resource type="PackedScene" uid="uid://bju6yh2tpw0cx" path="res://damage_dealers/balloons/parachute.tscn" id="14_xx6w0"]
+[ext_resource type="Texture2D" uid="uid://dda60tjv2x4s7" path="res://damage_dealers/balloons/parachute1.png" id="15_3ukbp"]
 [ext_resource type="PackedScene" uid="uid://b3000n1t58ww7" path="res://objective/snapper.tscn" id="15_6pb47"]
 [ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="15_608lu"]
+[ext_resource type="Texture2D" uid="uid://dfartscxfmlnv" path="res://damage_dealers/balloons/parachute2.png" id="16_a02li"]
 [ext_resource type="PackedScene" uid="uid://cnub8ykfqllq3" path="res://damage_dealers/clouds/cirrocumulus_cluster.tscn" id="16_cvhoq"]
 [ext_resource type="PackedScene" uid="uid://cieelbv48v7un" path="res://damage_dealers/clouds/long_cloud.tscn" id="17_7d603"]
 [ext_resource type="PackedScene" uid="uid://r3auskec56w2" path="res://damage_dealers/clouds/cirrus.tscn" id="17_gk6w7"]
 [ext_resource type="PackedScene" uid="uid://by7jp6eqcrmlb" path="res://damage_dealers/clouds/nimbocirrocumulus_cluster.tscn" id="17_pfrpq"]
+[ext_resource type="Texture2D" uid="uid://0rpgcqw1v1w" path="res://damage_dealers/balloons/parachute3.png" id="17_sdqwb"]
 [ext_resource type="Script" path="res://level/finish_line.gd" id="18_7x0vw"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="18_ijol7"]
 [ext_resource type="PackedScene" uid="uid://cw3hax6yk4aos" path="res://level/finish_flag.tscn" id="19_g8pb2"]
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="19_pks5e"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="20_ommao"]
 [ext_resource type="AudioStream" uid="uid://qrvqmnlf4jg8" path="res://audio/thunder_and_rain.wav" id="26_gpfhd"]
+[ext_resource type="PackedScene" uid="uid://cws6b3rywswu5" path="res://damage_dealers/flying_pig.tscn" id="31_bygvs"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yy8uv"]
 a = Vector2(0, -800)
@@ -36,10 +41,10 @@ script = ExtResource("1_q71hb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -2
-offset_left = -6.0
-offset_top = -101.0
-offset_right = 1994.0
-offset_bottom = 399.0
+offset_left = -7.0
+offset_top = -102.0
+offset_right = 1993.0
+offset_bottom = 398.0
 scale = Vector2(1.00013, 1)
 mouse_filter = 2
 texture = ExtResource("11_mu1xm")
@@ -342,8 +347,25 @@ position = Vector2(305, 103)
 position = Vector2(358, 102)
 path_start_ratio = 0.5
 
+[node name="Parachute" parent="Obstacles" instance=ExtResource("14_xx6w0")]
+position = Vector2(100, 294)
+is_objective = true
+texture = ExtResource("15_3ukbp")
+
+[node name="Parachute2" parent="Obstacles" instance=ExtResource("14_xx6w0")]
+position = Vector2(510, 177)
+texture = ExtResource("16_a02li")
+
+[node name="Parachute3" parent="Obstacles" instance=ExtResource("14_xx6w0")]
+position = Vector2(801, 200)
+texture = ExtResource("17_sdqwb")
+
+[node name="FlyingPig" parent="Obstacles" instance=ExtResource("31_bygvs")]
+position = Vector2(785, 96)
+is_objective = true
+
 [node name="FinishLine" type="Area2D" parent="."]
-position = Vector2(846, -86)
+position = Vector2(897, -86)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("18_7x0vw")
@@ -351,15 +373,12 @@ script = ExtResource("18_7x0vw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine"]
 shape = SubResource("SegmentShape2D_yy8uv")
 
-[node name="FinishFlag" parent="." instance=ExtResource("19_g8pb2")]
-position = Vector2(848, 112)
-
 [node name="Plane" parent="." instance=ExtResource("13_axt40")]
-position = Vector2(341, 180)
+position = Vector2(616, 245)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(341, 180)
+position = Vector2(616, 245)
 script = ExtResource("14_als33")
 finish_flag = NodePath("../FinishFlag")
 
@@ -399,6 +418,9 @@ texture_normal = ExtResource("4_cippc")
 texture_pressed = ExtResource("5_mhn1y")
 texture_hover = ExtResource("6_l5j47")
 script = ExtResource("7_cug1f")
+
+[node name="FinishFlag" parent="." instance=ExtResource("19_g8pb2")]
+position = Vector2(899, 112)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]

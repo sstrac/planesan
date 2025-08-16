@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cws6b3rywswu5"]
+[gd_scene load_steps=13 format=3 uid="uid://cws6b3rywswu5"]
 
 [ext_resource type="Texture2D" uid="uid://bqbs8xpbifpw6" path="res://damage_dealers/flying_pig_spritesheet.png" id="1_4yjpg"]
+[ext_resource type="Script" path="res://damage_dealers/flying_pig.gd" id="2_01bxu"]
 [ext_resource type="PackedScene" uid="uid://dgp374upq52y5" path="res://damage_dealers/damage_dealer.tscn" id="2_35q46"]
+[ext_resource type="PackedScene" uid="uid://ddrjy2klhqhol" path="res://objective/objective_manager.tscn" id="3_5nyp4"]
+[ext_resource type="AudioStream" uid="uid://6sot6cbk6w8j" path="res://audio/fly.wav" id="3_j4m4y"]
+[ext_resource type="Texture2D" uid="uid://d1c5h5debedaw" path="res://damage_dealers/pig_objective.png" id="4_vup43"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sp1ft"]
 atlas = ExtResource("1_4yjpg")
@@ -42,7 +46,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 11.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tsqcm"]
@@ -51,7 +55,12 @@ radius = 7.0
 [node name="FlyingPig" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_l1asq")
 autoplay = "default"
-frame_progress = 0.744446
+frame_progress = 0.108418
+script = ExtResource("2_01bxu")
+
+[node name="ObjectiveManager" parent="." node_paths=PackedStringArray("area") instance=ExtResource("3_5nyp4")]
+texture = ExtResource("4_vup43")
+area = NodePath("../DamageDealer")
 
 [node name="DamageDealer" parent="." instance=ExtResource("2_35q46")]
 position = Vector2(-2, 3)
@@ -59,3 +68,8 @@ damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealer"]
 shape = SubResource("CircleShape2D_tsqcm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j4m4y")
+autoplay = true
+max_distance = 100.0

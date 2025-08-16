@@ -4,8 +4,6 @@ Finish nak
 
 Required
 Look at bug with healthbar glitching at half health
-reduce lighning frequency for level 2 and clouds
-make plane stay in center
 
 
 Collision Layers

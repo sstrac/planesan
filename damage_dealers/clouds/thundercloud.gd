@@ -52,6 +52,6 @@ func _lightning_bolt():
 	await get_tree().create_timer(0.1).timeout
 	lightning.hide()
 	cloud.show()
-	timer.wait_time = randf() * 6
+	timer.wait_time = randf_range(1, 6)
 	audio.play(LIGHTNING_TIME)
 	lightning_polygon.set_deferred('disabled', true)
