@@ -146,10 +146,10 @@ position = Vector2(339, 44)
 position = Vector2(902, 73)
 
 [node name="Thundercloud10" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(809, 127)
+position = Vector2(859, 142)
 
 [node name="Thundercloud11" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(861, 148)
+position = Vector2(878, 148)
 
 [node name="Thundercloud3" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
 position = Vector2(168, 136)
@@ -239,7 +239,7 @@ position = Vector2(626, 90)
 
 [node name="Lenticular" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(861, 149)
+position = Vector2(885, 149)
 x_speed = 1.0
 
 [node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("20_ommao")]

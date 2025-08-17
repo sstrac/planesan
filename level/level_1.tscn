@@ -182,7 +182,7 @@ modulate = Color(0.537012, 0.537011, 0.537011, 1)
 position = Vector2(598, 78)
 
 [node name="Thundercloud" parent="MiddleClouds" instance=ExtResource("5_6w57y")]
-position = Vector2(628, 107)
+position = Vector2(634, 107)
 is_objective = true
 
 [node name="Cirrus4" parent="MiddleClouds" instance=ExtResource("6_d3cfc")]
