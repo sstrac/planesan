@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://b8elh3y6t8t46"]
 
-[ext_resource type="Script" path="res://objective/objective_list.gd" id="1_2eic5"]
+[ext_resource type="Script" path="res://objective/hud.gd" id="1_2eic5"]
 [ext_resource type="Texture2D" uid="uid://c8sgh4cxqmvxn" path="res://img/camera.png" id="2_8hprw"]
 [ext_resource type="Texture2D" uid="uid://b566hhwdp56xs" path="res://img/book_raised.png" id="2_bpa76"]
 [ext_resource type="Texture2D" uid="uid://djhulpxv8dim7" path="res://img/book_pressed.png" id="3_82jh5"]
@@ -165,7 +165,6 @@ stretch_mode = 3
 modulate = Color(1, 1, 1, 0.301961)
 custom_minimum_size = Vector2(7, 7)
 layout_mode = 2
-disabled = true
 texture_normal = ExtResource("12_qrndl")
 texture_pressed = ExtResource("14_tvom6")
 texture_hover = ExtResource("13_fsboy")

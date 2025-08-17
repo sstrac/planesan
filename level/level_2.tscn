@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://bko4tdx6b07rg"]
 
-[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/objective_list.tscn" id="1_l2e1s"]
+[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/hud.tscn" id="1_l2e1s"]
 [ext_resource type="Script" path="res://level/level_2.gd" id="1_q71hb"]
 [ext_resource type="Texture2D" uid="uid://de2117o72lftm" path="res://img/finish.png" id="2_r0l6x"]
 [ext_resource type="Script" path="res://level/finish_image.gd" id="3_chdn8"]
@@ -353,11 +353,11 @@ position = Vector2(801, 200)
 texture = ExtResource("17_sdqwb")
 
 [node name="FlyingPig" parent="Obstacles" instance=ExtResource("31_bygvs")]
-position = Vector2(802, 99)
+position = Vector2(808, 102)
 is_objective = true
 
 [node name="FinishLine" type="Area2D" parent="."]
-position = Vector2(897, -86)
+position = Vector2(907, -86)
 collision_layer = 0
 collision_mask = 32768
 script = ExtResource("18_7x0vw")
@@ -366,11 +366,11 @@ script = ExtResource("18_7x0vw")
 shape = SubResource("SegmentShape2D_yy8uv")
 
 [node name="Plane" parent="." instance=ExtResource("13_axt40")]
-position = Vector2(32, 197)
+position = Vector2(32, 198)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(32, 197)
+position = Vector2(32, 198)
 script = ExtResource("14_als33")
 finish_flag = NodePath("../FinishFlag")
 
@@ -412,7 +412,7 @@ texture_hover = ExtResource("6_l5j47")
 script = ExtResource("7_cug1f")
 
 [node name="FinishFlag" parent="." instance=ExtResource("19_g8pb2")]
-position = Vector2(899, 112)
+position = Vector2(909, 112)
 
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]

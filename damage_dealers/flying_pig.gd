@@ -16,8 +16,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x -= randf() * delta * x_speed
-	
 	if frame == 0:
 		i += delta * 5
 	

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://2qj54xvfksqu" path="res://damage_dealers/clouds/cumulus.tscn" id="3_kn7ie"]
 [ext_resource type="PackedScene" uid="uid://m5iasrjjtqhk" path="res://damage_dealers/clouds/cumulonimbus_half.tscn" id="3_x0lly"]
 [ext_resource type="Texture2D" uid="uid://bbfr2ygyd64uk" path="res://damage_dealers/balloons/balloon_2.png" id="4_ak85d"]
-[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/objective_list.tscn" id="4_b3pgn"]
+[ext_resource type="PackedScene" uid="uid://b8elh3y6t8t46" path="res://objective/hud.tscn" id="4_b3pgn"]
 [ext_resource type="PackedScene" uid="uid://blofs3c8q8emy" path="res://damage_dealers/clouds/lenticular.tscn" id="4_gb0ih"]
 [ext_resource type="PackedScene" uid="uid://boldxjf7gaemq" path="res://damage_dealers/clouds/thundercloud.tscn" id="5_6w57y"]
 [ext_resource type="PackedScene" uid="uid://b3ia20706f2ch" path="res://damage_dealers/clouds/cirrus_cluster.tscn" id="5_hlpsl"]
@@ -474,19 +474,19 @@ texture = ExtResource("17_gc3h7")
 [node name="Alien" parent="Obstacles" instance=ExtResource("18_n0u2s")]
 position = Vector2(724, -32)
 activation_min_pos = Vector2(500, -90)
-activation_max_pos = Vector2(775, 0)
+activation_max_pos = Vector2(864, 0)
 is_objective = true
 
 [node name="RainbowChest" parent="Obstacles" instance=ExtResource("30_dl2ma")]
 position = Vector2(304, 272)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") instance=ExtResource("5_m4pxb")]
-position = Vector2(32, 176)
+position = Vector2(32, 175)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(32, 176)
+position = Vector2(32, 175)
 script = ExtResource("2_4vlbo")
 finish_flag = NodePath("../FinishFlag")
 

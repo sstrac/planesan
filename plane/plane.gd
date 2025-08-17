@@ -35,10 +35,12 @@ var crashed_on_ground = false
 var scroll_strength: float = 0
 var movement_weight: float = 1
 var bounce_direction = false
-var exposure_damage = 0
 var theta = 0
 
 var current_num_colliding_damage_dealers = 0
+
+var exposure_damage = 0
+
 
 
 func _ready():
@@ -148,12 +150,14 @@ func _hit_ground():
 func _take_damage():
 	health_comp.decrease(exposure_damage)
 
+
 func calculate_scream_audio_position():
 	return scream_audio.stream.get_length() * (1.0 - float(health_comp.health) / health_comp.max_health)
 	
 
 func _on_death():
-	Finish.game_over()
+	if not won:
+		Finish.game_over()
 	
 
 func _on_finish(finish_type):
@@ -184,6 +188,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
 				hide_health_bar_timer.stop()
 				
 				health_comp.decrease(area.damage)
+				
 				exposure_damage += area.damage
 				
 				damage_timer.start()
@@ -211,12 +216,12 @@ func _on_area_2d_exited(area: Area2D) -> void:
 	if not won:
 		if area.get_collision_layer_value(1): #damage dealer
 			current_num_colliding_damage_dealers -= 1
+			exposure_damage -= area.damage
 			
 			if current_num_colliding_damage_dealers == 0:
 				if game_over:
 					anim.stop()
 				else:
-					exposure_damage -= area.damage
 					damage_timer.stop()
 					
 					if exposure_damage <= 0:
@@ -224,8 +229,8 @@ func _on_area_2d_exited(area: Area2D) -> void:
 					
 					anim.stop()
 					audio_anim.play_backwards('louden_screams')
-					
 					await audio_anim.animation_finished
+					
 					if audio_anim.current_animation_position == 0:
 						scream_audio.stop()
 		elif area.get_collision_layer_value(2): #healer
