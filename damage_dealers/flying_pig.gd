@@ -1,9 +1,13 @@
-extends "res://damage_dealers/clouds/cloud.gd"
+extends AnimatedSprite2D
 
+const CIRRUS_CLUSTER = preload("res://damage_dealers/clouds/cirrus_cluster.tscn")
+		
 @export var is_objective: bool
+@export var x_speed: float = 1
 
 @onready var obj_manager = get_node("ObjectiveManager")
 # Called when the node enters the scene tree for the first time.
+var i = 0
 
 func _ready() -> void:
 	if is_objective:
@@ -12,4 +16,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	position.x -= randf() * delta * x_speed
+	
+	if frame == 0:
+		i += delta * 5
+	
+	if i >= 3:
+		var cirrus = CIRRUS_CLUSTER.instantiate()
+		add_child(cirrus)
+		cirrus.position -= Vector2(50, 16)
+		i = 0
+	

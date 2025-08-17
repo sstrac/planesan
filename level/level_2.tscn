@@ -121,9 +121,6 @@ position = Vector2(839, 292)
 [node name="CirrusCluster17" parent="MiddleClouds" instance=ExtResource("15_608lu")]
 position = Vector2(874, 172)
 
-[node name="CirrusCluster18" parent="MiddleClouds" instance=ExtResource("15_608lu")]
-position = Vector2(844, 84)
-
 [node name="CirrusCluster19" parent="MiddleClouds" instance=ExtResource("15_608lu")]
 position = Vector2(240, 296)
 
@@ -146,13 +143,13 @@ position = Vector2(140, 69)
 position = Vector2(339, 44)
 
 [node name="Thundercloud" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(884, 73)
+position = Vector2(902, 73)
 
 [node name="Thundercloud10" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(770, 141)
+position = Vector2(809, 127)
 
 [node name="Thundercloud11" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(810, 146)
+position = Vector2(861, 148)
 
 [node name="Thundercloud3" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
 position = Vector2(168, 136)
@@ -169,7 +166,7 @@ scale = Vector2(1, -1)
 position = Vector2(137, 229)
 
 [node name="Thundercloud2" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(705, 73)
+position = Vector2(756, 76)
 
 [node name="Thundercloud7" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
 position = Vector2(11, 157)
@@ -179,12 +176,12 @@ position = Vector2(32, 247)
 scale = Vector2(1, -1)
 
 [node name="Thundercloud9" parent="MiddleClouds" instance=ExtResource("18_ijol7")]
-position = Vector2(856, 199)
+position = Vector2(911, 220)
 scale = Vector2(1, -1)
 
 [node name="Cumulus" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
 modulate = Color(0.521141, 0.521141, 0.521141, 1)
-position = Vector2(845, 83)
+position = Vector2(871, 82)
 
 [node name="Cumulus9" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
 modulate = Color(0.521141, 0.521141, 0.521141, 1)
@@ -197,12 +194,12 @@ scale = Vector2(-1, 1)
 
 [node name="Cumulus11" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
 modulate = Color(0.521141, 0.521141, 0.521141, 1)
-position = Vector2(850, 202)
+position = Vector2(890, 213)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus2" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
 modulate = Color(0.521141, 0.521141, 0.521141, 1)
-position = Vector2(761, 78)
+position = Vector2(793, 78)
 scale = Vector2(-1, 1)
 
 [node name="Cumulus3" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
@@ -234,11 +231,6 @@ modulate = Color(0.521141, 0.521141, 0.521141, 1)
 position = Vector2(651, 314)
 scale = Vector2(-1, 1)
 
-[node name="Cumulus12" parent="MiddleClouds" instance=ExtResource("19_pks5e")]
-modulate = Color(0.521141, 0.521141, 0.521141, 1)
-position = Vector2(801, 151)
-scale = Vector2(-1, 1)
-
 [node name="NimbocirrocumulusCluster2" parent="MiddleClouds" instance=ExtResource("17_pfrpq")]
 position = Vector2(663, 227)
 
@@ -247,7 +239,7 @@ position = Vector2(626, 90)
 
 [node name="Lenticular" parent="MiddleClouds" instance=ExtResource("20_ommao")]
 modulate = Color(0.609329, 0.60933, 0.60933, 1)
-position = Vector2(842, 146)
+position = Vector2(861, 149)
 x_speed = 1.0
 
 [node name="Lenticular2" parent="MiddleClouds" instance=ExtResource("20_ommao")]
@@ -361,7 +353,7 @@ position = Vector2(801, 200)
 texture = ExtResource("17_sdqwb")
 
 [node name="FlyingPig" parent="Obstacles" instance=ExtResource("31_bygvs")]
-position = Vector2(785, 96)
+position = Vector2(802, 99)
 is_objective = true
 
 [node name="FinishLine" type="Area2D" parent="."]
@@ -374,11 +366,11 @@ script = ExtResource("18_7x0vw")
 shape = SubResource("SegmentShape2D_yy8uv")
 
 [node name="Plane" parent="." instance=ExtResource("13_axt40")]
-position = Vector2(32, 198)
+position = Vector2(32, 197)
 collision_mask = 3
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(32, 198)
+position = Vector2(32, 197)
 script = ExtResource("14_als33")
 finish_flag = NodePath("../FinishFlag")
 
@@ -401,13 +393,13 @@ max_polyphony = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("1_l2e1s")]
-
 [node name="GameOverImage" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 position = Vector2(31, 20)
 texture = ExtResource("2_r0l6x")
 script = ExtResource("3_chdn8")
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("1_l2e1s")]
 
 [node name="RetryButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 53.0

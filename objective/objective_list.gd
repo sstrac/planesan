@@ -17,19 +17,20 @@ const ANIM_OBJ_SCENE = preload("res://objective/animated_objective.tscn")
 var i = 0
 var area_to_i = {}
 
+#TEST remember to disable the level 2 button when finished QAing
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Finish.finished.connect(_on_finish)
 	ObjectiveTracker.found.connect(_on_objective_found)
 	_set_objectives()
 	
-	if LevelTracker.current_level == 2:
-		level_1_button.disabled = false
-		level_1_button.modulate.a = 1
-	
-	if LevelTracker.level_1_complete:
+	if LevelTracker.current_level == 1 and LevelTracker.level_1_complete:
 		level_2_button.disabled = false
 		level_2_button.modulate.a = 1
+	elif LevelTracker.current_level == 2:
+		level_1_button.disabled = false
+		level_1_button.modulate.a = 1
 		
 
 func _set_objectives():
@@ -56,7 +57,6 @@ func _on_finish(finish_type):
 	if finish_type == Finish.FinishType.WON:
 		ObjectiveTracker.all_found = objectives.all(func(t): return t.obtained)
 		if ObjectiveTracker.all_found:
-			LevelTracker.level_1_complete = true
 			book.disabled = false
 			book.modulate.a = 1
 			anim.play('center_book')
@@ -77,6 +77,9 @@ func _on_finish(finish_type):
 			level_2_button.modulate.a = 1
 			cash_in_audio.play()
 			level_sparkles.emitting = true
+			
+			if LevelTracker.current_level == 1:
+				LevelTracker.level_1_complete = true
 
 
 func _on_level_1_button_pressed() -> void:

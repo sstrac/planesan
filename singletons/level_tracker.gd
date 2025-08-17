@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 	pass
 
 func change_level_to(level: int):
+	ObjectiveTracker.all_found = false
 	current_level = level
 	var level_scene: String
 	
