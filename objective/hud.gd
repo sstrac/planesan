@@ -72,11 +72,12 @@ func _on_finish(finish_type):
 					cash_in_audio.play()
 					book_sparkles.emitting = true
 					
-			await get_tree().create_timer(1).timeout
-			level_2_button.disabled = false
-			level_2_button.modulate.a = 1
-			cash_in_audio.play()
-			level_sparkles.emitting = true
+			if not LevelTracker.level_1_complete and LevelTracker.current_level == 1:
+				await get_tree().create_timer(1).timeout
+				level_2_button.disabled = false
+				level_2_button.modulate.a = 1
+				cash_in_audio.play()
+				level_sparkles.emitting = true
 			
 			if LevelTracker.current_level == 1:
 				LevelTracker.level_1_complete = true

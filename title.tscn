@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://04b7fppqq0ik"]
+
+[ext_resource type="PackedScene" uid="uid://dtwrv4qlgeneo" path="res://plane/plane.tscn" id="1_w8qkl"]
+[ext_resource type="Texture2D" uid="uid://d2f4cs3cc0npm" path="res://damage_dealers/clouds/thundercloud_lightning.png" id="2_0riwl"]
+
+[sub_resource type="Gradient" id="Gradient_riruk"]
+offsets = PackedFloat32Array(0, 0.140684, 0.148289, 0.209125, 0.39924, 0.574144, 0.749049)
+colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.316103, 0.326374, 0.343344, 1, 0.251365, 0.260083, 0.274489, 1, 0.0509804, 0.478431, 1, 1, 0.0509804, 0.627451, 0.964706, 1, 0.0478649, 0.449194, 0.938889, 1, 0, 0, 0.0588235, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ski3q"]
+gradient = SubResource("Gradient_riruk")
+width = 2000
+height = 500
+fill_from = Vector2(1, 1)
+
+[node name="Title" type="Node2D"]
+
+[node name="Plane" parent="." instance=ExtResource("1_w8qkl")]
+position = Vector2(88, 60)
+
+[node name="ThundercloudLightning" type="Sprite2D" parent="."]
+position = Vector2(104, 33)
+texture = ExtResource("2_0riwl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -10.0
+offset_top = -197.0
+offset_right = 1990.0
+offset_bottom = 303.0
+scale = Vector2(1.00013, 1)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ski3q")

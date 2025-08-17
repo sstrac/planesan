@@ -34,12 +34,12 @@
 [ext_resource type="PackedScene" uid="uid://wl5uq2350isk" path="res://mouse_controls.tscn" id="31_drn3p"]
 [ext_resource type="AudioStream" uid="uid://duk4p8knkj8gw" path="res://audio/distant seagull.wav" id="33_5s418"]
 
-[sub_resource type="Gradient" id="Gradient_riruk"]
+[sub_resource type="Gradient" id="Gradient_wp7gl"]
 offsets = PackedFloat32Array(0, 0.140684, 0.148289, 0.209125, 0.39924, 0.574144, 0.749049)
 colors = PackedColorArray(0.796078, 0.584314, 0, 1, 0.316103, 0.326374, 0.343344, 1, 0.251365, 0.260083, 0.274489, 1, 0.0509804, 0.478431, 1, 1, 0.0509804, 0.627451, 0.964706, 1, 0.0478649, 0.449194, 0.938889, 1, 0, 0, 0.0588235, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ua6vm"]
-gradient = SubResource("Gradient_riruk")
+gradient = SubResource("Gradient_wp7gl")
 width = 2000
 height = 500
 fill_from = Vector2(1, 1)
