@@ -196,14 +196,16 @@ func _on_area_2d_entered(area: Area2D) -> void:
 					scream_audio.play(calculate_scream_audio_position())
 		
 		elif area.get_collision_layer_value(2): #healer
-			health_bar.show()
-			hide_health_bar_timer.stop()
-			health_comp.increase(area.health)
+			if not game_over:
+				health_bar.show()
+				hide_health_bar_timer.stop()
+				health_comp.increase(area.health)
 			
 		elif area.get_collision_layer_value(8): #bouncy cloud
-			theta = 0
-			bounce_direction = sign(area.global_position.direction_to(global_position).y)
-		
+			if not game_over:
+				theta = 0
+				bounce_direction = sign(area.global_position.direction_to(global_position).y)
+			
 
 func _on_area_2d_exited(area: Area2D) -> void:
 	if not won:

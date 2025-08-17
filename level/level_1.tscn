@@ -481,12 +481,12 @@ is_objective = true
 position = Vector2(304, 272)
 
 [node name="Plane" parent="." node_paths=PackedStringArray("plane_boundary") instance=ExtResource("5_m4pxb")]
-position = Vector2(33, 178)
+position = Vector2(32, 176)
 collision_mask = 3
 plane_boundary = NodePath("../PlaneBoundary")
 
 [node name="PlaneBoundary" type="Camera2D" parent="." node_paths=PackedStringArray("finish_flag")]
-position = Vector2(33, 178)
+position = Vector2(32, 176)
 script = ExtResource("2_4vlbo")
 finish_flag = NodePath("../FinishFlag")
 
@@ -523,12 +523,12 @@ script = ExtResource("10_0167p")
 [node name="FinishFlag" parent="." instance=ExtResource("27_03j5k")]
 position = Vector2(864, 114)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CameraControlTriggerArea" type="Area2D" parent="."]
 position = Vector2(353, 210)
 collision_layer = 0
 collision_mask = 32768
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraControlTriggerArea"]
 shape = SubResource("CircleShape2D_wg08w")
 
 [node name="SkyAudio" type="AudioStreamPlayer2D" parent="."]
@@ -539,4 +539,4 @@ max_polyphony = 2
 [connection signal="area_entered" from="FinishLine" to="FinishLine" method="_on_area_entered"]
 [connection signal="button_down" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_down"]
 [connection signal="button_up" from="CanvasLayer/RetryButton" to="CanvasLayer/RetryButton" method="_on_button_up"]
-[connection signal="area_entered" from="Area2D" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="CameraControlTriggerArea" to="CanvasLayer/MouseControls" method="_on_area_2d_area_entered"]

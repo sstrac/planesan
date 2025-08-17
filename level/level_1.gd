@@ -6,13 +6,9 @@ func _ready() -> void:
 	get_tree().paused = true
 	LevelTracker.plane = get_node("Plane")
 
-	if LevelTracker.retry_times > 0:
+	if LevelTracker.all_controls_shown:
 		get_node("CanvasLayer/MouseControls").queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.

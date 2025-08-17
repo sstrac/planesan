@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	LevelTracker.all_controls_shown = true
 	var mouse_sprite = get_children()[2]
 	mouse_sprite.show()
 	await get_tree().create_timer(5).timeout

@@ -8,7 +8,7 @@ extends Node2D
 var popped = false
 
 func _ready() -> void:
-	pass
+	Finish.finished.connect(_disable_collision)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -25,3 +25,7 @@ func _on_health_dealer_area_entered(area: Area2D) -> void:
 			audio.play()
 			await audio.finished
 			queue_free()
+
+
+func _disable_collision(type):
+	health_dealer.set_collision_mask_value(16, false)

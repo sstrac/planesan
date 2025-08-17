@@ -8,6 +8,7 @@ var plane
 var retry_times = 0
 var current_level = 1
 var level_1_complete
+var all_controls_shown = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
